@@ -1,0 +1,288 @@
+{{ define "main" }}
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section style="background:#0a0a0a; padding: 7rem 7% 5rem; min-height:90vh; display:flex; align-items:center;">
+  <style>
+    .plat-hero-grid { display:grid; grid-template-columns:1fr; gap:3rem; align-items:center; max-width:1200px; margin:0 auto; width:100%; }
+    @media(min-width:1024px){ .plat-hero-grid { grid-template-columns: 1fr 1fr; } }
+    .plat-cat-eyebrow { font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#888; margin-bottom:1.5rem; display:flex; align-items:center; gap:8px; }
+    .plat-cat-eyebrow span { display:inline-block; width:24px; height:1.5px; background:#E9FF57; }
+  </style>
+  <div class="plat-hero-grid">
+    <!-- Left -->
+    <div>
+      <div class="plat-cat-eyebrow"><span></span> Plataforma Silex PMS</div>
+      <h1 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(3rem,6vw,5.5rem); font-weight:800; line-height:1.05; letter-spacing:-0.04em; color:#fff; margin:0 0 1.5rem 0;">
+        Creada<br>para tu<br><mark style="background:#E9FF57; color:#0a0a0a; padding:0.04em 0.15em; border-radius:3px;">ambición.</mark>
+      </h1>
+      <p style="font-size:1.1rem; color:#999; line-height:1.75; max-width:460px; margin:0 0 2.5rem 0;">
+        Silex PMS es la plataforma unificada creada para potenciar el camino único hacia el éxito de cada hotelero del Caribe.
+      </p>
+      <button onclick="openDemoModal()" style="background:#E9FF57; color:#0a0a0a; border:none; border-radius:999px; padding:15px 32px; font-family:'Plus Jakarta Sans',sans-serif; font-size:1rem; font-weight:800; cursor:pointer; letter-spacing:0.01em;">
+        Agenda una demo ↗
+      </button>
+    </div>
+    <!-- Right: category wheel visual -->
+    <div style="display:flex; align-items:center; justify-content:center;">
+      <div style="position:relative; width:min(400px,90vw); aspect-ratio:1; display:flex; align-items:center; justify-content:center;">
+        <!-- Center -->
+        <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:2;">
+          <div style="background:#E9FF57; border-radius:50%; width:110px; height:110px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:8px; box-shadow:0 0 40px rgba(233,255,87,0.3);">
+            <div style="font-size:10px; font-weight:800; letter-spacing:0.08em; text-transform:uppercase; color:#0a0a0a; line-height:1.2;">Silex<br>PMS</div>
+          </div>
+        </div>
+        <!-- 4 quadrant labels -->
+        <div style="position:absolute; top:10%; left:50%; transform:translateX(-50%); background:#1a3320; border-radius:12px; padding:10px 16px; font-size:12px; font-weight:700; color:#E9FF57; text-align:center; white-space:nowrap;">Operaciones</div>
+        <div style="position:absolute; right:2%; top:50%; transform:translateY(-50%); background:#1a2d4a; border-radius:12px; padding:10px 16px; font-size:12px; font-weight:700; color:#9bc4ff; text-align:center; white-space:nowrap;">Distribución</div>
+        <div style="position:absolute; bottom:10%; left:50%; transform:translateX(-50%); background:#2d1a3a; border-radius:12px; padding:10px 16px; font-size:12px; font-weight:700; color:#d4b4ff; text-align:center; white-space:nowrap;">Experiencia<br>del huésped</div>
+        <div style="position:absolute; left:2%; top:50%; transform:translateY(-50%); background:#1a2d1a; border-radius:12px; padding:10px 16px; font-size:12px; font-weight:700; color:#a4efbc; text-align:center; white-space:nowrap;">Revenue &<br>Analytics</div>
+        <!-- Circle -->
+        <div style="width:260px; height:260px; border-radius:50%; border:1px solid #333; position:absolute;"></div>
+        <div style="width:180px; height:180px; border-radius:50%; border:1px solid #222; position:absolute;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CATEGORY NAV ROWS
+═══════════════════════════════════════════════ -->
+<style>
+  .plat-cat-row { display:grid; align-items:center; padding: 2.5rem 7%; border-bottom:1px solid rgba(0,0,0,0.08); }
+  .plat-cat-row-inner { display:grid; grid-template-columns:1fr; gap:1rem; max-width:1200px; margin:0 auto; width:100%; }
+  @media(min-width:768px){ .plat-cat-row-inner { grid-template-columns: 1fr 1fr; align-items:center; } }
+  .plat-cat-title { font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2rem,4vw,3.2rem); font-weight:800; letter-spacing:-0.03em; text-decoration:underline; text-underline-offset:6px; display:flex; align-items:center; gap:0.5rem; }
+  .plat-cat-desc { font-size:1rem; line-height:1.75; color:rgba(0,0,0,0.65); max-width:480px; }
+</style>
+
+<a href="#operaciones" style="text-decoration:none;">
+  <div class="plat-cat-row" style="background:#E9FF57;">
+    <div class="plat-cat-row-inner">
+      <div class="plat-cat-title" style="color:#0a0a0a;">→ Operaciones</div>
+      <p class="plat-cat-desc">Mantén todos los aspectos de tu hotel sincronizados. Trabaja más inteligente, muévete más rápido y mantén el impulso a tu favor.</p>
+    </div>
+  </div>
+</a>
+
+<a href="#distribucion" style="text-decoration:none;">
+  <div class="plat-cat-row" style="background:#FFCBA4;">
+    <div class="plat-cat-row-inner">
+      <div class="plat-cat-title" style="color:#0a0a0a;">→ Distribución</div>
+      <p class="plat-cat-desc">Llega más lejos y vende de forma más inteligente. Conecta tus canales y convierte el alcance en ingresos reales.</p>
+    </div>
+  </div>
+</a>
+
+<a href="#huespedes" style="text-decoration:none;">
+  <div class="plat-cat-row" style="background:#C4D4FF;">
+    <div class="plat-cat-row-inner">
+      <div class="plat-cat-title" style="color:#0a0a0a;">→ Experiencia del huésped</div>
+      <p class="plat-cat-desc">Todo lo que necesitas para garantizar que cada estancia sea personalizada, sin fricciones y digna de 5 estrellas.</p>
+    </div>
+  </div>
+</a>
+
+<a href="#revenue" style="text-decoration:none;">
+  <div class="plat-cat-row" style="background:#A4EFBC;">
+    <div class="plat-cat-row-inner">
+      <div class="plat-cat-title" style="color:#0a0a0a;">→ Revenue & Analytics</div>
+      <p class="plat-cat-desc">Convierte tu estrategia en impulso. Conecta precios, reportes y analytics para crecer de forma más inteligente.</p>
+    </div>
+  </div>
+</a>
+
+<!-- ═══════════════════════════════════════════════
+     SECCIÓN 1: OPERACIONES
+═══════════════════════════════════════════════ -->
+<style>
+  .plat-section { padding: 5rem 7%; }
+  .plat-section-inner { max-width:1200px; margin:0 auto; }
+  .plat-section-header { display:grid; grid-template-columns:1fr; gap:1.5rem; margin-bottom:3.5rem; }
+  @media(min-width:768px){ .plat-section-header { grid-template-columns:auto 1fr; gap:3rem; align-items:start; } }
+  .plat-section-tag { font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#888; margin-bottom:0.75rem; }
+  .plat-section-h2 { font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2rem,3.5vw,2.8rem); font-weight:800; letter-spacing:-0.03em; line-height:1.1; }
+  .plat-content-grid { display:grid; grid-template-columns:1fr; gap:3rem; }
+  @media(min-width:1024px){ .plat-content-grid { grid-template-columns: 380px 1fr; gap:5rem; align-items:start; } }
+  .plat-photo { width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:20px; background:#eee; }
+  .plat-photo-placeholder { width:100%; aspect-ratio:3/4; border-radius:20px; display:flex; align-items:center; justify-content:center; font-size:3rem; }
+  .plat-feature-row { border-top:1px solid #e5e7eb; padding:1.75rem 0; }
+  .plat-feature-row:last-child { border-bottom:1px solid #e5e7eb; }
+  .plat-feature-title { font-family:'Plus Jakarta Sans',sans-serif; font-size:1.3rem; font-weight:700; color:#0a0a0a; margin:0 0 0.5rem 0; letter-spacing:-0.01em; }
+  .plat-feature-desc { font-size:0.95rem; color:#666; line-height:1.7; margin:0 0 0.75rem 0; max-width:540px; }
+  .plat-saber-mas { font-size:0.85rem; font-weight:600; color:#1a3320; text-decoration:none; }
+  .plat-saber-mas:hover { text-decoration:underline; }
+</style>
+
+<section id="operaciones" class="plat-section" style="background:#fafaf8;">
+  <div class="plat-section-inner">
+    <div class="plat-section-header">
+      <div>
+        <div class="plat-section-tag">01 · Operaciones</div>
+        <h2 class="plat-section-h2" style="color:#E9FF57; -webkit-text-stroke:1.5px #0a0a0a; text-stroke:1.5px #0a0a0a; color:#0a0a0a;">↓ Operaciones</h2>
+      </div>
+      <p style="font-size:1.05rem; color:#555; line-height:1.8; padding-top:0.5rem;">Silex PMS centraliza todo lo que tu equipo necesita para operar sin fricción — desde el primer check-in hasta el último cargo del folio.</p>
+    </div>
+    <div class="plat-content-grid">
+      <!-- Photo placeholder -->
+      <div class="plat-photo-placeholder" style="background:linear-gradient(150deg,#1a3320,#2d5a3d);">
+        <span>🏨</span>
+      </div>
+      <!-- Features -->
+      <div>
+        <div class="plat-feature-row">
+          <h3 class="plat-feature-title">Sistema PMS</h3>
+          <p class="plat-feature-desc">Reescribe la historia de tu hotel con un PMS inteligente centrado en el crecimiento, radicalmente intuitivo e increíblemente flexible. Check-in/out en un clic, gestión de habitaciones y tarifas en tiempo real.</p>
+          <a href="#" class="plat-saber-mas">↳ Saber más</a>
+        </div>
+        <div class="plat-feature-row">
+          <h3 class="plat-feature-title">Housekeeping</h3>
+          <p class="plat-feature-desc">Asigna habitaciones al equipo de limpieza, rastrea el estado en tiempo real y recibe actualizaciones desde cualquier dispositivo móvil. Sin llamadas, sin papel, sin demoras.</p>
+          <a href="#" class="plat-saber-mas">↳ Saber más</a>
+        </div>
+        <div class="plat-feature-row">
+          <h3 class="plat-feature-title">Folios & Facturación</h3>
+          <p class="plat-feature-desc">Gestiona cargos, pagos y facturas desde un único panel. Acepta múltiples métodos de pago, emite facturas fiscales y cierra el día con un clic.</p>
+          <a href="#" class="plat-saber-mas">↳ Saber más</a>
+        </div>
+        <div class="plat-feature-row">
+          <h3 class="plat-feature-title">Gestión de grupos</h3>
+          <p class="plat-feature-desc">Maneja reservas grupales y corporativas con asignación masiva de habitaciones, folios maestros e individuales, y check-in colectivo en segundos.</p>
+          <a href="#" class="plat-saber-mas">↳ Saber más</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECCIÓN 2: DISTRIBUCIÓN
+═══════════════════════════════════════════════ -->
+<section id="distribucion" class="plat-section" style="background:#fff8f4;">
+  <div class="plat-section-inner">
+    <div class="plat-section-header">
+      <div>
+        <div class="plat-section-tag">02 · Distribución</div>
+        <h2 class="plat-section-h2" style="color:#0a0a0a;">↓ Distribución</h2>
+      </div>
+      <p style="font-size:1.05rem; color:#555; line-height:1.8; padding-top:0.5rem;">Llega más lejos y vende de forma más inteligente. Silex conecta tus canales y tu motor de reservas para convertir cada punto de contacto en ingreso.</p>
+    </div>
+    <div class="plat-content-grid">
+      <div class="plat-photo-placeholder" style="background:linear-gradient(150deg,#3a1a0a,#7a3a1a);">
+        <span>📡</span>
+      </div>
+      <div>
+        <div class="plat-feature-row">
+          <h3 class="plat-feature-title">Motor de reservas directo</h3>
+          <p class="plat-feature-desc">Menos pasos, más reservas. Ofrece una experiencia de reserva integrada en tu sitio web, optimizada para móvil y diseñada para maximizar las reservas directas sin comisiones de terceros.</p>
+          <a href="#" class="plat-saber-mas">↳ Saber más</a>
+        </div>
+        <div class="plat-feature-row">
+          <h3 class="plat-feature-title">Channel Manager <span style="font-size:0.7rem; background:#E9FF57; color:#0a0a0a; border-radius:4px; padding:2px 7px; font-weight:700; vertical-align:middle; margin-left:6px;">Próximamente</span></h3>
+          <p class="plat-feature-desc">Vende en todos los canales — OTAs, GDS y tu propio sitio — con disponibilidad y tarifas sincronizadas en tiempo real. Sin sobreventa, sin actualizaciones manuales.</p>
+          <a href="#" class="plat-saber-mas">↳ Saber más</a>
+        </div>
+        <div class="plat-feature-row">
+          <h3 class="plat-feature-title">Códigos promocionales</h3>
+          <p class="plat-feature-desc">Crea descuentos por porcentaje o monto fijo, con fechas de validez y límites de uso. Perfectos para corporativos, agencias y campañas de temporada.</p>
+          <a href="#" class="plat-saber-mas">↳ Saber más</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECCIÓN 3: EXPERIENCIA DEL HUÉSPED
+═══════════════════════════════════════════════ -->
+<section id="huespedes" class="plat-section" style="background:#f4f4ff;">
+  <div class="plat-section-inner">
+    <div class="plat-section-header">
+      <div>
+        <div class="plat-section-tag">03 · Experiencia del huésped</div>
+        <h2 class="plat-section-h2" style="color:#0a0a0a;">↓ Experiencia<br>del huésped</h2>
+      </div>
+      <p style="font-size:1.05rem; color:#555; line-height:1.8; padding-top:0.5rem;">Cada detalle importa. Silex te da todas las herramientas para garantizar estancias personalizadas, sin complicaciones y dignas de cinco estrellas.</p>
+    </div>
+    <div class="plat-content-grid">
+      <div class="plat-photo-placeholder" style="background:linear-gradient(150deg,#1a0a2e,#3d1a5c);">
+        <span>✨</span>
+      </div>
+      <div>
+        <div class="plat-feature-row">
+          <h3 class="plat-feature-title">Perfil del huésped</h3>
+          <p class="plat-feature-desc">Construye un perfil completo de cada huésped — historial de estadías, preferencias, valor total y notas del equipo. Toda la información en un solo lugar para personalizar cada visita.</p>
+          <a href="#" class="plat-saber-mas">↳ Saber más</a>
+        </div>
+        <div class="plat-feature-row">
+          <h3 class="plat-feature-title">Pre check-in digital <span style="font-size:0.7rem; background:#E9FF57; color:#0a0a0a; border-radius:4px; padding:2px 7px; font-weight:700; vertical-align:middle; margin-left:6px;">Próximamente</span></h3>
+          <p class="plat-feature-desc">Permite que tus huéspedes completen el proceso de check-in desde su teléfono antes de llegar. Menos filas en recepción, mejor primera impresión.</p>
+          <a href="#" class="plat-saber-mas">↳ Saber más</a>
+        </div>
+        <div class="plat-feature-row">
+          <h3 class="plat-feature-title">Gestión de incidencias</h3>
+          <p class="plat-feature-desc">Registra, asigna y resuelve solicitudes de huéspedes al instante. Mantén a tu equipo alineado y responde antes de que un problema se convierta en una mala reseña.</p>
+          <a href="#" class="plat-saber-mas">↳ Saber más</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SECCIÓN 4: REVENUE & ANALYTICS
+═══════════════════════════════════════════════ -->
+<section id="revenue" class="plat-section" style="background:#f4fff8;">
+  <div class="plat-section-inner">
+    <div class="plat-section-header">
+      <div>
+        <div class="plat-section-tag">04 · Revenue & Analytics</div>
+        <h2 class="plat-section-h2" style="color:#0a0a0a;">↓ Revenue &<br>Analytics</h2>
+      </div>
+      <p style="font-size:1.05rem; color:#555; line-height:1.8; padding-top:0.5rem;">Convierte tu estrategia en impulso. Conecta precios, reportes y analytics para tomar decisiones más rápidas y generar más ingresos.</p>
+    </div>
+    <div class="plat-content-grid">
+      <div class="plat-photo-placeholder" style="background:linear-gradient(150deg,#0f2d1a,#1a5c2d);">
+        <span>📊</span>
+      </div>
+      <div>
+        <div class="plat-feature-row">
+          <h3 class="plat-feature-title">KPIs en tiempo real</h3>
+          <p class="plat-feature-desc">RevPAR, ADR, ocupación, ingresos por canal y más — todo actualizado en tiempo real desde tu dashboard. Sin exportar hojas de cálculo, sin esperar al cierre del día.</p>
+          <a href="#" class="plat-saber-mas">↳ Saber más</a>
+        </div>
+        <div class="plat-feature-row">
+          <h3 class="plat-feature-title">Reportes automáticos</h3>
+          <p class="plat-feature-desc">Genera estados de cuenta, resúmenes de caja, reportes de ocupación y producción con un clic. Exporta en PDF o CSV y comparte con tu equipo o contador al instante.</p>
+          <a href="#" class="plat-saber-mas">↳ Saber más</a>
+        </div>
+        <div class="plat-feature-row">
+          <h3 class="plat-feature-title">Inteligencia de tarifas <span style="font-size:0.7rem; background:#E9FF57; color:#0a0a0a; border-radius:4px; padding:2px 7px; font-weight:700; vertical-align:middle; margin-left:6px;">Próximamente</span></h3>
+          <p class="plat-feature-desc">Recomendaciones de precio basadas en ocupación, temporada y competencia. Maximiza el ingreso por habitación sin trabajo manual.</p>
+          <a href="#" class="plat-saber-mas">↳ Saber más</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════════════ -->
+<section style="background:#0a0a0a; padding:6rem 7%; text-align:center;">
+  <div style="max-width:680px; margin:0 auto;">
+    <div style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#555; margin-bottom:1.5rem;">Tu visión · Tu motor de crecimiento</div>
+    <h2 style="font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(2.4rem,5vw,4rem); font-weight:800; letter-spacing:-0.04em; color:#fff; line-height:1.08; margin:0 0 1.5rem 0;">
+      Una talla única no<br>le queda bien a nadie.
+    </h2>
+    <p style="font-size:1.1rem; color:#888; line-height:1.75; margin:0 0 2.5rem 0;">
+      Hemos creado el único motor de crecimiento inteligente del Caribe para darte la potencia, la flexibilidad y el soporte que necesitas para crecer a tu manera.
+    </p>
+    <button onclick="openDemoModal()" style="background:#E9FF57; color:#0a0a0a; border:none; border-radius:999px; padding:16px 36px; font-family:'Plus Jakarta Sans',sans-serif; font-size:1.05rem; font-weight:800; cursor:pointer; letter-spacing:0.01em;">
+      Agenda una demo ↗
+    </button>
+  </div>
+</section>
+
+{{ end }}
