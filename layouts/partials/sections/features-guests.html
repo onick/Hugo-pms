@@ -1,0 +1,184 @@
+<style>
+  @media (min-width: 1024px) {
+    .fg-grid { grid-template-columns: 55% 45% !important; gap: 6rem !important; }
+  }
+
+  .fg-item { cursor: pointer; }
+  .fg-item:hover .fg-title { color: #1A3320; }
+
+  .fg-arrow {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 50%;
+    border: 1.5px solid var(--color-border-dark);
+    font-size: 0.95rem; color: var(--text-muted);
+    transition: transform 0.25s ease, background 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0;
+  }
+  .fg-item.open .fg-arrow {
+    transform: rotate(90deg);
+    background: #E9FF57;
+    border-color: #E9FF57;
+    color: #0A0A0A;
+  }
+
+  .fg-body {
+    max-height: 0; overflow: hidden; opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+  }
+  .fg-item.open .fg-body {
+    max-height: 120px; opacity: 1; padding-bottom: 1rem;
+  }
+</style>
+
+<section style="background:var(--color-bg); padding:6rem 0;">
+  <div style="max-width:80rem; margin:0 auto; padding:0 2rem;">
+
+    <div class="fg-grid" style="display:grid; grid-template-columns:1fr; gap:3rem; align-items:start;">
+
+      <!-- ─── LEFT: Heading + Imagen con card ──────────── -->
+      <div class="fade-up">
+
+        <h2 style="font-family:var(--font-sans); font-weight:600; letter-spacing:-0.025em;
+                   color:var(--text-primary); margin-bottom:2.5rem;
+                   font-size:clamp(2rem,3.5vw,3.2rem); line-height:1.12;">
+          Potencia toda la experiencia<br>de tus huéspedes
+        </h2>
+
+        <!-- Imagen + card flotante -->
+        <div style="position:relative; border-radius:16px; overflow:hidden;
+                    box-shadow:0 20px 60px rgba(0,0,0,0.1); aspect-ratio:4/3;">
+
+          <!-- Fondo foto simulado (gradiente cálido) -->
+          <div style="width:100%; height:100%;
+                      background:linear-gradient(135deg,#d4a76a 0%,#c49455 40%,#8a6a3a 100%);
+                      position:relative;">
+
+            <!-- Silueta huésped (SVG simple) -->
+            <svg viewBox="0 0 400 300" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.25;">
+              <ellipse cx="200" cy="260" rx="120" ry="60" fill="#5a3a1a"/>
+              <circle cx="200" cy="130" r="70" fill="#7a5030"/>
+              <rect x="130" y="190" width="140" height="120" rx="20" fill="#5a3a1a"/>
+            </svg>
+
+            <!-- Card flotante: perfil de huésped -->
+            <div style="position:absolute; top:50%; right:5%; transform:translateY(-50%);
+                        background:#fff; border-radius:12px; padding:16px 20px;
+                        box-shadow:0 8px 32px rgba(0,0,0,0.18); width:220px;">
+
+              <!-- Título card -->
+              <div style="font-family:var(--font-sans); font-size:11px; font-weight:600;
+                          color:#6b7280; letter-spacing:0.06em; margin-bottom:12px;">
+                PERFIL DEL HUÉSPED
+              </div>
+
+              <!-- Avatar + nombre -->
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;
+                          padding-bottom:12px; border-bottom:1px solid #f3f4f6;">
+                <div style="width:36px; height:36px; border-radius:50%;
+                            background:#1A3320; display:flex; align-items:center; justify-content:center;
+                            font-family:var(--font-sans); font-size:14px; font-weight:700; color:#E9FF57;
+                            flex-shrink:0;">MG</div>
+                <div>
+                  <div style="font-family:var(--font-sans); font-size:13px; font-weight:600; color:#111;">
+                    María García
+                  </div>
+                  <div style="font-family:var(--font-sans); font-size:11px; color:#9ca3af;">
+                    ★ Huésped frecuente
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stats -->
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px;">
+                <div style="background:#f9fafb; border-radius:8px; padding:8px; text-align:center;">
+                  <div style="font-family:var(--font-sans); font-size:16px; font-weight:700; color:#1A3320;">12</div>
+                  <div style="font-family:var(--font-sans); font-size:10px; color:#9ca3af;">Estadías</div>
+                </div>
+                <div style="background:#f9fafb; border-radius:8px; padding:8px; text-align:center;">
+                  <div style="font-family:var(--font-sans); font-size:16px; font-weight:700; color:#1A3320;">$4.2k</div>
+                  <div style="font-family:var(--font-sans); font-size:10px; color:#9ca3af;">Total</div>
+                </div>
+              </div>
+
+              <!-- Tags -->
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <span style="font-family:var(--font-sans); font-size:10px; font-weight:600;
+                             background:#f0fdf4; color:#166534; border-radius:4px; padding:2px 8px;">
+                  Cama extra
+                </span>
+                <span style="font-family:var(--font-sans); font-size:10px; font-weight:600;
+                             background:#eff6ff; color:#1d4ed8; border-radius:4px; padding:2px 8px;">
+                  Piso alto
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- ─── END LEFT ──────────────────────────────────── -->
+
+
+      <!-- ─── RIGHT: Párrafo + Acordeón ────────────────── -->
+      <div class="fade-up delay-1" style="padding-top:0.5rem;">
+
+        <p style="font-family:var(--font-sans); font-size:1.2rem; line-height:1.65;
+                  color:var(--text-secondary); margin-bottom:2.5rem;">
+          Desde el primer contacto hasta el checkout y más allá, conoce a
+          cada huésped en profundidad y ofrece experiencias que los hagan
+          volver siempre.
+        </p>
+
+        <div id="fg-accordion">
+
+          {{ range slice
+            (slice "Perfiles de huéspedes unificados"
+                   "Consolida todo el historial, preferencias y notas de cada huésped en un solo perfil accesible desde recepción.")
+            (slice "Historial completo de estadías y consumo"
+                   "Consulta cada visita anterior, cargos, solicitudes especiales y patrones de comportamiento con un clic.")
+            (slice "Pagos flexibles centrados en el huésped"
+                   "Ofrece múltiples métodos de pago, cargos parciales y folios separados para grupos sin complicaciones.")
+            (slice "Preferencias y notas internas"
+                   "Registra preferencias de habitación, alergias o notas VIP para que tu equipo las tenga siempre a mano.")
+            (slice "Búsqueda universal instantánea"
+                   "Encuentra cualquier huésped, reserva o folio en menos de un segundo desde cualquier pantalla del sistema.")
+          }}
+          {{ $item := . }}
+          <div class="fg-item" style="border-top:1px solid var(--color-border);"
+               onclick="fgToggle(this)">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:1.2rem 0; gap:1rem;">
+              <span class="fg-title" style="font-family:var(--font-sans); font-size:1rem;
+                            font-weight:500; color:var(--text-primary); transition:color 0.2s;">
+                {{ index $item 0 }}
+              </span>
+              <span class="fg-arrow">→</span>
+            </div>
+            <div class="fg-body">
+              <p style="font-family:var(--font-sans); font-size:0.9rem; line-height:1.65;
+                        color:var(--text-secondary); margin:0;">
+                {{ index $item 1 }}
+              </p>
+            </div>
+          </div>
+          {{ end }}
+
+          <div style="border-top:1px solid var(--color-border);"></div>
+
+        </div>
+      </div>
+      <!-- ─── END RIGHT ─────────────────────────────────── -->
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function fgToggle(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('#fg-accordion .fg-item').forEach(function(i) {
+      i.classList.remove('open');
+    });
+    if (!isOpen) el.classList.add('open');
+  }
+</script>
