@@ -338,7 +338,18 @@
   }
 
   function cancelAnim(id) {
-    if (anims[id]) { try { anims[id].cancel(); } catch(e){} delete anims[id]; }
+    if (anims[id]) {
+      anims[id].onfinish = null;              // prevent stale callback from firing
+      try { anims[id].cancel(); } catch(e){}
+      delete anims[id];
+    }
+  }
+
+  /* commitStyles() copies the animation's current values as inline styles,
+     then cancel() removes the fill — so inline styles win from that point on. */
+  function commitAndCancel(anim, body) {
+    try { anim.commitStyles(); } catch(e){}
+    try { anim.cancel();       } catch(e){}
   }
 
   /* Open: animate height 0 → scrollHeight, then release to auto */
@@ -354,8 +365,10 @@
     );
     anims[id] = anim;
     anim.onfinish = function () {
+      commitAndCancel(anim, body);   // commits to+'px' as inline, removes fill
       delete anims[id];
-      body.style.height   = 'auto';  // release — lets content reflow freely
+      delete locked[id];             // unlock immediately — don't wait for setTimeout
+      body.style.height   = 'auto'; // inline style now wins — lets content reflow
       body.style.overflow = '';
     };
   }
@@ -373,14 +386,16 @@
     );
     anims[id] = anim;
     anim.onfinish = function () {
+      commitAndCancel(anim, body);   // commits 0px as inline, removes fill
       delete anims[id];
+      delete locked[id];             // unlock immediately
       body.style.height = '0px';
     };
   }
 
-  /* Instant close (no animation) — used when switching items */
+  /* Instant close — cancelAnim clears onfinish first, then we own the styles */
   function closeInstant(id) {
-    cancelAnim(id);
+    cancelAnim(id);                           // onfinish=null + cancel = no fill conflict
     var prevItem = document.getElementById('acc-' + id);
     var prevBody = document.getElementById('body-' + id);
     if (prevBody) { prevBody.style.height = '0px'; prevBody.style.overflow = 'hidden'; }
