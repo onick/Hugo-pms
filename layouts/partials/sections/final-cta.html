@@ -1,31 +1,21 @@
-<section class="py-28 relative overflow-hidden" style="background: var(--gradient-hero)">
-
-  <!-- Radial accents -->
-  <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute top-0 right-0 w-[500px] h-[500px] opacity-15"
-         style="background: radial-gradient(ellipse at top right, hsl(183 100% 36%), transparent 65%)"></div>
-    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] opacity-10"
-         style="background: radial-gradient(ellipse at bottom left, hsl(270 60% 55%), transparent 65%)"></div>
-  </div>
+<section class="py-28 relative overflow-hidden bg-[#0D1F12]">
 
   <div class="relative max-w-3xl mx-auto px-4 sm:px-6 text-center space-y-8">
 
-    <h2 class="text-[clamp(2.2rem,4vw+1rem,3.5rem)] font-extrabold tracking-tight leading-[1.1]">
+    <h2 class="text-[clamp(2.2rem,4vw+1rem,3.5rem)] font-extrabold tracking-tight leading-[1.1] text-white">
       Deja de pelear con tu software.
-      <span class="text-white/60"> Empieza a hospedar.</span>
+      <br><span class="text-[var(--color-accent)]">Empieza a hospedar.</span>
     </h2>
 
     <a href="{{ .Site.Params.registerUrl }}"
-       class="inline-block bg-white text-[hsl(183_100%_26%)] font-bold rounded-full h-14 px-14 text-lg
-              leading-[3.5rem] shadow-[0_0_40px_rgba(255,255,255,0.25)]
-              hover:shadow-[0_0_60px_rgba(255,255,255,0.35)] hover:-translate-y-0.5
+       class="inline-block bg-[var(--color-accent)] text-[#0D1F12] font-bold rounded-full h-14 px-14 text-lg
+              leading-[3.5rem] hover:-translate-y-0.5 hover:brightness-105
               transition-all duration-200">
-      Crear Mi Cuenta Gratis
+      Crear mi cuenta gratis ↗
     </a>
 
-    <p class="text-white/40 text-sm flex items-center justify-center gap-2">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
-      Sin tarjeta de crédito · Sin contratos · Cancela cuando quieras
+    <p class="text-white/40 text-sm">
+      ✓ Sin tarjeta de crédito &nbsp;·&nbsp; ✓ Sin contratos &nbsp;·&nbsp; ✓ Cancela cuando quieras
     </p>
 
   </div>

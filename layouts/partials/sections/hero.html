@@ -1,92 +1,50 @@
-<section class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+<section class="relative bg-grid min-h-screen flex flex-col justify-center pt-16 overflow-hidden">
 
-  <!-- Background glows -->
-  <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-20"
-         style="background: radial-gradient(ellipse, hsl(38 72% 85%) 0%, transparent 70%); transform: translate(30%, -30%)"></div>
-    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full opacity-15"
-         style="background: radial-gradient(ellipse, hsl(183 100% 36%) 0%, transparent 70%); transform: translate(-30%, 30%)"></div>
-  </div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full">
 
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <!-- Badge superior -->
+    <div class="fade-up flex items-center gap-2 mb-8 w-fit">
+      <div class="w-4 h-4 bg-[var(--color-accent)] rounded-sm flex-shrink-0"></div>
+      <span class="text-sm font-medium text-[var(--text-secondary)]">Software de gestión hotelera para el Caribe</span>
+    </div>
 
-      <!-- Left: Copy -->
-      <div class="space-y-8">
+    <!-- Headline masivo (estilo editorial Cloudbeds) -->
+    <h1 class="fade-up delay-1 font-bold leading-[0.94] tracking-[-0.02em] text-[var(--text-primary)] mb-12"
+        style="font-size: clamp(3rem, 7.5vw, 7.8rem);">
+      Potenciando a los<br>
+      hoteleros
+      <mark style="background: #E9FF57; padding: 0 0.12em; display: inline; position: relative; transform: rotate(-1deg); display: inline-block;">más exigentes</mark>
+      <br>del Caribe
+    </h1>
 
-        <!-- Status pill -->
-        <div class="fade-up inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-300 text-xs font-medium w-fit">
-          <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
-          Plataforma nativa en la nube · Construido para el Caribe
-        </div>
+    <!-- Fila inferior: CTAs izq · Descripción der -->
+    <div class="fade-up delay-2 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start">
 
-        <!-- Award badge -->
-        <div class="fade-up delay-1 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold w-fit">
-          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-          PMS #1 para hoteles del Caribe
-        </div>
-
-        <!-- Headline -->
-        <h1 class="fade-up delay-2 text-[clamp(2.4rem,4vw+1rem,3.8rem)] font-extrabold leading-[1.08] tracking-tight">
-          El motor de tu hotel,
-          <span class="text-gradient-ocean"> diseñado para la realidad operativa de hoy.</span>
-        </h1>
-
-        <!-- Subheading -->
-        <p class="fade-up delay-3 text-[hsl(200_14%_65%)] text-lg leading-relaxed max-w-xl">
-          Automatiza tus reservas, sincroniza tus canales y aumenta tus ingresos
-          sin depender de hojas de Excel ni de software de los años 90.
-          Creado a la medida para hoteles independientes y boutique.
-        </p>
-
-        <!-- CTAs -->
-        <div class="fade-up delay-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-          <a href="{{ .Site.Params.registerUrl }}" class="btn-cta px-8 py-3.5 text-base">
-            Comenzar Prueba Gratis
+      <!-- CTAs -->
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="{{ .Site.Params.registerUrl }}" class="btn-primary text-base px-6 py-3.5">
+            Comenzar gratis ↗
           </a>
-          <a href="#funciones"
-             class="flex items-center gap-2 text-sm font-medium text-[hsl(200_14%_65%)] hover:text-white transition-colors border border-[hsl(210_25%_28%)] px-6 py-3.5 rounded-full hover:border-[hsl(210_25%_40%)]">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
-            Ver Demo Interactiva
+          <a href="#funciones" class="btn-outline text-base px-6 py-3.5">
+            Explorar plataforma ↗
           </a>
         </div>
-
-        <!-- Trust reducers -->
-        <p class="fade-up text-xs text-[hsl(200_14%_50%)]">
+        <p class="text-xs text-[var(--text-muted)] pt-1">
           ✓ Sin tarjeta de crédito &nbsp;·&nbsp; ✓ Setup en 5 min &nbsp;·&nbsp; ✓ Soporte en español
         </p>
       </div>
 
-      <!-- Right: Dashboard placeholder + floating badges -->
-      <div class="relative hidden lg:block">
-        <!-- Main placeholder -->
-        <div class="screenshot-placeholder w-full aspect-[4/3] rounded-2xl border border-[hsl(183_100%_36%/0.15)] shadow-[0_2px_40px_rgba(0,0,0,0.5)]">
-          <span>Dashboard Preview</span>
-        </div>
-
-        <!-- Badge top-left -->
-        <div class="absolute -top-4 -left-6 flex items-center gap-2 bg-[hsl(210_35%_14%)] border border-[hsl(210_25%_22%)] rounded-xl px-3 py-2 shadow-lg">
-          <div class="w-7 h-7 rounded-lg bg-[hsl(183_100%_36%/0.15)] flex items-center justify-center text-[hsl(183_100%_36%)]">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-          </div>
-          <div>
-            <p class="text-[10px] text-[hsl(200_14%_55%)]">Tiempo de check-in</p>
-            <p class="text-xs font-semibold">8s vs 3 min promedio</p>
-          </div>
-        </div>
-
-        <!-- Badge bottom-right -->
-        <div class="absolute -bottom-4 -right-6 flex items-center gap-2 bg-[hsl(210_35%_14%)] border border-[hsl(210_25%_22%)] rounded-xl px-3 py-2 shadow-lg">
-          <div class="w-7 h-7 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-          </div>
-          <div>
-            <p class="text-[10px] text-[hsl(200_14%_55%)]">RevPAR promedio</p>
-            <p class="text-xs font-semibold text-emerald-400">+24% clientes activos</p>
-          </div>
-        </div>
+      <!-- Descripción -->
+      <div>
+        <p class="text-[var(--text-secondary)] text-lg leading-relaxed">
+          SilexPMS unifica la gestión de reservas, canales de distribución,
+          operaciones y experiencia del huésped en una sola plataforma —
+          diseñada para la realidad de los hoteles independientes del Caribe.
+        </p>
       </div>
 
     </div>
   </div>
+
 </section>

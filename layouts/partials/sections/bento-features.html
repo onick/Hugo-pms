@@ -7,7 +7,7 @@
         12 módulos diseñados para
         <span class="text-gradient-ocean"> hoteles reales</span>
       </h2>
-      <p class="mt-4 text-[hsl(200_14%_55%)] text-base max-w-2xl mx-auto">
+      <p class="mt-4 text-[var(--text-muted)] text-base max-w-2xl mx-auto">
         Cada módulo está construido para integrarse con los demás. Sin silos, sin duplicidad de datos.
       </p>
     </div>
@@ -23,7 +23,7 @@
       {{- else }}                {{- $span = "col-span-1" }}
       {{- end }}
 
-      <div class="bento-card {{ $span }} relative rounded-2xl border border-[hsl(210_25%_22%)] bg-[hsl(210_35%_14%)] p-5 overflow-hidden cursor-default
+      <div class="bento-card {{ $span }} relative rounded-2xl border border-[var(--color-border)] bg-white p-5 overflow-hidden cursor-default
                   {{ if eq .span "hero" }}hero-card{{ end }}">
 
         <!-- Accent top line -->
@@ -38,7 +38,7 @@
         </div>
 
         <h3 class="font-semibold text-sm {{ if eq .span "hero" }}text-base{{ end }} mb-1.5">{{ .title }}</h3>
-        <p class="text-[hsl(200_14%_55%)] text-xs leading-relaxed {{ if eq .span "hero" }}text-sm max-w-xs{{ end }}">{{ .desc }}</p>
+        <p class="text-[var(--text-muted)] text-xs leading-relaxed {{ if eq .span "hero" }}text-sm max-w-xs{{ end }}">{{ .desc }}</p>
 
         <!-- Placeholder screenshot for hero card -->
         {{ if eq .span "hero" }}

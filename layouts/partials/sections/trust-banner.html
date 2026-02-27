@@ -1,18 +1,16 @@
-<section class="py-16 border-y border-[hsl(210_25%_18%)]">
+<section class="py-14 border-y border-[var(--color-border)] bg-[var(--color-bg)]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
 
-    <!-- Label -->
-    <p class="text-center text-[10px] font-semibold uppercase tracking-[0.15em] text-[hsl(200_14%_50%)]">
+    <p class="text-center text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--text-muted)]">
       Integrado con el ecosistema hotelero global
     </p>
 
-    <!-- Logo carousel -->
     <div class="overflow-hidden logo-fade">
       {{- $logos := .Site.Data.integrations.logos }}
-      <div class="logo-track gap-12 items-center">
+      <div class="logo-track gap-10 items-center">
         {{- range seq 2 }}
         {{- range $logos }}
-        <div class="shrink-0 px-6 py-2 rounded-xl border border-[hsl(210_25%_22%)] bg-[hsl(210_35%_14%)] text-[hsl(200_14%_55%)] text-sm font-medium whitespace-nowrap hover:text-white hover:border-[hsl(210_25%_35%)] transition-colors">
+        <div class="shrink-0 px-5 py-2 rounded-lg border border-[var(--color-border)] bg-white text-[var(--text-secondary)] text-sm font-semibold whitespace-nowrap hover:border-[var(--color-border-dark)] hover:text-[var(--text-primary)] transition-colors">
           {{ .name }}
         </div>
         {{- end }}
@@ -20,12 +18,11 @@
       </div>
     </div>
 
-    <!-- Stats strip -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
       {{ range .Site.Data.stats.stats }}
       <div class="text-center">
-        <p class="text-[clamp(1.8rem,3vw+0.5rem,2.6rem)] font-extrabold text-gradient-ocean tabular-nums">{{ .value }}</p>
-        <p class="text-xs text-[hsl(200_14%_55%)] mt-1">{{ .label }}</p>
+        <p class="text-[clamp(1.8rem,3vw+0.5rem,2.6rem)] font-extrabold text-[var(--text-primary)] tabular-nums">{{ .value }}</p>
+        <p class="text-xs text-[var(--text-muted)] mt-1">{{ .label }}</p>
       </div>
       {{ end }}
     </div>
