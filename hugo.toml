@@ -7,9 +7,11 @@ title = "SilexPMS — El PMS del Caribe"
 
 [params]
   description = "La plataforma hotelera de nueva generación para hoteles independientes y boutique del Caribe."
-  appUrl     = "https://app.silexpms.com"
+  appUrl      = "https://app.silexpms.com"
   registerUrl = "https://app.silexpms.com/auth?tab=register"
   loginUrl    = "https://app.silexpms.com/auth"
+  heroVideo   = ""           # URL del video MP4 (dejar vacío para usar imagen/placeholder)
+  heroImage   = ""           # URL de imagen fallback
 
 [markup]
   [markup.goldmark]
