@@ -45,20 +45,24 @@
   max-width:480px; text-align:left; margin:0;
 }
 
-/* ── Accordion body ── */
+/* ── Accordion body — CSS Grid trick ── */
 .plat-acc-body {
-  height: 0;
-  overflow: hidden;
-  /* height animated via Web Animations API — no CSS transition needed */
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s cubic-bezier(0.4,0,0.2,1);
+}
+.plat-acc-item.open .plat-acc-body {
+  grid-template-rows: 1fr;
 }
 
 .plat-acc-body-inner {
-  padding: 0 7% 4rem;
-  max-width:1200px; margin:0 auto;
+  overflow: hidden;          /* required by grid trick */
+  min-height: 0;             /* required by grid trick — no padding here! */
 }
 .plat-acc-body-inner-wrap {
+  padding: 3rem 7% 4rem;    /* padding lives here, outside overflow:hidden */
   max-width:1200px; margin:0 auto;
-  border-top: 1px solid rgba(0,0,0,0.15); padding-top:3rem;
+  border-top: 1px solid rgba(0,0,0,0.15);
 }
 
 /* ── Content grid ── */
@@ -325,83 +329,12 @@
 <script>
 (function () {
   var current    = null;
-  var locked     = {};       // per-item click debounce
-  var anims      = {};       // running Web Animation per id
-  var DURATION   = 600;
-  var EASING     = 'cubic-bezier(0.4,0,0.2,1)';
+  var locked     = {};
   var SCROLL_PAD = 16;
-
-  /* ── helpers ─────────────────────────────────── */
 
   function setExpanded(id, val) {
     var btn = document.querySelector('#acc-' + id + ' .plat-acc-trigger');
     if (btn) btn.setAttribute('aria-expanded', val ? 'true' : 'false');
-  }
-
-  function cancelAnim(id) {
-    if (anims[id]) {
-      anims[id].onfinish = null;              // prevent stale callback from firing
-      try { anims[id].cancel(); } catch(e){}
-      delete anims[id];
-    }
-  }
-
-  /* commitStyles() copies the animation's current values as inline styles,
-     then cancel() removes the fill — so inline styles win from that point on. */
-  function commitAndCancel(anim, body) {
-    try { anim.commitStyles(); } catch(e){}
-    try { anim.cancel();       } catch(e){}
-  }
-
-  /* Open: animate height 0 → scrollHeight, then release to auto */
-  function openBody(body, id) {
-    cancelAnim(id);
-    var from = body.getBoundingClientRect().height || 0;
-    var to   = body.scrollHeight;
-    body.style.overflow = 'hidden';
-
-    var anim = body.animate(
-      [{ height: from + 'px' }, { height: to + 'px' }],
-      { duration: DURATION, easing: EASING, fill: 'forwards' }
-    );
-    anims[id] = anim;
-    anim.onfinish = function () {
-      commitAndCancel(anim, body);   // commits to+'px' as inline, removes fill
-      delete anims[id];
-      delete locked[id];             // unlock immediately — don't wait for setTimeout
-      body.style.height   = 'auto'; // inline style now wins — lets content reflow
-      body.style.overflow = '';
-    };
-  }
-
-  /* Close: freeze at current rendered height → animate to 0 */
-  function closeBody(body, id) {
-    cancelAnim(id);
-    var from = body.getBoundingClientRect().height;
-    body.style.height   = from + 'px';
-    body.style.overflow = 'hidden';
-
-    var anim = body.animate(
-      [{ height: from + 'px' }, { height: '0px' }],
-      { duration: DURATION, easing: EASING, fill: 'forwards' }
-    );
-    anims[id] = anim;
-    anim.onfinish = function () {
-      commitAndCancel(anim, body);   // commits 0px as inline, removes fill
-      delete anims[id];
-      delete locked[id];             // unlock immediately
-      body.style.height = '0px';
-    };
-  }
-
-  /* Instant close — cancelAnim clears onfinish first, then we own the styles */
-  function closeInstant(id) {
-    cancelAnim(id);                           // onfinish=null + cancel = no fill conflict
-    var prevItem = document.getElementById('acc-' + id);
-    var prevBody = document.getElementById('body-' + id);
-    if (prevBody) { prevBody.style.height = '0px'; prevBody.style.overflow = 'hidden'; }
-    if (prevItem) prevItem.classList.remove('open');
-    setExpanded(id, false);
   }
 
   function scrollToTop(el) {
@@ -409,50 +342,42 @@
     window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
   }
 
-  /* ── main toggle ──────────────────────────────── */
-
   window.platToggle = function (id) {
     if (locked[id]) return;
     locked[id] = true;
-    setTimeout(function () { delete locked[id]; }, DURATION);
+    setTimeout(function () { delete locked[id]; }, 600);
 
     var item   = document.getElementById('acc-' + id);
-    var body   = document.getElementById('body-' + id);
     var isOpen = item.classList.contains('open');
+
+    // Cierra el anterior INSTANTÁNEAMENTE (sin transición)
+    // para que el layout esté estable antes de medir la posición del nuevo
+    if (current && current !== id) {
+      var prev     = document.getElementById('acc-' + current);
+      var prevBody = document.getElementById('body-' + current);
+      if (prevBody) prevBody.style.transition = 'none';  // desactiva transición
+      if (prev)     prev.classList.remove('open');
+      setExpanded(current, false);
+      // Reactiva transición tras dos frames (no afecta al nuevo que se abre)
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          if (prevBody) prevBody.style.transition = '';
+        });
+      });
+      current = null;
+    }
 
     if (isOpen) {
       item.classList.remove('open');
-      closeBody(body, id);
       setExpanded(id, false);
       current = null;
-      return;
+    } else {
+      scrollToTop(item);
+      item.classList.add('open');
+      setExpanded(id, true);
+      current = id;
     }
-
-    // Close previous instantly so layout is stable before we measure
-    if (current && current !== id) {
-      closeInstant(current);
-      current = null;
-    }
-
-    // Scroll + open simultaneously
-    scrollToTop(item);
-    item.classList.add('open');
-    openBody(body, id);
-    setExpanded(id, true);
-    current = id;
   };
-
-  /* ── ResizeObserver: recalculate open body on viewport change ── */
-  if (typeof ResizeObserver !== 'undefined') {
-    var ro = new ResizeObserver(function () {
-      if (!current || anims[current]) return;       // skip if animating
-      var openBody = document.getElementById('body-' + current);
-      if (openBody && openBody.style.height !== 'auto') {
-        openBody.style.height = openBody.scrollHeight + 'px';
-      }
-    });
-    ro.observe(document.documentElement);
-  }
 
 }());
 </script>
