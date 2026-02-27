@@ -12,7 +12,7 @@ title = "SilexPMS — El PMS del Caribe"
   loginUrl    = "https://app.silexpms.com/auth"
   heroVideo    = ""           # URL del video MP4 (dejar vacío para usar imagen/placeholder)
   heroImage    = ""           # URL de imagen fallback
-  demoFormUrl  = "https://formspree.io/f/xpwzgpbe"  # Reemplaza con tu form ID de formspree.io
+  demoFormUrl  = "https://api.silexpms.com/api/leads"  # Laravel API + Resend
   demoWhatsApp = "18099206939"  # Tu WhatsApp (sin + ni espacios)
 
 [markup]
