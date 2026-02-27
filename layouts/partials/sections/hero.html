@@ -1,139 +1,49 @@
-<section class="relative bg-grid min-h-[92vh] flex flex-col justify-center pt-20 overflow-hidden">
+<section class="relative bg-grid min-h-screen flex flex-col justify-center pt-16 overflow-hidden">
 
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 w-full">
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 w-full">
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-16 items-center">
+    <!-- Pre-título -->
+    <div class="fade-up flex items-center gap-2 mb-8 w-fit">
+      <div class="w-4 h-4 bg-[var(--color-accent)] rounded-sm flex-shrink-0"></div>
+      <span class="text-sm font-medium text-[var(--text-secondary)]">Sistema de Gestión Hotelera (PMS) de nueva generación</span>
+    </div>
 
-      <!-- ─── LEFT: Copy ─────────────────────────────────── -->
-      <div>
+    <!-- Título principal -->
+    <h1 class="fade-up delay-1 font-semibold tracking-[-0.025em] text-[var(--text-primary)] mb-12"
+        style="font-size: clamp(2.8rem, 5.8vw, 6rem); line-height: 1.22;">
+      Impulsando a los hoteleros
+      <mark style="background:#E9FF57; padding:0.05em 0.18em; border-radius:2px; -webkit-box-decoration-break:clone; box-decoration-break:clone;">más ambiciosos</mark>
+      del Caribe
+    </h1>
 
-        <!-- Pre-título -->
-        <div class="fade-up flex items-center gap-2 mb-7 w-fit">
-          <div class="w-3.5 h-3.5 bg-[var(--color-accent)] rounded-sm flex-shrink-0"></div>
-          <span class="text-sm font-medium text-[var(--text-secondary)] tracking-wide">
-            Sistema de Gestión Hotelera (PMS) de nueva generación
-          </span>
+    <!-- Fila inferior: CTAs izq · Descripción der -->
+    <div class="fade-up delay-2 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start">
+
+      <!-- CTAs -->
+      <div class="space-y-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <a href="{{ .Site.Params.registerUrl }}" class="btn-primary text-base px-6 py-3.5">
+            Comenzar gratis ↗
+          </a>
+          <a href="#funciones" class="btn-outline text-base px-6 py-3.5">
+            Explorar plataforma ↗
+          </a>
         </div>
-
-        <!-- Título -->
-        <h1 class="fade-up delay-1 font-semibold tracking-[-0.025em] text-[var(--text-primary)] mb-7"
-            style="font-size: clamp(2.6rem, 4.2vw, 5rem); line-height: 1.18;">
-          Impulsando a los hoteleros
-          <mark style="background:#E9FF57; padding:0.05em 0.2em; border-radius:3px;
-                       -webkit-box-decoration-break:clone; box-decoration-break:clone;">más ambiciosos</mark>
-          del Caribe
-        </h1>
-
-        <!-- Descripción -->
-        <p class="fade-up delay-2 text-[var(--text-secondary)] text-lg leading-relaxed mb-9" style="max-width:42ch;">
-          Silex PMS unifica reservas, recepción, limpieza y facturación en una sola
-          interfaz ultrarrápida para que gestiones tu hotel sin fricciones y eleves
-          la experiencia de tus huéspedes.
+        <p class="text-xs text-[var(--text-muted)] pt-1">
+          ✓ Sin tarjeta de crédito &nbsp;·&nbsp; ✓ Setup en 5 min &nbsp;·&nbsp; ✓ Soporte en español
         </p>
-
-        <!-- CTAs -->
-        <div class="fade-up delay-3 space-y-3">
-          <div class="flex flex-wrap items-center gap-3">
-            <a href="{{ .Site.Params.registerUrl }}" class="btn-primary text-base px-7 py-3.5">
-              Comenzar gratis ↗
-            </a>
-            <a href="#funciones" class="btn-outline text-base px-7 py-3.5">
-              Ver demo ↗
-            </a>
-          </div>
-          <p class="text-xs text-[var(--text-muted)]">
-            ✓ Sin tarjeta de crédito &nbsp;·&nbsp; ✓ Setup en 5 min &nbsp;·&nbsp; ✓ Soporte en español
-          </p>
-        </div>
-
       </div>
-      <!-- ─── END LEFT ───────────────────────────────────── -->
 
-
-      <!-- ─── RIGHT: Video / Image ───────────────────────── -->
-      <div class="fade-up delay-2 relative">
-
-        <!-- Media container -->
-        <div class="relative rounded-2xl overflow-hidden shadow-2xl" style="aspect-ratio:4/3;">
-
-          {{ if .Site.Params.heroVideo }}
-            {{/* ── VIDEO ── */}}
-            <video class="w-full h-full object-cover"
-                   autoplay muted loop playsinline
-                   {{ with .Site.Params.heroImage }}poster="{{ . }}"{{ end }}>
-              <source src="{{ .Site.Params.heroVideo }}" type="video/mp4">
-            </video>
-
-          {{ else if .Site.Params.heroImage }}
-            {{/* ── IMAGE FALLBACK ── */}}
-            <img src="{{ .Site.Params.heroImage }}"
-                 alt="Silex PMS en acción"
-                 class="w-full h-full object-cover">
-
-          {{ else }}
-            {{/* ── PLACEHOLDER ── */}}
-            <div class="w-full h-full flex flex-col items-center justify-center gap-4"
-                 style="background:linear-gradient(135deg,#1A3320 0%,#2A5030 60%,#1A3320 100%);">
-              <!-- Mock hotel dashboard UI -->
-              <div style="width:88%; background:rgba(255,255,255,0.06); border-radius:12px; padding:20px; border:1px solid rgba(255,255,255,0.1);">
-                <!-- Header bar -->
-                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
-                  <div style="display:flex; gap:6px;">
-                    <div style="width:8px;height:8px;border-radius:50%;background:#E9FF57;"></div>
-                    <div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);"></div>
-                    <div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.3);"></div>
-                  </div>
-                  <div style="font-size:11px;color:rgba(255,255,255,0.5);font-family:var(--font-sans);">SilexPMS</div>
-                </div>
-                <!-- Fake stat row -->
-                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
-                  <div style="background:rgba(233,255,87,0.12);border-radius:8px;padding:12px;text-align:center;">
-                    <div style="font-size:22px;font-weight:700;color:#E9FF57;font-family:var(--font-sans);">87%</div>
-                    <div style="font-size:10px;color:rgba(255,255,255,0.5);font-family:var(--font-sans);">Ocupación</div>
-                  </div>
-                  <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:12px;text-align:center;">
-                    <div style="font-size:22px;font-weight:700;color:#fff;font-family:var(--font-sans);">$142</div>
-                    <div style="font-size:10px;color:rgba(255,255,255,0.5);font-family:var(--font-sans);">ADR</div>
-                  </div>
-                  <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:12px;text-align:center;">
-                    <div style="font-size:22px;font-weight:700;color:#fff;font-family:var(--font-sans);">12</div>
-                    <div style="font-size:10px;color:rgba(255,255,255,0.5);font-family:var(--font-sans);">Check-ins</div>
-                  </div>
-                </div>
-                <!-- Fake reservation row -->
-                <div style="display:flex;flex-direction:column;gap:7px;">
-                  <div style="background:rgba(255,255,255,0.05);border-radius:6px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;">
-                    <span style="font-size:12px;color:rgba(255,255,255,0.7);font-family:var(--font-sans);">Hab. 101 — García, M.</span>
-                    <span style="font-size:11px;background:#E9FF57;color:#0A0A0A;border-radius:4px;padding:2px 8px;font-weight:600;font-family:var(--font-sans);">Check-in</span>
-                  </div>
-                  <div style="background:rgba(255,255,255,0.05);border-radius:6px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;">
-                    <span style="font-size:12px;color:rgba(255,255,255,0.7);font-family:var(--font-sans);">Hab. 204 — Rodríguez, A.</span>
-                    <span style="font-size:11px;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.6);border-radius:4px;padding:2px 8px;font-family:var(--font-sans);">In-house</span>
-                  </div>
-                  <div style="background:rgba(255,255,255,0.05);border-radius:6px;padding:9px 12px;display:flex;align-items:center;justify-content:space-between;">
-                    <span style="font-size:12px;color:rgba(255,255,255,0.7);font-family:var(--font-sans);">Hab. 305 — López, J.</span>
-                    <span style="font-size:11px;background:rgba(239,68,68,0.15);color:#fca5a5;border-radius:4px;padding:2px 8px;font-family:var(--font-sans);">Check-out</span>
-                  </div>
-                </div>
-              </div>
-              <p style="font-size:11px;color:rgba(255,255,255,0.3);font-family:var(--font-sans);">Vista previa del dashboard</p>
-            </div>
-
-          {{ end }}
-        </div><!-- /media container -->
-
-        <!-- Floating badge: live indicator -->
-        <div class="absolute -bottom-4 -left-4 flex items-center gap-2 px-4 py-2.5 rounded-xl shadow-lg"
-             style="background:#fff; border:1px solid var(--color-border);">
-          <span class="relative flex h-2.5 w-2.5">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style="background:#22c55e;"></span>
-            <span class="relative inline-flex rounded-full h-2.5 w-2.5" style="background:#22c55e;"></span>
-          </span>
-          <span class="text-xs font-medium text-[var(--text-primary)]">Sistema en vivo · 24/7</span>
-        </div>
-
+      <!-- Descripción -->
+      <div>
+        <p class="text-[var(--text-secondary)] text-lg leading-relaxed">
+          Silex PMS unifica la gestión de reservas, operaciones de recepción,
+          limpieza y facturación, todas potenciadas por una interfaz ultrarrápida
+          y automatización inteligente, para que puedas gestionar tu hotel sin
+          fricción, ahorrar horas de trabajo manual y elevar la experiencia de
+          tus huéspedes.
+        </p>
       </div>
-      <!-- ─── END RIGHT ──────────────────────────────────── -->
 
     </div>
   </div>
