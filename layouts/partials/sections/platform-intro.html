@@ -1,0 +1,91 @@
+<section id="plataforma" class="py-24 lg:py-32" style="background:#fff;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-12 lg:gap-20 items-center">
+
+      <!-- ─── LEFT: Video ──────────────────────────────── -->
+      <div class="fade-up relative rounded-2xl overflow-hidden shadow-xl" style="aspect-ratio:16/9;">
+
+        {{ if .Site.Params.heroVideo }}
+          {{/* Video real */}}
+          <video class="w-full h-full object-cover"
+                 autoplay muted loop playsinline
+                 {{ with .Site.Params.heroImage }}poster="{{ . }}"{{ end }}>
+            <source src="{{ .Site.Params.heroVideo }}" type="video/mp4">
+          </video>
+
+        {{ else }}
+          {{/* Placeholder con play button */}}
+          <div class="w-full h-full flex items-center justify-center"
+               style="background:linear-gradient(145deg,#0f1f15 0%,#1a3320 50%,#0d1a10 100%);">
+
+            <!-- Grid lines overlay -->
+            <div class="absolute inset-0 opacity-10"
+                 style="background-image:linear-gradient(to right,rgba(255,255,255,0.3) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.3) 1px,transparent 1px);background-size:48px 48px;"></div>
+
+            <!-- Play button -->
+            <div class="relative flex flex-col items-center gap-5">
+              <button class="group relative flex items-center justify-center w-20 h-20 rounded-full transition-transform duration-200 hover:scale-105"
+                      style="background:#E9FF57;">
+                <!-- Triangle -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                  <polygon points="8,5 19,12 8,19" fill="#0A0A0A"/>
+                </svg>
+              </button>
+              <span style="font-size:13px;color:rgba(255,255,255,0.45);font-family:var(--font-sans);">
+                Ver demo de la plataforma
+              </span>
+            </div>
+
+            <!-- Fake browser chrome at top -->
+            <div class="absolute top-0 inset-x-0 flex items-center gap-2 px-5 py-3"
+                 style="background:rgba(0,0,0,0.35);border-bottom:1px solid rgba(255,255,255,0.08);">
+              <div style="width:10px;height:10px;border-radius:50%;background:#ff5f57;"></div>
+              <div style="width:10px;height:10px;border-radius:50%;background:#ffbd2e;"></div>
+              <div style="width:10px;height:10px;border-radius:50%;background:#28c840;"></div>
+              <div style="flex:1;margin-left:10px;background:rgba(255,255,255,0.08);border-radius:4px;height:22px;"></div>
+            </div>
+
+          </div>
+        {{ end }}
+
+      </div>
+      <!-- ─── END LEFT ─────────────────────────────────── -->
+
+
+      <!-- ─── RIGHT: Texto ─────────────────────────────── -->
+      <div class="fade-up delay-1">
+
+        <!-- Eyebrow -->
+        <div class="flex items-center gap-2 mb-6">
+          <div class="w-6 h-[2px]" style="background:#E9FF57;"></div>
+          <span class="text-xs font-semibold uppercase tracking-widest text-[var(--text-muted)]">La plataforma</span>
+        </div>
+
+        <!-- Heading -->
+        <h2 class="font-semibold tracking-[-0.02em] text-[var(--text-primary)] mb-6"
+            style="font-size:clamp(1.9rem,2.8vw,2.8rem);line-height:1.15;">
+          Descubre el PMS creado<br>para lo que viene.
+        </h2>
+
+        <!-- Body -->
+        <p class="text-[var(--text-secondary)] text-lg leading-relaxed mb-8">
+          ¿Cansado de los sistemas fragmentados y las oportunidades perdidas?
+          Reescribe la historia de tu hotel con la plataforma diseñada para
+          impulsar tu crecimiento. Mucho más que tu PMS.
+        </p>
+
+        <!-- CTA secundario -->
+        <a href="{{ .Site.Params.registerUrl }}"
+           class="inline-flex items-center gap-2 font-semibold text-[var(--text-primary)] group"
+           style="font-size:1rem;">
+          Explorar todas las funciones
+          <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
+        </a>
+
+      </div>
+      <!-- ─── END RIGHT ─────────────────────────────────── -->
+
+    </div>
+  </div>
+</section>
