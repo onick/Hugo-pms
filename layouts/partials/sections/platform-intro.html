@@ -1,82 +1,99 @@
-<section id="plataforma" class="py-24 lg:py-32" style="background:#fff;">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<style>
+  @media (min-width: 1024px) {
+    .pi-grid { grid-template-columns: 2fr 3fr !important; gap: 5rem !important; }
+  }
+</style>
 
-    <div class="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-12 lg:gap-20 items-center">
+<section id="plataforma" style="background:#fff; padding:6rem 0;">
+  <div style="max-width:80rem; margin:0 auto; padding:0 2rem;">
 
-      <!-- ─── LEFT: Texto ───────────────────────────────── -->
+    <div class="pi-grid" style="display:grid; grid-template-columns:1fr; gap:3rem; align-items:center;">
+
+      <!-- ─── LEFT: Texto ─────────────────────────── -->
       <div class="fade-up">
 
         <!-- Eyebrow -->
-        <div class="flex items-center gap-2 mb-6">
-          <div class="w-3.5 h-3.5 bg-[var(--color-accent)] rounded-sm flex-shrink-0"></div>
-          <span class="text-sm font-medium text-[var(--text-secondary)]">Sistema de gestión hotelera PMS</span>
+        <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1.5rem;">
+          <div style="width:14px; height:14px; background:#E9FF57; border-radius:3px; flex-shrink:0;"></div>
+          <span style="font-size:0.875rem; font-weight:500; color:var(--text-secondary); font-family:var(--font-sans);">
+            Sistema de gestión hotelera PMS
+          </span>
         </div>
 
         <!-- Heading -->
-        <h2 class="font-semibold tracking-[-0.02em] text-[var(--text-primary)] mb-6"
-            style="font-size:clamp(2rem,3vw,3rem);line-height:1.15;">
+        <h2 style="font-family:var(--font-sans); font-weight:600; letter-spacing:-0.02em;
+                   color:var(--text-primary); margin-bottom:1.5rem;
+                   font-size:clamp(1.9rem, 2.8vw, 2.8rem); line-height:1.15;">
           Descubre el PMS creado para
           <mark style="background:#E9FF57; padding:0.05em 0.15em; border-radius:2px;">lo que viene.</mark>
         </h2>
 
         <!-- Body -->
-        <p class="text-[var(--text-secondary)] text-lg leading-relaxed mb-8">
+        <p style="font-family:var(--font-sans); font-size:1.125rem; line-height:1.7;
+                  color:var(--text-secondary); margin-bottom:2rem;">
           ¿Cansado de los sistemas fragmentados y las oportunidades perdidas?
           Reescribe la historia de tu hotel con la plataforma diseñada para
           impulsar tu crecimiento. Mucho más que tu PMS.
         </p>
 
         <!-- CTA -->
-        <a href="{{ .Site.Params.registerUrl }}" class="btn-primary text-base px-7 py-3.5">
+        <a href="{{ .Site.Params.registerUrl }}" class="btn-primary"
+           style="font-size:1rem; padding:0.875rem 1.75rem; display:inline-block;">
           Agenda una demo ↗
         </a>
 
       </div>
-      <!-- ─── END LEFT ──────────────────────────────────── -->
+      <!-- ─── END LEFT ─────────────────────────────── -->
 
 
-      <!-- ─── RIGHT: Video ──────────────────────────────── -->
-      <div class="fade-up delay-1 relative rounded-2xl overflow-hidden shadow-xl" style="aspect-ratio:16/9;">
+      <!-- ─── RIGHT: Video ─────────────────────────── -->
+      <div class="fade-up delay-1"
+           style="position:relative; border-radius:16px; overflow:hidden;
+                  box-shadow:0 25px 60px rgba(0,0,0,0.15); aspect-ratio:16/9;">
 
         {{ if .Site.Params.heroVideo }}
-          <video class="w-full h-full object-cover"
+          <video style="width:100%; height:100%; object-fit:cover;"
                  autoplay muted loop playsinline
                  {{ with .Site.Params.heroImage }}poster="{{ . }}"{{ end }}>
             <source src="{{ .Site.Params.heroVideo }}" type="video/mp4">
           </video>
 
         {{ else if .Site.Params.heroImage }}
-          <img src="{{ .Site.Params.heroImage }}"
-               alt="Silex PMS en acción"
-               class="w-full h-full object-cover">
+          <img src="{{ .Site.Params.heroImage }}" alt="Silex PMS en acción"
+               style="width:100%; height:100%; object-fit:cover;">
 
         {{ else }}
-          {{/* Placeholder */}}
-          <div class="w-full h-full flex items-center justify-center"
-               style="background:linear-gradient(145deg,#0f1f15 0%,#1a3320 50%,#0d1a10 100%);">
+          <!-- Placeholder verde oscuro -->
+          <div style="position:absolute; inset:0; display:flex; flex-direction:column;
+                      align-items:center; justify-content:center;
+                      background:linear-gradient(145deg,#0f1f15 0%,#1a3320 55%,#0d1a10 100%);">
 
             <!-- Grid overlay -->
-            <div class="absolute inset-0 opacity-10"
-                 style="background-image:linear-gradient(to right,rgba(255,255,255,0.3) 1px,transparent 1px),linear-gradient(to bottom,rgba(255,255,255,0.3) 1px,transparent 1px);background-size:48px 48px;"></div>
+            <div style="position:absolute; inset:0; opacity:0.08;
+                        background-image:linear-gradient(to right,rgba(255,255,255,1) 1px,transparent 1px),
+                                         linear-gradient(to bottom,rgba(255,255,255,1) 1px,transparent 1px);
+                        background-size:48px 48px;"></div>
 
             <!-- Browser chrome -->
-            <div class="absolute top-0 inset-x-0 flex items-center gap-2 px-5 py-3"
-                 style="background:rgba(0,0,0,0.35);border-bottom:1px solid rgba(255,255,255,0.08);">
+            <div style="position:absolute; top:0; left:0; right:0; display:flex; align-items:center;
+                        gap:6px; padding:12px 20px;
+                        background:rgba(0,0,0,0.4); border-bottom:1px solid rgba(255,255,255,0.08);">
               <div style="width:10px;height:10px;border-radius:50%;background:#ff5f57;"></div>
               <div style="width:10px;height:10px;border-radius:50%;background:#ffbd2e;"></div>
               <div style="width:10px;height:10px;border-radius:50%;background:#28c840;"></div>
-              <div style="flex:1;margin-left:10px;background:rgba(255,255,255,0.08);border-radius:4px;height:22px;"></div>
+              <div style="flex:1; margin-left:8px; background:rgba(255,255,255,0.08); border-radius:4px; height:20px;"></div>
             </div>
 
             <!-- Play button -->
-            <div class="relative flex flex-col items-center gap-4">
-              <button class="flex items-center justify-center w-20 h-20 rounded-full transition-transform duration-200 hover:scale-105"
-                      style="background:#E9FF57;">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <div style="position:relative; display:flex; flex-direction:column; align-items:center; gap:1rem;">
+              <button style="display:flex; align-items:center; justify-content:center;
+                             width:5rem; height:5rem; border-radius:9999px; border:none;
+                             background:#E9FF57; cursor:pointer;">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
                   <polygon points="8,5 19,12 8,19" fill="#0A0A0A"/>
                 </svg>
               </button>
-              <span style="font-size:13px;color:rgba(255,255,255,0.45);font-family:var(--font-sans);">
+              <span style="font-size:13px; color:rgba(255,255,255,0.4); font-family:var(--font-sans);">
                 Ver demo de la plataforma
               </span>
             </div>
@@ -85,7 +102,7 @@
         {{ end }}
 
       </div>
-      <!-- ─── END RIGHT ─────────────────────────────────── -->
+      <!-- ─── END RIGHT ─────────────────────────────── -->
 
     </div>
   </div>
