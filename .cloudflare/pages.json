@@ -1,0 +1,4 @@
+{
+  "build_command": "hugo --minify",
+  "destination_dir": "public"
+}

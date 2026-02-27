@@ -1,0 +1,3 @@
+# Redirect app subdomain CTAs (handled in templates)
+# 404 fallback
+/* /404.html 404

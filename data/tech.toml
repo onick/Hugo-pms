@@ -1,0 +1,19 @@
+[[stack]]
+name  = "React"
+color = "#61DAFB"
+
+[[stack]]
+name  = "TypeScript"
+color = "#3178C6"
+
+[[stack]]
+name  = "Laravel"
+color = "#FF2D20"
+
+[[stack]]
+name  = "MySQL"
+color = "#4479A1"
+
+[[stack]]
+name  = "Docker"
+color = "#2496ED"

@@ -1,0 +1,51 @@
+<section id="funciones" class="py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+
+    {{ range $i, $f := .Site.Data.zigzag.features }}
+
+    {{- $reverse := false }}
+    {{- if eq (mod $i 2) 1 }}{{- $reverse = true }}{{- end }}
+
+    <div class="group flex flex-col {{ if $reverse }}md:flex-row-reverse{{ else }}md:flex-row{{ end }} items-center gap-12 lg:gap-16">
+
+      <!-- Text -->
+      <div class="flex-1 space-y-5">
+        {{- $tagColor := "text-[hsl(183_100%_36%)] bg-[hsl(183_100%_36%/0.1)] border-[hsl(183_100%_36%/0.2)]" }}
+        {{- if eq .tag_color "amber" }}
+          {{- $tagColor = "text-amber-400 bg-amber-500/10 border-amber-500/20" }}
+        {{- else if eq .tag_color "violet" }}
+          {{- $tagColor = "text-violet-400 bg-violet-500/10 border-violet-500/20" }}
+        {{- end }}
+
+        <span class="inline-block text-[10px] font-bold tracking-[0.12em] uppercase px-3 py-1 rounded-full border {{ $tagColor }}">
+          {{ .tag }}
+        </span>
+
+        <h2 class="text-[clamp(1.9rem,3.5vw+1rem,2.9rem)] font-extrabold tracking-tight leading-[1.1]">
+          {{ .title }}
+        </h2>
+
+        <p class="text-[hsl(200_14%_60%)] text-base leading-relaxed max-w-lg">
+          {{ .body }}
+        </p>
+
+        <a href="{{ $.Site.Params.registerUrl }}"
+           class="inline-flex items-center gap-2 text-sm font-semibold text-[hsl(183_100%_36%)] hover:text-[hsl(183_100%_50%)] transition-colors group/link">
+          Empezar ahora
+          <svg class="w-4 h-4 group-hover/link:translate-x-1 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+
+      <!-- Screenshot placeholder -->
+      <div class="flex-1 w-full">
+        <div class="screenshot-placeholder w-full aspect-[4/3] rounded-2xl shadow-[0_2px_40px_rgba(0,0,0,0.5)]
+                    group-hover:scale-[1.01] transition-transform duration-300">
+          {{ .tag }}
+        </div>
+      </div>
+
+    </div>
+    {{ end }}
+
+  </div>
+</section>

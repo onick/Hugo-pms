@@ -1,0 +1,20 @@
+[[features]]
+tag       = "CONTROL TOTAL"
+tag_color = "primary"
+title     = "Un panel de control que tu equipo sí sabrá usar."
+body      = "Desde el check-in hasta la facturación, tu equipo opera con fluidez en una sola pantalla. Cero curva de aprendizaje, máximo control desde el primer día."
+screenshot = "screenshots/placeholder-dashboard.svg"
+
+[[features]]
+tag       = "FLUJO DE CAJA"
+tag_color = "amber"
+title     = "Facturación clara, pagos rápidos y sin fugas."
+body      = "Folios automáticos por reserva, cargos en tiempo real y conciliación al cerrar el día. Tus ingresos siempre claros, sin sorpresas al final del mes."
+screenshot = "screenshots/placeholder-billing.svg"
+
+[[features]]
+tag       = "EL FUTURO HOY"
+tag_color = "violet"
+title     = "El primer PMS con Inteligencia Artificial nativa."
+body      = "Consulta ocupación, ingresos y tendencias en lenguaje natural. Tu asistente IA entiende tu hotel y te da respuestas, no reportes."
+screenshot = "screenshots/placeholder-analytics.svg"

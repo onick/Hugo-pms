@@ -1,0 +1,95 @@
+[[features]]
+id    = "front-desk"
+title = "Front Desk"
+desc  = "Check-in/out rápido, asignación inteligente de habitaciones y vista 360° del huésped."
+icon  = "hotel"
+color = "hsl(180 100% 19%)"
+span  = "hero"
+
+[[features]]
+id    = "reservas"
+title = "Reservas"
+desc  = "Calendario unificado, gestión de grupos y confirmaciones automáticas por correo."
+icon  = "calendar"
+color = "hsl(183 100% 26%)"
+span  = "normal"
+
+[[features]]
+id    = "housekeeping"
+title = "Housekeeping"
+desc  = "Tablero Kanban en tiempo real. Tu equipo de limpieza opera desde el móvil."
+icon  = "bed"
+color = "hsl(159 58% 60%)"
+span  = "normal"
+
+[[features]]
+id    = "facturacion"
+title = "Facturación"
+desc  = "Folios automáticos, cargos en tiempo real y cierre de caja sin sorpresas."
+icon  = "credit-card"
+color = "hsl(43 100% 73%)"
+span  = "normal"
+
+[[features]]
+id    = "crm"
+title = "CRM"
+desc  = "Historial de huéspedes, preferencias y programas de fidelidad integrados."
+icon  = "users"
+color = "hsl(255 18% 68%)"
+span  = "normal"
+
+[[features]]
+id    = "channel-manager"
+title = "Channel Manager"
+desc  = "Sincroniza tarifas y disponibilidad en Booking.com, Expedia, Airbnb y más en tiempo real."
+icon  = "network"
+color = "hsl(23 100% 67%)"
+span  = "tall"
+
+[[features]]
+id    = "revenue"
+title = "Revenue Management"
+desc  = "Pricing dinámico basado en ocupación, temporada y competencia."
+icon  = "trending-up"
+color = "hsl(34 100% 50%)"
+span  = "normal"
+
+[[features]]
+id    = "asistente-ia"
+title = "Asistente IA"
+desc  = "Consulta ocupación, revenue y más con lenguaje natural. Tu copiloto hotelero 24/7."
+icon  = "bot"
+color = "hsl(194 30% 26%)"
+span  = "wide"
+
+[[features]]
+id    = "tareas"
+title = "Tareas"
+desc  = "Asigna, prioriza y rastrea tareas de mantenimiento y operaciones."
+icon  = "clipboard-list"
+color = "hsl(270 60% 55%)"
+span  = "normal"
+
+[[features]]
+id    = "staff"
+title = "Staff"
+desc  = "Gestión de turnos, roles y permisos para todo tu equipo."
+icon  = "user-cog"
+color = "hsl(210 70% 50%)"
+span  = "normal"
+
+[[features]]
+id    = "inventario"
+title = "Inventario"
+desc  = "Control de amenities, suministros y consumibles con alertas de stock bajo."
+icon  = "package"
+color = "hsl(28 80% 52%)"
+span  = "normal"
+
+[[features]]
+id    = "analytics"
+title = "Analytics & Reportes"
+desc  = "RevPAR, ADR, ocupación y canal de venta. Datos reales para decisiones reales."
+icon  = "bar-chart-3"
+color = "hsl(160 60% 40%)"
+span  = "wide"

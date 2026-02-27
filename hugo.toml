@@ -1,0 +1,20 @@
+baseURL = "https://www.silexpms.com/"
+languageCode = "es-DO"
+title = "SilexPMS — El PMS del Caribe"
+
+[build]
+  writeStats = true
+
+[params]
+  description = "La plataforma hotelera de nueva generación para hoteles independientes y boutique del Caribe."
+  appUrl     = "https://app.silexpms.com"
+  registerUrl = "https://app.silexpms.com/auth?tab=register"
+  loginUrl    = "https://app.silexpms.com/auth"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[minify]
+  minifyOutput = true

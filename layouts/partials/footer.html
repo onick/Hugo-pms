@@ -1,0 +1,67 @@
+<footer class="relative overflow-hidden" style="background: var(--gradient-hero)">
+  <div class="border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+        <!-- Brand -->
+        <div class="md:col-span-1 space-y-4">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm"
+                 style="background: var(--gradient-ocean)">S</div>
+            <span class="font-bold text-lg text-white">Silex<span class="text-[hsl(183_100%_50%)]">PMS</span></span>
+          </div>
+          <p class="text-sm text-white/50 leading-relaxed">
+            La plataforma hotelera de nueva generación para hoteles independientes y boutique del Caribe.
+          </p>
+          <div class="flex items-center gap-1.5 text-xs text-white/40">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"/></svg>
+            Santo Domingo, Dominican Republic
+          </div>
+        </div>
+
+        <!-- Producto -->
+        <div class="space-y-4">
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-white/40">Producto</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#plataforma" class="text-sm text-white/60 hover:text-white transition-colors">Módulos</a></li>
+            <li><a href="#funciones"  class="text-sm text-white/60 hover:text-white transition-colors">Funciones</a></li>
+            <li><a href="{{ .Site.Params.registerUrl }}" class="text-sm text-white/60 hover:text-white transition-colors">Comenzar gratis</a></li>
+          </ul>
+        </div>
+
+        <!-- Empresa -->
+        <div class="space-y-4">
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-white/40">Empresa</h4>
+          <ul class="space-y-2.5">
+            <li><span class="text-sm text-white/60">Contan2 SRL</span></li>
+            <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors">Blog</a></li>
+            <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors">Contacto</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div class="space-y-4">
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-white/40">Legal</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors">Privacidad</a></li>
+            <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors">Términos</a></li>
+            <li><a href="#" class="text-sm text-white/60 hover:text-white transition-colors">Seguridad</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-white/30">
+          © {{ now.Year }} Contan2 SRL — SilexPMS. Todos los derechos reservados.
+        </p>
+        <p class="text-xs text-white/30">
+          Hecho con ❤️ para la industria hotelera del Caribe
+        </p>
+      </div>
+
+    </div>
+  </div>
+</footer>

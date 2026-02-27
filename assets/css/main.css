@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Colores ── */
+  --color-primary:     hsl(183 100% 36%);
+  --color-primary-dark: hsl(183 100% 26%);
+  --color-secondary:   hsl(18 100% 71%);
+  --color-accent:      hsl(43 100% 73%);
+  --color-bg:          hsl(210 43% 9%);
+  --color-card:        hsl(210 35% 14%);
+  --color-border:      hsl(210 25% 22%);
+  --color-muted:       hsl(200 14% 55%);
+
+  /* ── Gradientes ── */
+  --gradient-ocean: linear-gradient(135deg, hsl(183 100% 26%), hsl(183 100% 36%));
+  --gradient-hero:  linear-gradient(120deg, hsl(210 43% 9%), hsl(183 100% 18%));
+
+  /* ── Shadows editoriales ── */
+  --shadow-editorial:    5px 5px 0px 0px rgba(0,0,0,0.80);
+  --shadow-editorial-teal: 5px 5px 0px 0px hsl(183 100% 26% / 0.55);
+  --shadow-editorial-sm: 3px 3px 0px 0px rgba(0,0,0,0.70);
+
+  /* ── Fonts ── */
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+/* ── Base ── */
+html { color-scheme: dark; }
+body {
+  background-color: var(--color-bg);
+  color: white;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Logo carousel ── */
+@keyframes scroll-logos {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.logo-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-logos 28s linear infinite;
+}
+.logo-track:hover { animation-play-state: paused; }
+.logo-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+/* ── Fade-in animation ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 0.6s ease both; }
+.delay-1 { animation-delay: 100ms; }
+.delay-2 { animation-delay: 200ms; }
+.delay-3 { animation-delay: 300ms; }
+.delay-4 { animation-delay: 400ms; }
+
+/* ── Gradient text ── */
+.text-gradient-ocean {
+  background: var(--gradient-ocean);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── CTA glow button ── */
+.btn-cta {
+  background: var(--gradient-ocean);
+  color: white;
+  border-radius: 9999px;
+  font-weight: 600;
+  transition: opacity 0.2s, box-shadow 0.2s, transform 0.15s;
+  box-shadow: 0 0 24px hsl(183 100% 36% / 0.35);
+}
+.btn-cta:hover {
+  opacity: 0.92;
+  box-shadow: 0 0 40px hsl(183 100% 36% / 0.55);
+  transform: translateY(-1px);
+}
+
+/* ── Bento card editorial hover ── */
+.bento-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.bento-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-editorial-teal);
+}
+.bento-card.hero-card:hover {
+  box-shadow: var(--shadow-editorial-teal);
+}
+
+/* ── Placeholder screenshot ── */
+.screenshot-placeholder {
+  background: linear-gradient(135deg, hsl(210 35% 18%), hsl(183 100% 18%));
+  border: 1px solid hsl(183 100% 36% / 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(183 100% 36% / 0.5);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}

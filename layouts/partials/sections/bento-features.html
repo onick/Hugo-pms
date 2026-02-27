@@ -1,0 +1,55 @@
+<section id="plataforma" class="py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Heading -->
+    <div class="text-center mb-14">
+      <h2 class="text-[clamp(1.9rem,3.5vw+0.5rem,3rem)] font-extrabold tracking-tight">
+        12 módulos diseñados para
+        <span class="text-gradient-ocean"> hoteles reales</span>
+      </h2>
+      <p class="mt-4 text-[hsl(200_14%_55%)] text-base max-w-2xl mx-auto">
+        Cada módulo está construido para integrarse con los demás. Sin silos, sin duplicidad de datos.
+      </p>
+    </div>
+
+    <!-- Bento grid -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[minmax(160px,auto)]">
+      {{ range .Site.Data.features.features }}
+
+      {{- $span := "" }}
+      {{- if eq .span "hero" }}  {{- $span = "col-span-2 row-span-2" }}
+      {{- else if eq .span "wide" }}  {{- $span = "col-span-2" }}
+      {{- else if eq .span "tall" }}  {{- $span = "row-span-2" }}
+      {{- else }}                {{- $span = "col-span-1" }}
+      {{- end }}
+
+      <div class="bento-card {{ $span }} relative rounded-2xl border border-[hsl(210_25%_22%)] bg-[hsl(210_35%_14%)] p-5 overflow-hidden cursor-default
+                  {{ if eq .span "hero" }}hero-card{{ end }}">
+
+        <!-- Accent top line -->
+        <div class="absolute inset-x-0 top-0 h-0.5" style="background: {{ .color }}"></div>
+
+        <!-- Icon -->
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+             style="background: {{ .color }}1a; color: {{ .color }}">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/>
+          </svg>
+        </div>
+
+        <h3 class="font-semibold text-sm {{ if eq .span "hero" }}text-base{{ end }} mb-1.5">{{ .title }}</h3>
+        <p class="text-[hsl(200_14%_55%)] text-xs leading-relaxed {{ if eq .span "hero" }}text-sm max-w-xs{{ end }}">{{ .desc }}</p>
+
+        <!-- Placeholder screenshot for hero card -->
+        {{ if eq .span "hero" }}
+        <div class="absolute bottom-0 right-0 w-48 h-36 translate-x-4 translate-y-4 screenshot-placeholder rounded-xl opacity-60 text-[9px]">
+          Preview
+        </div>
+        {{ end }}
+      </div>
+
+      {{ end }}
+    </div>
+
+  </div>
+</section>

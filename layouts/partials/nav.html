@@ -1,0 +1,51 @@
+<header id="navbar"
+  class="fixed top-0 inset-x-0 z-50 transition-all duration-300
+         [&.nav-scrolled]:bg-[hsl(210_43%_9%/0.85)] [&.nav-scrolled]:backdrop-blur-lg
+         [&.nav-scrolled]:border-b [&.nav-scrolled]:border-[hsl(210_25%_22%)]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 shrink-0">
+        <div class="w-8 h-8 rounded-lg bg-[var(--gradient-ocean)] flex items-center justify-center text-white font-bold text-sm">S</div>
+        <span class="font-bold text-lg tracking-tight">Silex<span class="text-[hsl(183_100%_36%)]">PMS</span></span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#funciones"  class="text-sm text-[hsl(200_14%_65%)] hover:text-white transition-colors">Funciones</a>
+        <a href="#plataforma" class="text-sm text-[hsl(200_14%_65%)] hover:text-white transition-colors">Plataforma</a>
+      </nav>
+
+      <!-- Desktop CTAs -->
+      <div class="hidden md:flex items-center gap-3">
+        <a href="{{ .Site.Params.loginUrl }}"
+           class="text-sm font-medium text-[hsl(200_14%_65%)] hover:text-white transition-colors px-4 py-2">
+          Iniciar Sesión
+        </a>
+        <a href="{{ .Site.Params.registerUrl }}"
+           class="btn-cta text-sm px-5 py-2">
+          Comenzar Gratis
+        </a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button id="menu-btn" aria-expanded="false" aria-label="Abrir menú"
+              class="md:hidden p-2 rounded-lg text-[hsl(200_14%_65%)] hover:text-white hover:bg-white/5 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-[hsl(210_25%_22%)] pb-4 pt-3 space-y-1">
+      <a href="#funciones"  class="block px-3 py-2 text-sm text-[hsl(200_14%_65%)] hover:text-white transition-colors rounded-lg hover:bg-white/5">Funciones</a>
+      <a href="#plataforma" class="block px-3 py-2 text-sm text-[hsl(200_14%_65%)] hover:text-white transition-colors rounded-lg hover:bg-white/5">Plataforma</a>
+      <div class="pt-2 flex flex-col gap-2 px-3">
+        <a href="{{ .Site.Params.loginUrl }}"    class="text-center py-2 text-sm font-medium text-[hsl(200_14%_65%)] hover:text-white border border-[hsl(210_25%_22%)] rounded-full transition-colors">Iniciar Sesión</a>
+        <a href="{{ .Site.Params.registerUrl }}" class="btn-cta text-sm text-center py-2.5">Comenzar Gratis</a>
+      </div>
+    </div>
+  </div>
+</header>
