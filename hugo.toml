@@ -10,8 +10,10 @@ title = "SilexPMS — El PMS del Caribe"
   appUrl      = "https://app.silexpms.com"
   registerUrl = "https://app.silexpms.com/auth?tab=register"
   loginUrl    = "https://app.silexpms.com/auth"
-  heroVideo   = ""           # URL del video MP4 (dejar vacío para usar imagen/placeholder)
-  heroImage   = ""           # URL de imagen fallback
+  heroVideo    = ""           # URL del video MP4 (dejar vacío para usar imagen/placeholder)
+  heroImage    = ""           # URL de imagen fallback
+  demoFormUrl  = "https://formspree.io/f/xpwzgpbe"  # Reemplaza con tu form ID de formspree.io
+  demoWhatsApp = "18099206939"  # Tu WhatsApp (sin + ni espacios)
 
 [markup]
   [markup.goldmark]

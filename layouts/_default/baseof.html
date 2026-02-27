@@ -12,6 +12,7 @@
   </main>
 
   {{ partial "footer.html" . }}
+  {{ partial "demo-modal.html" . }}
 
   {{- $js := resources.Get "js/main.ts" | js.Build (dict "minify" true "target" "es2020") }}
   <script src="{{ $js.RelPermalink }}" defer></script>

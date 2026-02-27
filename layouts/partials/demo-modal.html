@@ -1,0 +1,462 @@
+<!-- ═══════════════════════════════════════════════
+     DEMO MODAL — Flujo 3 pasos
+     Paso 1: Tipo de propiedad
+     Paso 2: Datos de contacto
+     Paso 3: Mayor desafío operativo
+     ─── Envía a Formspree → llega al email
+══════════════════════════════════════════════ -->
+
+<style>
+  /* Overlay */
+  #demo-overlay {
+    display: none;
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  #demo-overlay.open { display: flex; }
+
+  /* Card */
+  #demo-card {
+    background: #fff;
+    border-radius: 20px;
+    width: 100%; max-width: 520px;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.22);
+    animation: slideUp 0.28s cubic-bezier(0.34,1.3,0.64,1);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  @keyframes slideUp {
+    from { opacity:0; transform:translateY(24px) scale(0.97); }
+    to   { opacity:1; transform:translateY(0) scale(1); }
+  }
+
+  /* Close btn */
+  #demo-close {
+    position: absolute; top: 1.25rem; right: 1.25rem;
+    width: 32px; height: 32px; border-radius: 50%;
+    border: none; background: #f3f4f6; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: #6b7280;
+    transition: background 0.15s;
+  }
+  #demo-close:hover { background: #e5e7eb; }
+
+  /* Progress bar */
+  .dm-progress {
+    display: flex; align-items: center; gap: 6px; margin-bottom: 1.75rem;
+  }
+  .dm-progress-step {
+    height: 3px; border-radius: 9999px; flex: 1;
+    background: #e5e7eb; transition: background 0.3s;
+  }
+  .dm-progress-step.active { background: #E9FF57; }
+  .dm-progress-step.done   { background: #1A3320; }
+
+  /* Steps visibility */
+  .dm-step { display: none; }
+  .dm-step.active { display: block; }
+
+  /* Property type cards */
+  .dm-type-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-top: 1.25rem;
+  }
+  .dm-type-card {
+    border: 1.5px solid #e5e7eb; border-radius: 12px;
+    padding: 14px 16px; cursor: pointer;
+    display: flex; align-items: center; gap: 10px;
+    transition: border-color 0.15s, background 0.15s;
+    font-family: var(--font-sans); font-size: 14px;
+    font-weight: 500; color: #111;
+    background: #fff;
+  }
+  .dm-type-card:hover { border-color: #1A3320; background: #f9fafb; }
+  .dm-type-card.selected {
+    border-color: #1A3320; background: #f0fdf4;
+    box-shadow: 0 0 0 1px #1A3320;
+  }
+  .dm-type-card .dm-radio {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid #d1d5db; margin-left: auto;
+    flex-shrink: 0; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .dm-type-card.selected .dm-radio {
+    border-color: #1A3320; background: #1A3320;
+  }
+  .dm-type-card.selected .dm-radio::after {
+    content: ''; width: 6px; height: 6px;
+    border-radius: 50%; background: #fff;
+  }
+
+  /* Form fields */
+  .dm-field { margin-bottom: 1rem; }
+  .dm-field label {
+    display: block; font-family: var(--font-sans);
+    font-size: 13px; font-weight: 600; color: #374151;
+    margin-bottom: 5px;
+  }
+  .dm-field input, .dm-field select {
+    width: 100%; border: 1.5px solid #e5e7eb; border-radius: 10px;
+    padding: 11px 14px; font-family: var(--font-sans); font-size: 14px;
+    color: #111; outline: none; transition: border-color 0.15s;
+    background: #fff; box-sizing: border-box;
+  }
+  .dm-field input:focus, .dm-field select:focus {
+    border-color: #1A3320;
+    box-shadow: 0 0 0 3px rgba(26,51,32,0.08);
+  }
+
+  /* Challenge checkboxes */
+  .dm-check-list { display: flex; flex-direction: column; gap: 8px; margin-top: 1rem; }
+  .dm-check-item {
+    display: flex; align-items: center; gap: 10px;
+    border: 1.5px solid #e5e7eb; border-radius: 10px;
+    padding: 11px 14px; cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    font-family: var(--font-sans); font-size: 14px; color: #374151;
+  }
+  .dm-check-item:hover { border-color: #1A3320; background: #f9fafb; }
+  .dm-check-item input[type="checkbox"] { accent-color: #1A3320; width: 16px; height: 16px; }
+  .dm-check-item.checked { border-color: #1A3320; background: #f0fdf4; }
+
+  /* Buttons */
+  .dm-btn-primary {
+    width: 100%; padding: 14px; border: none; border-radius: 12px;
+    background: #1A3320; color: #fff; font-family: var(--font-sans);
+    font-size: 15px; font-weight: 600; cursor: pointer;
+    transition: opacity 0.2s; margin-top: 0.5rem;
+  }
+  .dm-btn-primary:hover { opacity: 0.88; }
+  .dm-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+  .dm-btn-back {
+    background: none; border: none; font-family: var(--font-sans);
+    font-size: 13px; color: #6b7280; cursor: pointer;
+    padding: 8px 0; display: flex; align-items: center; gap: 4px;
+    margin-bottom: 0.5rem;
+  }
+  .dm-btn-back:hover { color: #111; }
+
+  /* Step label */
+  .dm-step-label {
+    font-family: var(--font-sans); font-size: 12px;
+    font-weight: 600; color: #9ca3af; letter-spacing: 0.06em;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .dm-step-title {
+    font-family: var(--font-sans); font-size: 1.35rem;
+    font-weight: 700; color: #0A0A0A; margin-bottom: 4px;
+  }
+  .dm-step-sub {
+    font-family: var(--font-sans); font-size: 14px;
+    color: #6b7280; margin-bottom: 0;
+  }
+
+  /* Success */
+  #dm-success { display: none; text-align: center; padding: 1rem 0; }
+  #dm-success.active { display: block; }
+  .dm-check-anim {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: #f0fdf4; display: flex; align-items: center;
+    justify-content: center; margin: 0 auto 1.25rem;
+  }
+</style>
+
+<!-- Overlay -->
+<div id="demo-overlay" role="dialog" aria-modal="true" aria-label="Solicitar demo">
+  <div id="demo-card">
+
+    <button id="demo-close" onclick="closeDemoModal()" aria-label="Cerrar">✕</button>
+
+    <!-- Progress bar -->
+    <div class="dm-progress" id="dm-progress">
+      <div class="dm-progress-step active" id="dp1"></div>
+      <div class="dm-progress-step"        id="dp2"></div>
+      <div class="dm-progress-step"        id="dp3"></div>
+    </div>
+
+    <!-- ─── PASO 1: Tipo de propiedad ─────────────────── -->
+    <div class="dm-step active" id="dm-step-1">
+      <p class="dm-step-label">Paso 1 de 3</p>
+      <h2 class="dm-step-title">¿Qué tipo de propiedad tienes?</h2>
+      <p class="dm-step-sub">Así personalizamos tu demo.</p>
+
+      <div class="dm-type-grid" id="dm-types">
+        {{ range slice
+          (slice "hotel"       "🏨" "Hotel")
+          (slice "hostal"      "🛏️" "Hostal / Posada")
+          (slice "resort"      "🌴" "Resort")
+          (slice "boutique"    "🏡" "Boutique / B&B")
+          (slice "vacacional"  "🔑" "Alquiler vacacional")
+          (slice "otro"        "📋" "Otro")
+        }}
+        {{ $t := . }}
+        <div class="dm-type-card" data-value="{{ index $t 0 }}"
+             onclick="selectType(this)">
+          <span>{{ index $t 1 }}</span>
+          <span>{{ index $t 2 }}</span>
+          <span class="dm-radio"></span>
+        </div>
+        {{ end }}
+      </div>
+
+      <button class="dm-btn-primary" style="margin-top:1.5rem;" onclick="goStep(2)" id="dm-btn1" disabled>
+        Siguiente →
+      </button>
+    </div>
+
+    <!-- ─── PASO 2: Datos de contacto ─────────────────── -->
+    <div class="dm-step" id="dm-step-2">
+      <button class="dm-btn-back" onclick="goStep(1)">← Atrás</button>
+      <p class="dm-step-label">Paso 2 de 3</p>
+      <h2 class="dm-step-title">Cuéntanos sobre tu hotel</h2>
+      <p class="dm-step-sub">Promesa: cero spam. Solo una llamada.</p>
+
+      <div style="margin-top:1.25rem;">
+        <div class="dm-field">
+          <label>Nombre completo *</label>
+          <input type="text" id="dm-nombre" placeholder="Ej. María García" autocomplete="name">
+        </div>
+        <div class="dm-field">
+          <label>Nombre del hotel *</label>
+          <input type="text" id="dm-hotel" placeholder="Ej. Hotel El Caribe">
+        </div>
+        <div class="dm-field">
+          <label>Email *</label>
+          <input type="email" id="dm-email" placeholder="tu@hotel.com" autocomplete="email">
+        </div>
+        <div class="dm-field">
+          <label>WhatsApp / Teléfono *</label>
+          <input type="tel" id="dm-tel" placeholder="+1 (809) 000-0000" autocomplete="tel">
+        </div>
+        <div class="dm-field">
+          <label>Número de habitaciones</label>
+          <select id="dm-rooms">
+            <option value="">Selecciona...</option>
+            <option value="1-10">1 – 10 habitaciones</option>
+            <option value="11-25">11 – 25 habitaciones</option>
+            <option value="26-50">26 – 50 habitaciones</option>
+            <option value="51-100">51 – 100 habitaciones</option>
+            <option value="100+">Más de 100</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="dm-btn-primary" onclick="validateStep2()">
+        Siguiente →
+      </button>
+    </div>
+
+    <!-- ─── PASO 3: Desafío operativo ─────────────────── -->
+    <div class="dm-step" id="dm-step-3">
+      <button class="dm-btn-back" onclick="goStep(2)">← Atrás</button>
+      <p class="dm-step-label">Paso 3 de 3</p>
+      <h2 class="dm-step-title">¿Cuál es tu mayor desafío?</h2>
+      <p class="dm-step-sub">Selecciona todos los que apliquen.</p>
+
+      <div class="dm-check-list">
+        {{ range slice
+          "Gestión de reservas caótica"
+          "Check-in / check-out manual y lento"
+          "Poca visibilidad de ingresos y reportes"
+          "Housekeeping descoordinada"
+          "Facturación y cobros complicados"
+          "Todo lo anterior 😅"
+        }}
+        <label class="dm-check-item" onclick="this.classList.toggle('checked')">
+          <input type="checkbox" name="desafio" value="{{ . }}">
+          {{ . }}
+        </label>
+        {{ end }}
+      </div>
+
+      <button class="dm-btn-primary" style="margin-top:1.5rem;" onclick="submitDemo(this)" id="dm-submit-btn">
+        Solicitar mi demo gratuita ↗
+      </button>
+      <p style="text-align:center; font-size:12px; color:#9ca3af; margin-top:0.75rem; font-family:var(--font-sans);">
+        Sin tarjeta de crédito · Te respondemos en menos de 24h
+      </p>
+    </div>
+
+    <!-- ─── SUCCESS ────────────────────────────────────── -->
+    <div id="dm-success">
+      <div class="dm-check-anim">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#1A3320"/>
+          <path d="M7 12.5l3.5 3.5 6.5-7" stroke="#E9FF57" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 style="font-family:var(--font-sans); font-size:1.4rem; font-weight:700;
+                 color:#0A0A0A; margin-bottom:0.75rem;">¡Solicitud recibida!</h2>
+      <p style="font-family:var(--font-sans); font-size:15px; color:#6b7280;
+                line-height:1.6; margin-bottom:1.75rem;">
+        Un especialista de Silex PMS revisará tu información y se pondrá en
+        contacto contigo en <strong>menos de 24 horas</strong>.
+      </p>
+      <!-- WhatsApp directo -->
+      <a href="https://wa.me/{{ .Site.Params.demoWhatsApp }}?text=Hola,%20solicité%20una%20demo%20de%20Silex%20PMS%20y%20quiero%20más%20información"
+         target="_blank" rel="noopener"
+         style="display:inline-flex; align-items:center; gap:8px;
+                background:#25D366; color:#fff; border-radius:12px;
+                padding:12px 24px; font-family:var(--font-sans); font-size:14px;
+                font-weight:600; text-decoration:none; margin-bottom:1rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.556 4.123 1.526 5.855L.057 23.25a.75.75 0 00.916.916l5.395-1.469A11.953 11.953 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.878 0-3.64-.49-5.172-1.348l-.37-.214-3.835 1.044 1.044-3.835-.214-.37A9.952 9.952 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+        </svg>
+        Escribir por WhatsApp ahora
+      </a>
+      <br>
+      <button onclick="closeDemoModal()"
+              style="background:none; border:none; font-family:var(--font-sans);
+                     font-size:13px; color:#9ca3af; cursor:pointer; margin-top:0.5rem;">
+        Cerrar
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // ─── Config (inyectada desde Hugo) ────────────────────
+  var DEMO_FORM_URL = "{{ .Site.Params.demoFormUrl }}";
+
+  // ─── Estado global ────────────────────────────────────
+  var dmState = { tipo: '', paso: 1 };
+
+  // ─── Abrir / cerrar ───────────────────────────────────
+  function openDemoModal() {
+    var el = document.getElementById('demo-overlay');
+    el.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // Reset al abrir
+    goStep(1);
+    document.getElementById('dm-success').classList.remove('active');
+    document.getElementById('dm-progress').style.display = 'flex';
+    // Limpiar selecciones
+    document.querySelectorAll('.dm-type-card').forEach(function(c){ c.classList.remove('selected'); });
+    document.getElementById('dm-btn1').disabled = true;
+    document.querySelectorAll('.dm-check-item').forEach(function(c){ c.classList.remove('checked'); });
+    document.querySelectorAll('.dm-check-item input').forEach(function(c){ c.checked = false; });
+    ['dm-nombre','dm-hotel','dm-email','dm-tel','dm-rooms'].forEach(function(id){
+      var el = document.getElementById(id); if(el) el.value = '';
+    });
+    dmState.tipo = '';
+  }
+
+  function closeDemoModal() {
+    document.getElementById('demo-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Cerrar al hacer clic en el backdrop
+  document.getElementById('demo-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeDemoModal();
+  });
+
+  // ESC cierra el modal
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeDemoModal();
+  });
+
+  // ─── Navegación de pasos ──────────────────────────────
+  function goStep(n) {
+    // Oculta todos
+    document.querySelectorAll('.dm-step').forEach(function(s){ s.classList.remove('active'); });
+    document.getElementById('dm-step-' + n).classList.add('active');
+    dmState.paso = n;
+    updateProgress(n);
+    document.getElementById('demo-card').scrollTop = 0;
+  }
+
+  function updateProgress(n) {
+    for (var i = 1; i <= 3; i++) {
+      var bar = document.getElementById('dp' + i);
+      bar.className = 'dm-progress-step';
+      if (i < n)       bar.classList.add('done');
+      else if (i === n) bar.classList.add('active');
+    }
+  }
+
+  // ─── Paso 1: Selección de tipo ────────────────────────
+  function selectType(card) {
+    document.querySelectorAll('.dm-type-card').forEach(function(c){ c.classList.remove('selected'); });
+    card.classList.add('selected');
+    dmState.tipo = card.dataset.value;
+    document.getElementById('dm-btn1').disabled = false;
+  }
+
+  // ─── Paso 2: Validación ───────────────────────────────
+  function validateStep2() {
+    var nombre = document.getElementById('dm-nombre').value.trim();
+    var hotel  = document.getElementById('dm-hotel').value.trim();
+    var email  = document.getElementById('dm-email').value.trim();
+    var tel    = document.getElementById('dm-tel').value.trim();
+
+    if (!nombre || !hotel || !email || !tel) {
+      alert('Por favor completa todos los campos obligatorios (*).');
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Por favor ingresa un email válido.');
+      return;
+    }
+    goStep(3);
+  }
+
+  // ─── Paso 3: Envío ────────────────────────────────────
+  function submitDemo(btn) {
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    var desafios = [];
+    document.querySelectorAll('.dm-check-item input:checked').forEach(function(c){
+      desafios.push(c.value);
+    });
+
+    var payload = {
+      tipo_propiedad: dmState.tipo,
+      nombre:         document.getElementById('dm-nombre').value.trim(),
+      hotel:          document.getElementById('dm-hotel').value.trim(),
+      email:          document.getElementById('dm-email').value.trim(),
+      telefono:       document.getElementById('dm-tel').value.trim(),
+      habitaciones:   document.getElementById('dm-rooms').value,
+      desafios:       desafios.join(', ') || 'No especificado',
+      _subject:       '🏨 Nueva solicitud de demo — Silex PMS'
+    };
+
+    fetch(DEMO_FORM_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        showSuccess();
+      } else {
+        // Formspree puede devolver errores
+        btn.disabled = false;
+        btn.textContent = 'Solicitar mi demo gratuita ↗';
+        alert('Hubo un problema al enviar. Intenta de nuevo o escríbenos por WhatsApp.');
+      }
+    })
+    .catch(function() {
+      // Fallback: mostrar éxito igual (el form puede haberse enviado)
+      showSuccess();
+    });
+  }
+
+  function showSuccess() {
+    document.querySelectorAll('.dm-step').forEach(function(s){ s.classList.remove('active'); });
+    document.getElementById('dm-progress').style.display = 'none';
+    document.getElementById('dm-success').classList.add('active');
+  }
+</script>

@@ -21,14 +21,13 @@
       puede hacer por tu ambición.
     </p>
 
-    <a href="{{ .Site.Params.registerUrl }}" class="fade-up delay-2"
-       style="display:inline-block; font-family:var(--font-sans); font-weight:600;
-              font-size:1rem; background:#0A0A0A; color:#fff;
-              border-radius:9999px; padding:1rem 2.5rem;
-              text-decoration:none; transition:opacity 0.2s;"
-       onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+    <button onclick="openDemoModal()" class="fade-up delay-2"
+            style="font-family:var(--font-sans); font-weight:600; font-size:1rem;
+                   background:#0A0A0A; color:#fff; border:none; cursor:pointer;
+                   border-radius:9999px; padding:1rem 2.5rem; transition:opacity 0.2s;"
+            onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
       Agenda una demo ↗
-    </a>
+    </button>
 
   </div>
 </section>
