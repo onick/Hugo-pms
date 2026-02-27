@@ -324,20 +324,31 @@
 
 <script>
 (function () {
-  var current = null;
-  var TRANSITION = '0.65s cubic-bezier(0.4,0,0.2,1)';
+  var current    = null;
+  var locked     = {};                              // per-item click lock
+  var DURATION   = 650;                             // must match CSS transition ms
+  var TRANSITION = DURATION + 'ms cubic-bezier(0.4,0,0.2,1)';
+  var SCROLL_PAD = 16;                              // px of breathing room above trigger
 
-  /* Close a body instantly (no animation) so the layout settles
-     before we measure the next item's position. */
+  /* ── helpers ─────────────────────────────────── */
+
+  function getBtn(id) {
+    return document.querySelector('#acc-' + id + ' .plat-acc-trigger');
+  }
+
+  function setExpanded(id, value) {
+    var btn = getBtn(id);
+    if (btn) btn.setAttribute('aria-expanded', value ? 'true' : 'false');
+  }
+
   function closeInstant(prevId) {
     var prevItem = document.getElementById('acc-' + prevId);
     var prevBody = document.getElementById('body-' + prevId);
     if (!prevBody) return;
-    // Temporarily kill the transition so collapse is instant
     prevBody.style.transition = 'none';
-    prevBody.style.maxHeight = null;
+    prevBody.style.maxHeight  = null;
     if (prevItem) prevItem.classList.remove('open');
-    // Re-enable transition after two frames (avoids flash)
+    setExpanded(prevId, false);
     requestAnimationFrame(function () {
       requestAnimationFrame(function () {
         if (prevBody) prevBody.style.transition = TRANSITION;
@@ -345,34 +356,54 @@
     });
   }
 
+  function scrollToTop(el) {
+    var top = el.getBoundingClientRect().top + window.pageYOffset - SCROLL_PAD;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+  }
+
+  /* ── main toggle ──────────────────────────────── */
+
   window.platToggle = function (id) {
-    var item = document.getElementById('acc-' + id);
-    var body = document.getElementById('body-' + id);
+    if (locked[id]) return;                         // same item mid-animation
+
+    var item   = document.getElementById('acc-' + id);
+    var body   = document.getElementById('body-' + id);
     var isOpen = item.classList.contains('open');
+    locked[id] = true;
+    setTimeout(function () { delete locked[id]; }, DURATION);
 
     if (isOpen) {
-      // Just collapse this one (with animation)
       item.classList.remove('open');
       body.style.maxHeight = null;
+      setExpanded(id, false);
       current = null;
       return;
     }
 
-    // Close previous INSTANTLY so layout settles before we measure
+    // Close previous INSTANTLY — layout settles before we measure
     if (current && current !== id) {
       closeInstant(current);
       current = null;
     }
 
-    // Now the layout is stable — measure and scroll to the trigger top
-    var top = item.getBoundingClientRect().top + window.pageYOffset;
-    window.scrollTo({ top: top, behavior: 'smooth' });
-
-    // Open this accordion (animation runs while scroll is happening)
+    // Layout is now stable — scroll + open simultaneously
+    scrollToTop(item);
     item.classList.add('open');
     body.style.maxHeight = body.scrollHeight + 'px';
+    setExpanded(id, true);
     current = id;
   };
+
+  /* ── ResizeObserver: keep open body height in sync ── */
+  if (typeof ResizeObserver !== 'undefined') {
+    var ro = new ResizeObserver(function () {
+      if (!current) return;
+      var openBody = document.getElementById('body-' + current);
+      if (openBody) openBody.style.maxHeight = openBody.scrollHeight + 'px';
+    });
+    ro.observe(document.documentElement);
+  }
+
 }());
 </script>
 
