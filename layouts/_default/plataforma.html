@@ -46,11 +46,10 @@
 
 /* ── Accordion body ── */
 .plat-acc-body {
-  max-height: 0;
+  height: 0;
   overflow: hidden;
-  transition: max-height 0.65s cubic-bezier(0.4,0,0.2,1);
+  /* height animated via Web Animations API — no CSS transition needed */
 }
-.plat-acc-item.open .plat-acc-body { max-height: 1400px; }
 
 .plat-acc-body-inner {
   padding: 0 7% 4rem;
@@ -325,35 +324,68 @@
 <script>
 (function () {
   var current    = null;
-  var locked     = {};                              // per-item click lock
-  var DURATION   = 650;                             // must match CSS transition ms
-  var TRANSITION = DURATION + 'ms cubic-bezier(0.4,0,0.2,1)';
-  var SCROLL_PAD = 16;                              // px of breathing room above trigger
+  var locked     = {};       // per-item click debounce
+  var anims      = {};       // running Web Animation per id
+  var DURATION   = 600;
+  var EASING     = 'cubic-bezier(0.4,0,0.2,1)';
+  var SCROLL_PAD = 16;
 
   /* ── helpers ─────────────────────────────────── */
 
-  function getBtn(id) {
-    return document.querySelector('#acc-' + id + ' .plat-acc-trigger');
+  function setExpanded(id, val) {
+    var btn = document.querySelector('#acc-' + id + ' .plat-acc-trigger');
+    if (btn) btn.setAttribute('aria-expanded', val ? 'true' : 'false');
   }
 
-  function setExpanded(id, value) {
-    var btn = getBtn(id);
-    if (btn) btn.setAttribute('aria-expanded', value ? 'true' : 'false');
+  function cancelAnim(id) {
+    if (anims[id]) { try { anims[id].cancel(); } catch(e){} delete anims[id]; }
   }
 
-  function closeInstant(prevId) {
-    var prevItem = document.getElementById('acc-' + prevId);
-    var prevBody = document.getElementById('body-' + prevId);
-    if (!prevBody) return;
-    prevBody.style.transition = 'none';
-    prevBody.style.maxHeight  = null;
+  /* Open: animate height 0 → scrollHeight, then release to auto */
+  function openBody(body, id) {
+    cancelAnim(id);
+    var from = body.getBoundingClientRect().height || 0;
+    var to   = body.scrollHeight;
+    body.style.overflow = 'hidden';
+
+    var anim = body.animate(
+      [{ height: from + 'px' }, { height: to + 'px' }],
+      { duration: DURATION, easing: EASING, fill: 'forwards' }
+    );
+    anims[id] = anim;
+    anim.onfinish = function () {
+      delete anims[id];
+      body.style.height   = 'auto';  // release — lets content reflow freely
+      body.style.overflow = '';
+    };
+  }
+
+  /* Close: freeze at current rendered height → animate to 0 */
+  function closeBody(body, id) {
+    cancelAnim(id);
+    var from = body.getBoundingClientRect().height;
+    body.style.height   = from + 'px';
+    body.style.overflow = 'hidden';
+
+    var anim = body.animate(
+      [{ height: from + 'px' }, { height: '0px' }],
+      { duration: DURATION, easing: EASING, fill: 'forwards' }
+    );
+    anims[id] = anim;
+    anim.onfinish = function () {
+      delete anims[id];
+      body.style.height = '0px';
+    };
+  }
+
+  /* Instant close (no animation) — used when switching items */
+  function closeInstant(id) {
+    cancelAnim(id);
+    var prevItem = document.getElementById('acc-' + id);
+    var prevBody = document.getElementById('body-' + id);
+    if (prevBody) { prevBody.style.height = '0px'; prevBody.style.overflow = 'hidden'; }
     if (prevItem) prevItem.classList.remove('open');
-    setExpanded(prevId, false);
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        if (prevBody) prevBody.style.transition = TRANSITION;
-      });
-    });
+    setExpanded(id, false);
   }
 
   function scrollToTop(el) {
@@ -364,42 +396,44 @@
   /* ── main toggle ──────────────────────────────── */
 
   window.platToggle = function (id) {
-    if (locked[id]) return;                         // same item mid-animation
+    if (locked[id]) return;
+    locked[id] = true;
+    setTimeout(function () { delete locked[id]; }, DURATION);
 
     var item   = document.getElementById('acc-' + id);
     var body   = document.getElementById('body-' + id);
     var isOpen = item.classList.contains('open');
-    locked[id] = true;
-    setTimeout(function () { delete locked[id]; }, DURATION);
 
     if (isOpen) {
       item.classList.remove('open');
-      body.style.maxHeight = null;
+      closeBody(body, id);
       setExpanded(id, false);
       current = null;
       return;
     }
 
-    // Close previous INSTANTLY — layout settles before we measure
+    // Close previous instantly so layout is stable before we measure
     if (current && current !== id) {
       closeInstant(current);
       current = null;
     }
 
-    // Layout is now stable — scroll + open simultaneously
+    // Scroll + open simultaneously
     scrollToTop(item);
     item.classList.add('open');
-    body.style.maxHeight = body.scrollHeight + 'px';
+    openBody(body, id);
     setExpanded(id, true);
     current = id;
   };
 
-  /* ── ResizeObserver: keep open body height in sync ── */
+  /* ── ResizeObserver: recalculate open body on viewport change ── */
   if (typeof ResizeObserver !== 'undefined') {
     var ro = new ResizeObserver(function () {
-      if (!current) return;
+      if (!current || anims[current]) return;       // skip if animating
       var openBody = document.getElementById('body-' + current);
-      if (openBody) openBody.style.maxHeight = openBody.scrollHeight + 'px';
+      if (openBody && openBody.style.height !== 'auto') {
+        openBody.style.height = openBody.scrollHeight + 'px';
+      }
     });
     ro.observe(document.documentElement);
   }
