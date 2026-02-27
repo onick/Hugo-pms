@@ -1,5 +1,5 @@
 name = "silex-landing"
-compatibility_date = "2024-01-01"
+compatibility_date = "2026-01-01"
 
-[env.production]
-name = "silex-landing"
+[assets]
+directory = "./public"
