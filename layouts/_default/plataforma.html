@@ -325,35 +325,53 @@
 <script>
 (function () {
   var current = null;
+  var TRANSITION = '0.65s cubic-bezier(0.4,0,0.2,1)';
+
+  /* Close a body instantly (no animation) so the layout settles
+     before we measure the next item's position. */
+  function closeInstant(prevId) {
+    var prevItem = document.getElementById('acc-' + prevId);
+    var prevBody = document.getElementById('body-' + prevId);
+    if (!prevBody) return;
+    // Temporarily kill the transition so collapse is instant
+    prevBody.style.transition = 'none';
+    prevBody.style.maxHeight = null;
+    if (prevItem) prevItem.classList.remove('open');
+    // Re-enable transition after two frames (avoids flash)
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        if (prevBody) prevBody.style.transition = TRANSITION;
+      });
+    });
+  }
 
   window.platToggle = function (id) {
     var item = document.getElementById('acc-' + id);
     var body = document.getElementById('body-' + id);
     var isOpen = item.classList.contains('open');
 
-    // Close current open accordion
-    if (current && current !== id) {
-      var prevItem = document.getElementById('acc-' + current);
-      var prevBody = document.getElementById('body-' + current);
-      if (prevItem) prevItem.classList.remove('open');
-      if (prevBody) prevBody.style.maxHeight = null;
-    }
-
     if (isOpen) {
-      // Close this one
+      // Just collapse this one (with animation)
       item.classList.remove('open');
       body.style.maxHeight = null;
       current = null;
-    } else {
-      // Open this one
-      item.classList.add('open');
-      body.style.maxHeight = body.scrollHeight + 'px';
-      current = id;
-      // Smooth scroll to trigger
-      setTimeout(function () {
-        item.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 50);
+      return;
     }
+
+    // Close previous INSTANTLY so layout settles before we measure
+    if (current && current !== id) {
+      closeInstant(current);
+      current = null;
+    }
+
+    // Now the layout is stable — measure and scroll to the trigger top
+    var top = item.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+
+    // Open this accordion (animation runs while scroll is happening)
+    item.classList.add('open');
+    body.style.maxHeight = body.scrollHeight + 'px';
+    current = id;
   };
 }());
 </script>
