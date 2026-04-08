@@ -1,0 +1,36 @@
+<section id="faq" class="py-24 bg-[#faf9f5]">
+  <div class="max-w-3xl mx-auto px-6">
+
+    <div class="text-center mb-16">
+      <p class="text-sm font-semibold uppercase tracking-wider text-[#F5C842] mb-3">Preguntas frecuentes</p>
+      <h2 class="text-4xl font-bold text-[#30302E]">Lo que necesitas saber</h2>
+    </div>
+
+    <div class="space-y-4">
+      {{ $faqs := slice
+        (dict "q" "¿Necesito experiencia técnica para usar Silex PMS?" "a" "No. Silex está diseñado para hoteleros, no para ingenieros. Si puedes usar WhatsApp, puedes usar Silex. El setup toma menos de 5 minutos y ofrecemos onboarding gratuito.")
+        (dict "q" "¿Silex cumple con la facturación electrónica de la DGII?" "a" "Sí. Silex es el único PMS con e-CF integrado nativamente. Genera comprobantes fiscales electrónicos (B01, B04, B14) firmados digitalmente y los envía a la DGII automáticamente al cerrar cada folio. Solo necesitas tu certificado digital (.p12) de DigiFirma.")
+        (dict "q" "¿Funciona con Booking.com y Airbnb?" "a" "Sí. El plan Business incluye Channel Manager con sincronización bidireccional con Booking.com, Airbnb, Expedia y otros OTAs. Tarifas y disponibilidad se actualizan automáticamente.")
+        (dict "q" "¿Puedo migrar desde otro PMS?" "a" "Sí. Nuestro equipo te ayuda a importar tus datos de habitaciones, tarifas y huéspedes desde cualquier sistema. La migración típica toma menos de 24 horas.")
+        (dict "q" "¿Necesito instalar algo en mi computadora?" "a" "No. Silex es 100% en la nube. Solo necesitas un navegador web. Funciona en computadoras, tablets y celulares. Tu equipo de housekeeping puede operar desde su celular.")
+        (dict "q" "¿Hay contrato de permanencia?" "a" "No. Pago mensual, cancela cuando quieras. Sin letra pequeña, sin penalidades. Creemos que te quedas porque el producto es bueno, no porque estés atrapado.")
+        (dict "q" "¿Mis datos están seguros?" "a" "Sí. Encriptación SSL, backups automáticos cada hora, y cada hotel tiene su base de datos completamente aislada. Tus datos nunca se mezclan con los de otro hotel. Además, mantenemos un servidor de respaldo con restauración automática.")
+        (dict "q" "¿Puedo probar gratis antes de pagar?" "a" "Sí. Todos los planes incluyen 14 días de prueba gratuita con todas las funciones. Sin tarjeta de crédito. Si no te convence, simplemente no pagas.")
+        (dict "q" "¿El soporte es en español?" "a" "Sí. Todo el sistema y el soporte están en español. Nuestro equipo está en República Dominicana y entiende las necesidades específicas de los hoteles del Caribe. Respondemos en menos de 24 horas, incluyendo fines de semana.")
+      }}
+
+      {{ range $faqs }}
+      <details class="group rounded-2xl border border-[#e8e6dc] bg-white overflow-hidden">
+        <summary class="flex items-center justify-between cursor-pointer px-6 py-5 text-[#30302E] font-semibold hover:bg-[#f5f4ed] transition-colors">
+          {{ .q }}
+          <svg class="h-5 w-5 shrink-0 text-[#87867f] group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+        </summary>
+        <div class="px-6 pb-5 text-[#5e5d59] leading-relaxed">
+          {{ .a }}
+        </div>
+      </details>
+      {{ end }}
+
+    </div>
+  </div>
+</section>

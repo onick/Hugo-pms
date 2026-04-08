@@ -1,15 +1,15 @@
 [[stats]]
-value = "40%"
-label = "Reducción en errores manuales"
+value = "30s"
+label = "Check-in promedio"
 
 [[stats]]
-value = "2×"
-label = "Más rápido en check-in / check-out"
+value = "85%"
+label = "Menos tiempo en administración"
 
 [[stats]]
-value = "100%"
-label = "Cloud nativo, sin instalaciones"
+value = "99.9%"
+label = "Uptime garantizado"
 
 [[stats]]
-value = "24/7"
-label = "Soporte en tu zona horaria"
+value = "5min"
+label = "Setup inicial completo"
