@@ -1,7 +1,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
-<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 
 <!-- Open Graph -->
 <meta property="og:type"        content="website">
@@ -9,14 +9,23 @@
 <meta property="og:title"       content="{{ .Site.Title }}">
 <meta property="og:description" content="{{ .Site.Params.description }}">
 <meta property="og:image"       content="{{ .Site.BaseURL }}og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt"   content="SilexPMS — El PMS del Caribe">
+<meta property="og:locale"      content="es_DO">
+<meta property="og:site_name"   content="SilexPMS">
 
 <!-- Twitter -->
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:title"       content="{{ .Site.Title }}">
 <meta name="twitter:description" content="{{ .Site.Params.description }}">
+<meta name="twitter:image"       content="{{ .Site.BaseURL }}og-image.png">
+<meta name="twitter:image:alt"   content="SilexPMS — El PMS del Caribe">
 
-<!-- Canonical -->
+<!-- Canonical + hreflang -->
 <link rel="canonical" href="{{ .Permalink }}">
+<link rel="alternate" hreflang="es-DO" href="{{ .Permalink }}">
+<link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -29,3 +38,142 @@
 <!-- Tailwind via Hugo Pipes -->
 {{- $css := resources.Get "css/main.css" | css.TailwindCSS (dict "minify" hugo.IsProduction) | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+
+<!-- ═══ Structured Data (JSON-LD) ═══ -->
+
+<!-- Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "SilexPMS",
+  "alternateName": "Silex PMS",
+  "url": "https://www.silexpms.com",
+  "logo": "https://www.silexpms.com/favicon.svg",
+  "description": "Sistema de Gestión Hotelera (PMS) de nueva generación para hoteles independientes y boutique del Caribe",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Santo Domingo",
+    "addressCountry": "DO"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-809-494-3702",
+    "contactType": "Customer Service",
+    "availableLanguage": "Spanish"
+  }
+}
+</script>
+
+<!-- SoftwareApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "SilexPMS",
+  "description": "Plataforma hotelera con gestión de reservas, front desk, housekeeping, facturación fiscal e-CF y analytics integrados",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "inLanguage": "es-DO",
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "USD",
+    "lowPrice": "29",
+    "highPrice": "129",
+    "offerCount": "3"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "ratingCount": "3",
+    "bestRating": "5"
+  }
+}
+</script>
+
+<!-- FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Necesito experiencia técnica para usar Silex PMS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Silex está diseñado para hoteleros, no para ingenieros. Si puedes usar WhatsApp, puedes usar Silex. El setup toma menos de 5 minutos y ofrecemos onboarding gratuito."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Silex cumple con la facturación electrónica de la DGII?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Silex es el único PMS con e-CF integrado nativamente. Genera comprobantes fiscales electrónicos (B01, B04, B14) firmados digitalmente y los envía a la DGII automáticamente."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Funciona con Booking.com y Airbnb?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. El Channel Manager sincroniza tarifas y disponibilidad en tiempo real con Booking.com, Airbnb, Expedia y otros OTAs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hay contrato de permanencia?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Pago mensual, cancela cuando quieras. Sin letra pequeña, sin penalidades. 14 días gratis sin tarjeta de crédito."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Mis datos están seguros?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Encriptación SSL en todo momento, backups automáticos cada hora, y cada hotel tiene su base de datos completamente aislada."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto cuesta Silex PMS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Desde $29/mes (Starter, hasta 15 habitaciones), $69/mes (Pro, hasta 50 habitaciones) y $129/mes (Business, habitaciones ilimitadas con Channel Manager)."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Review -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "SilexPMS",
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+      "author": {"@type": "Person", "name": "Carlos García"},
+      "reviewBody": "Pasamos de Excel a Silex en un día. Ahora mis recepcionistas hacen check-in en 30 segundos."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+      "author": {"@type": "Person", "name": "María Rodríguez"},
+      "reviewBody": "Antes pagaba $400/mes por un PMS que ni siquiera estaba en español. Con Silex pago $69 y tiene todo."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": {"@type": "Rating", "ratingValue": "5"},
+      "author": {"@type": "Person", "name": "Juan Peña"},
+      "reviewBody": "Lo mejor es el soporte. Cuando tuve un problema a las 10pm un sábado, me respondieron en minutos."
+    }
+  ]
+}
+</script>

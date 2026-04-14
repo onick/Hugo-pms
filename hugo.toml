@@ -15,6 +15,11 @@ title = "SilexPMS — El PMS del Caribe"
   demoFormUrl  = "https://api.silexpms.com/api/leads"  # Laravel API + Resend
   demoWhatsApp = "18094943702"  # Tu WhatsApp (sin + ni espacios)
 
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

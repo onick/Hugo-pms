@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /plataforma-gestion-hotelera/
+
+Disallow: /categories/
+Disallow: /tags/
+
+Sitemap: https://www.silexpms.com/sitemap.xml
