@@ -13,7 +13,7 @@ title = "SilexPMS — El PMS del Caribe"
   heroVideo    = ""           # URL del video MP4 (dejar vacío para usar imagen/placeholder)
   heroImage    = ""           # URL de imagen fallback
   demoFormUrl  = "https://api.silexpms.com/api/leads"  # Laravel API + Resend
-  demoWhatsApp = "18099206939"  # Tu WhatsApp (sin + ni espacios)
+  demoWhatsApp = "18094943702"  # Tu WhatsApp (sin + ni espacios)
 
 [markup]
   [markup.goldmark]

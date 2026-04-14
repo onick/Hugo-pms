@@ -93,7 +93,7 @@
 #dm-close:hover { background:rgba(0,0,0,0.13); }
 
 /* ── Type cards ──────────────────────────────────────── */
-.dm-type-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.dm-type-grid { display:grid; grid-template-columns:1fr; gap:8px; }
 .dm-type-card {
   border:1.5px solid #e5e7eb; border-radius:10px; padding:11px 13px; cursor:pointer;
   display:flex; align-items:center; gap:9px;
@@ -104,6 +104,8 @@
 .dm-radio { width:15px; height:15px; border-radius:50%; border:2px solid #d1d5db; margin-left:auto; flex-shrink:0; transition:all 0.15s; display:flex; align-items:center; justify-content:center; }
 .dm-type-card.selected .dm-radio { border-color:#1A3320; background:#1A3320; }
 .dm-type-card.selected .dm-radio::after { content:''; width:5px; height:5px; border-radius:50%; background:#fff; }
+.dm-type-icon { color:#6b7280; flex-shrink:0; transition:color 0.15s; }
+.dm-type-card.selected .dm-type-icon { color:#1A3320; }
 
 /* ── Fields ──────────────────────────────────────────── */
 .dm-field { margin-bottom:0.75rem; }
@@ -180,20 +182,26 @@
       <div class="dm-slide active" id="dm-slide-1">
         <p style="font-family:var(--font-sans);font-size:13px;color:#6b7280;margin-bottom:0.875rem;">¿Cuál describe mejor tu negocio?</p>
         <div class="dm-type-grid">
-          {{ range slice
-            (slice "hotel"      "🏨" "Hotel")
-            (slice "hostal"     "🛏" "Hostal / Posada")
-            (slice "resort"     "🌴" "Resort")
-            (slice "boutique"   "🏡" "Boutique / B&B")
-            (slice "vacacional" "🔑" "Alquiler vacacional")
-            (slice "otro"       "📋" "Otro")
-          }}{{ $t := . }}
-          <div class="dm-type-card" data-value="{{ index $t 0 }}" onclick="selectType(this)">
-            <span>{{ index $t 1 }}</span>
-            <span>{{ index $t 2 }}</span>
+          <div class="dm-type-card" data-value="hotel-pequeno" onclick="selectType(this)">
+            <svg class="dm-type-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/><path d="M9 18v.01"/></svg>
+            <span>Hotel pequeño (1–15 hab.)</span>
             <span class="dm-radio"></span>
           </div>
-          {{ end }}
+          <div class="dm-type-card" data-value="hotel-mediano" onclick="selectType(this)">
+            <svg class="dm-type-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 012-2h8a2 2 0 012 2v18Z"/><path d="M6 12H4a2 2 0 00-2 2v6a2 2 0 002 2h2"/><path d="M18 9h2a2 2 0 012 2v9a2 2 0 01-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
+            <span>Hotel mediano (16–50 hab.)</span>
+            <span class="dm-radio"></span>
+          </div>
+          <div class="dm-type-card" data-value="hotel-grande" onclick="selectType(this)">
+            <svg class="dm-type-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22V8l5-3v17"/><path d="M7 22V5l10-5v22"/><path d="M17 22V3l5 3v16"/><path d="M10 7v.01"/><path d="M10 11v.01"/><path d="M10 15v.01"/><path d="M14 7v.01"/><path d="M14 11v.01"/><path d="M14 15v.01"/></svg>
+            <span>Hotel grande (51+ hab.)</span>
+            <span class="dm-radio"></span>
+          </div>
+          <div class="dm-type-card" data-value="cadena" onclick="selectType(this)">
+            <svg class="dm-type-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="6" width="7" height="16" rx="1"/><rect x="9" y="2" width="7" height="20" rx="1"/><rect x="17" y="8" width="6" height="14" rx="1"/></svg>
+            <span>Cadena / Multi-propiedad</span>
+            <span class="dm-radio"></span>
+          </div>
         </div>
       </div>
 

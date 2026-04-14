@@ -40,10 +40,25 @@
         <h3 class="font-semibold text-sm {{ if eq .span "hero" }}text-base{{ end }} mb-1.5">{{ .title }}</h3>
         <p class="text-[var(--text-muted)] text-xs leading-relaxed {{ if eq .span "hero" }}text-sm max-w-xs{{ end }}">{{ .desc }}</p>
 
-        <!-- Placeholder screenshot for hero card -->
-        {{ if eq .span "hero" }}
-        <div class="absolute bottom-0 right-0 w-48 h-36 translate-x-4 translate-y-4 screenshot-placeholder rounded-xl opacity-60 text-[9px]">
-          Preview
+        <!-- Screenshot for hero and wide cards -->
+        {{ $screenshotMap := dict
+          "front-desk" "/screenshots/front-desk.png"
+          "reservas" "/screenshots/reservas.png"
+          "housekeeping" "/screenshots/housekeeping.png"
+          "facturacion" "/screenshots/facturacion.png"
+          "crm" "/screenshots/huespedes.png"
+          "channel-manager" "/screenshots/dashboard.png"
+          "revenue" "/screenshots/tarifas.png"
+          "asistente-ia" "/screenshots/dashboard.png"
+          "analytics" "/screenshots/facturacion.png"
+          "staff" "/screenshots/settings.png"
+          "inventario" "/screenshots/habitaciones.png"
+          "tareas" "/screenshots/housekeeping.png"
+        }}
+        {{ $screenshot := index $screenshotMap .id }}
+        {{ if and $screenshot (or (eq .span "hero") (eq .span "wide") (eq .span "tall")) }}
+        <div class="absolute bottom-0 right-0 {{ if eq .span "hero" }}w-[55%] h-[60%]{{ else if eq .span "wide" }}w-[45%] h-[70%]{{ else }}w-[85%] h-[45%] bottom-2{{ end }} overflow-hidden rounded-xl shadow-lg opacity-90">
+          <img src="{{ $screenshot }}" alt="{{ .title }}" class="w-full h-full object-cover object-top-left" loading="lazy" />
         </div>
         {{ end }}
       </div>
