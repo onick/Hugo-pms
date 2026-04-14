@@ -10,8 +10,8 @@ title = "SilexPMS — El PMS del Caribe"
   appUrl      = "https://app.silexpms.com"
   registerUrl = "https://app.silexpms.com/auth?register=true"
   loginUrl    = "https://app.silexpms.com/auth"
-  heroVideo    = ""           # URL del video MP4 (dejar vacío para usar imagen/placeholder)
-  heroImage    = ""           # URL de imagen fallback
+  heroVideo    = "/video/hero.mp4"
+  heroImage    = "/video/hero-poster.jpg"
   demoFormUrl  = "https://api.silexpms.com/api/leads"  # Laravel API + Resend
   demoWhatsApp = "18094943702"  # Tu WhatsApp (sin + ni espacios)
 
