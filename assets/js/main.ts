@@ -28,10 +28,20 @@ if (menuBtn && mobileMenu) {
 }
 
 // ── Hero rotating word ───────────────────────────────────────────────────────
-// Cycles the last word of the H1 every few seconds with a fade + slide
-// transition. Respects prefers-reduced-motion and pauses when the user
-// hovers the word (so they can read it). Kicks in only after LCP to
-// keep Core Web Vitals untouched.
+// Cycles the last yellow word of the H1 with a buttery fade + slide + width
+// transition. Key design decisions:
+//   - Width animates too (not min-width reserved), so "del Caribe" sits
+//     flush against the current word regardless of its length. No dead
+//     whitespace when a short word shows.
+//   - Every next word's pixel width is pre-measured via a hidden clone so
+//     we know the target width exactly (no layout thrash).
+//   - Easing: cubic-bezier(.22, 1, .36, 1) — the "ease-out-quint" curve
+//     used by Apple / Linear / Vercel. Feels more premium than linear or
+//     ease.
+//   - Phases are serialised so they don't fight: fade+slide out (300ms) →
+//     swap text + set width → fade+slide in (420ms).
+//   - Respects prefers-reduced-motion: no rotation, static word.
+//   - Pauses on hover and when tab is backgrounded.
 (() => {
   const rotator = document.querySelector<HTMLElement>('.hero-rotator');
   if (!rotator) return;
@@ -40,66 +50,90 @@ if (menuBtn && mobileMenu) {
   const words = raw.split('|').map(w => w.trim()).filter(Boolean);
   if (words.length < 2) return;
 
-  // Current index — start at the DOM's initial word so we don't flash
-  // a different word on first paint.
   let idx = words.findIndex(w => w === rotator.textContent?.trim());
   if (idx < 0) idx = 0;
 
-  const prefersReducedMotion =
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReducedMotion) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  // Lock the min-width to the widest word so the layout doesn't shift
-  // when the word changes. We measure all words using a hidden clone.
-  const measure = () => {
-    const ghost = rotator.cloneNode(true) as HTMLElement;
-    ghost.style.position = 'absolute';
-    ghost.style.visibility = 'hidden';
-    ghost.style.pointerEvents = 'none';
-    ghost.style.whiteSpace = 'nowrap';
-    ghost.style.transform = 'none';
-    ghost.style.opacity = '1';
-    rotator.parentElement?.appendChild(ghost);
-    let maxWidth = 0;
-    for (const w of words) {
-      ghost.textContent = w;
-      maxWidth = Math.max(maxWidth, ghost.getBoundingClientRect().width);
+  // Measure each word's rendered width via Canvas — same technique as
+  // chenglou/pretext. Canvas measureText is DOM-free, doesn't trigger
+  // reflow, and returns the exact width the browser will paint given
+  // an identical font shorthand. We read the rotator's computed style
+  // once to build that shorthand, then add the horizontal padding
+  // (which Canvas doesn't account for).
+  const widthFor: Record<string, number> = {};
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  const measureAll = () => {
+    if (!ctx) {
+      // Canvas unavailable — extremely rare. Fall back to a no-op:
+      // we simply don't animate width, and the word will snap.
+      return;
     }
-    ghost.remove();
-    if (maxWidth > 0) rotator.style.minWidth = `${Math.ceil(maxWidth)}px`;
+    const cs = window.getComputedStyle(rotator);
+    // Build the CSS font shorthand expected by Canvas:
+    //   "style weight size/line-height family"
+    ctx.font = [
+      cs.fontStyle || 'normal',
+      cs.fontWeight || 'normal',
+      cs.fontSize || '16px',
+      cs.fontFamily || 'sans-serif',
+    ].join(' ');
+    const padLeft = parseFloat(cs.paddingLeft) || 0;
+    const padRight = parseFloat(cs.paddingRight) || 0;
+    for (const w of words) {
+      widthFor[w] = Math.ceil(ctx.measureText(w).width + padLeft + padRight);
+    }
+    // Lock the starting width to the initial word so the first transition
+    // has something concrete to animate from.
+    const initialWidth = widthFor[words[idx]];
+    if (initialWidth) rotator.style.width = `${initialWidth}px`;
   };
-  measure();
-  // Re-measure on resize (font-size uses clamp with vw units)
+  measureAll();
+
   let resizeTimer: number | null = null;
   window.addEventListener('resize', () => {
     if (resizeTimer) clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(measure, 150);
+    resizeTimer = window.setTimeout(measureAll, 150);
   }, { passive: true });
 
   let intervalId: number | null = null;
   let paused = false;
+  let inFlight = false;
 
   const advance = () => {
-    if (paused) return;
-    idx = (idx + 1) % words.length;
-    // Phase 1: slide up + fade out the current word
-    rotator.style.transform = 'translateY(-0.5em)';
+    if (paused || inFlight) return;
+    inFlight = true;
+    const nextIdx = (idx + 1) % words.length;
+    const nextWord = words[nextIdx];
+    const nextWidth = widthFor[nextWord];
+
+    // Phase 1: exit — slide up + fade out. 300ms feels natural without
+    // being slow.
+    rotator.style.transform = 'translateY(-0.35em)';
     rotator.style.opacity = '0';
+
     window.setTimeout(() => {
-      // Phase 2: swap text and prep slide-up-from-below
-      rotator.textContent = words[idx];
-      rotator.style.transform = 'translateY(0.5em)';
-      // Force a reflow so the browser picks up the starting transform
+      // Mid-point: swap text and kick the width animation. Because the
+      // opacity is already 0, the text swap is invisible — the user only
+      // perceives the smooth width change.
+      rotator.textContent = nextWord;
+      if (nextWidth) rotator.style.width = `${nextWidth}px`;
+      rotator.style.transform = 'translateY(0.35em)';
+      // Force a reflow so the enter transition has a starting state.
       void rotator.offsetWidth;
-      // Phase 3: settle into place
+      // Phase 2: enter — slide up into place + fade in.
       rotator.style.transform = 'translateY(0)';
       rotator.style.opacity = '1';
-    }, 280);
+      idx = nextIdx;
+      window.setTimeout(() => { inFlight = false; }, 520);
+    }, 300);
   };
 
   const start = () => {
     if (intervalId) return;
-    intervalId = window.setInterval(advance, 2800);
+    intervalId = window.setInterval(advance, 3400);
   };
   const stop = () => {
     if (intervalId) {
@@ -108,18 +142,15 @@ if (menuBtn && mobileMenu) {
     }
   };
 
-  // Pause while the word is hovered so the user can read it.
   const wrap = rotator.closest<HTMLElement>('.hero-rotator-wrap') ?? rotator;
   wrap.addEventListener('mouseenter', () => { paused = true; });
   wrap.addEventListener('mouseleave', () => { paused = false; });
 
-  // Pause when the tab is backgrounded (battery + CPU friendly).
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) stop();
     else start();
   });
 
-  // Kick in 1.5s after load to clear the LCP window.
   const kickoff = () => window.setTimeout(start, 1500);
   if (document.readyState === 'complete') kickoff();
   else window.addEventListener('load', kickoff, { once: true });
