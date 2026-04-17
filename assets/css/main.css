@@ -34,6 +34,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Typography hygiene — prevent orphaned last words ("widows") in
+ * copy. `text-wrap: pretty` is the modern CSS property that tells the
+ * browser to rebalance line breaks so the last line doesn't end with
+ * a lonely short word. Supported in Chromium, Safari 17+, Firefox 131+;
+ * silently no-ops in older browsers so we never render worse. */
+p, li, dd {
+  text-wrap: pretty;
+}
+
+/* Headlines benefit from `text-wrap: balance` which makes every line
+ * roughly the same width — feels composed and editorial. Both
+ * properties fall back to `normal` on unsupported browsers. */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
 /* ── Grid background (fondo cuadriculado sutil) ── */
 .bg-grid {
   background-image:
