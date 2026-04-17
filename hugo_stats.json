@@ -192,6 +192,8 @@
       "h-auto",
       "h-full",
       "hero-card",
+      "hero-rotator",
+      "hero-rotator-wrap",
       "hidden",
       "hover:-translate-y-1",
       "hover:bg-[#30302E]",

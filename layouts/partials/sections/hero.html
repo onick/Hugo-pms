@@ -8,12 +8,24 @@
       <span class="text-sm font-medium text-[var(--text-secondary)]">Sistema de Gestión Hotelera (PMS) de nueva generación</span>
     </div>
 
-    <!-- Título principal -->
+    <!-- Título principal
+         The first rendered word in .hero-rotator is what crawlers and
+         OpenGraph preview consume, so it MUST be "ambiciosos" to match
+         the meta description and brand positioning. The JS rotator only
+         kicks in after LCP to not affect Core Web Vitals. -->
     <h1 class="fade-up delay-1 font-semibold tracking-[-0.025em] text-[var(--text-primary)] mb-12"
         style="font-size: clamp(2.8rem, 5.8vw, 6rem); line-height: 1.22;">
       Impulsando a los<br>
       hoteleros <mark style="background:#E9FF57; padding:0.05em 0.18em; border-radius:2px; -webkit-box-decoration-break:clone; box-decoration-break:clone;">más</mark><br>
-      <mark style="background:#E9FF57; padding:0.05em 0.18em; border-radius:2px; -webkit-box-decoration-break:clone; box-decoration-break:clone;">ambiciosos</mark> del Caribe
+      <span class="hero-rotator-wrap" style="display:inline-block; position:relative;">
+        <mark class="hero-rotator"
+              data-words="ambiciosos|exigentes|visionarios|rentables|innovadores|estratégicos|extraordinarios"
+              aria-live="polite"
+              style="background:#E9FF57; padding:0.05em 0.18em; border-radius:2px; -webkit-box-decoration-break:clone; box-decoration-break:clone; display:inline-block; transition: opacity 260ms cubic-bezier(.4,0,.2,1), transform 260ms cubic-bezier(.4,0,.2,1); will-change: transform, opacity;">
+          ambiciosos
+        </mark>
+      </span>
+      del Caribe
     </h1>
 
     <!-- Fila inferior: CTAs izq · Descripción der -->
