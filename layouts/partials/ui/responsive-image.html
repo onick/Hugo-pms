@@ -1,0 +1,64 @@
+{{- /*
+  Responsive image partial — optimised <picture> with WebP + JPEG.
+
+  Context dict:
+    src       — path relative to assets/ (e.g. "images/slide-experience.jpg")
+    alt       — alt text (required for a11y)
+    class     — CSS classes for the <img> (optional)
+    sizes     — CSS sizes attribute. Default covers typical full-width hero.
+    loading   — "lazy" (default) / "eager"
+    priority  — "high" / "auto" / "low" (fetchpriority hint; use "high" for LCP)
+    widths    — comma-separated ints for srcset variants.
+                Default: "480,768,1200,1920"
+
+  WebP gives ~30-50% savings over JPEG at equivalent visual quality. We serve
+  WebP as the primary <source> and keep a fingerprinted JPEG fallback in the
+  <img> for the handful of browsers without WebP (<0.5% globally, <0.1% in
+  the Caribbean per caniuse).
+*/ -}}
+
+{{- $src := .src -}}
+{{- $alt := .alt | default "" -}}
+{{- $class := .class | default "" -}}
+{{- $sizes := .sizes | default "(max-width: 768px) 100vw, 1200px" -}}
+{{- $loading := .loading | default "lazy" -}}
+{{- $priority := .priority | default "" -}}
+{{- $widthsStr := .widths | default "480,768,1200,1920" -}}
+{{- $widths := split $widthsStr "," -}}
+
+{{- $img := resources.Get $src -}}
+{{- if $img -}}
+
+  {{- /* Build WebP srcset — filter widths larger than the source */ -}}
+  {{- $webpSet := slice -}}
+  {{- range $widths -}}
+    {{- $w := (trim . " ") | int -}}
+    {{- if le $w $img.Width -}}
+      {{- $resized := $img.Process (printf "resize %dx webp q80" $w) -}}
+      {{- $webpSet = $webpSet | append (printf "%s %dw" $resized.RelPermalink $w) -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- /* JPEG fallback: cap at 1600w to keep the fallback small */ -}}
+  {{- $fallbackWidth := 1200 -}}
+  {{- if gt $img.Width 1600 -}}{{- $fallbackWidth = 1600 -}}{{- end -}}
+  {{- if lt $img.Width 1200 -}}{{- $fallbackWidth = $img.Width -}}{{- end -}}
+  {{- $fallback := $img.Process (printf "resize %dx jpg q78" $fallbackWidth) -}}
+
+  <picture>
+    <source type="image/webp" srcset="{{ delimit $webpSet ", " }}" sizes="{{ $sizes }}">
+    <img
+      src="{{ $fallback.RelPermalink }}"
+      alt="{{ $alt }}"
+      width="{{ $fallback.Width }}"
+      height="{{ $fallback.Height }}"
+      loading="{{ $loading }}"
+      decoding="async"
+      {{- with $priority }} fetchpriority="{{ . }}"{{- end }}
+      {{- with $class }} class="{{ . }}"{{- end }}
+    >
+  </picture>
+
+{{- else -}}
+  <!-- responsive-image: asset not found: {{ $src }} -->
+{{- end -}}

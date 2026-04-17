@@ -49,9 +49,13 @@
                     box-shadow:0 20px 60px rgba(0,0,0,0.1); aspect-ratio:4/3;">
 
           <!-- Foto real -->
-          <img src="/images/guest-experience.jpg"
-               alt="Recepcionista entregando llave a huésped en hotel"
-               style="width:100%; height:100%; object-fit:cover; display:block;" loading="lazy" />
+          {{ partial "ui/responsive-image.html" (dict
+            "src" "images/guest-experience.jpg"
+            "alt" "Recepcionista entregando llave a huésped en hotel"
+            "class" "w-full h-full object-cover block"
+            "sizes" "(max-width: 768px) 100vw, 50vw"
+            "widths" "480,768,1024"
+            "loading" "lazy") }}
 
             <!-- Card flotante: perfil de huésped (translúcida) -->
             <div style="position:absolute; bottom:8%; right:5%;

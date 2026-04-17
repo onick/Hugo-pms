@@ -50,10 +50,13 @@
 
         <!-- Photo -->
         <div style="border-radius:16px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.12);">
-          <img src="/images/reception-desk.jpg"
-               alt="Recepcionistas de hotel usando Silex PMS en la recepción"
-               style="width:100%; height:auto; display:block; object-fit:cover;"
-               loading="lazy" />
+          {{ partial "ui/responsive-image.html" (dict
+            "src" "images/reception-desk.jpg"
+            "alt" "Recepcionistas de hotel usando Silex PMS en la recepción"
+            "class" "w-full h-auto block object-cover"
+            "sizes" "(max-width: 768px) 100vw, 50vw"
+            "widths" "480,768,1024,1440"
+            "loading" "lazy") }}
         </div>
 
       </div>

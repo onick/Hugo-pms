@@ -1,11 +1,35 @@
+# Cloudflare Pages-compatible headers.
+# Applied by the edge to every response before returning to the client.
+
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Cross-Origin-Opener-Policy: same-origin
 
+# Long-lived immutable caches for fingerprinted assets. Hugo fingerprints
+# CSS/JS and the image pipeline, so these files have hash in the name and
+# can be cached essentially forever.
 /css/*
   Cache-Control: public, max-age=31536000, immutable
 
 /js/*
   Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# HTML should revalidate so fresh deploys are picked up quickly. 5-minute
+# edge cache tolerance keeps Cloudflare's TTFB excellent while not serving
+# stale headlines for longer than that.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate

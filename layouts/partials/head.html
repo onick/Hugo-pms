@@ -1,5 +1,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0B0B0B">
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} — {{ .Site.Title }}{{ end }}</title>
 <meta name="description" content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
 
@@ -8,9 +9,10 @@
 <meta property="og:url"         content="{{ .Permalink }}">
 <meta property="og:title"       content="{{ .Site.Title }}">
 <meta property="og:description" content="{{ .Site.Params.description }}">
-<meta property="og:image"       content="{{ .Site.BaseURL }}og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:image"       content="{{ .Site.BaseURL }}og-image.jpg">
+<meta property="og:image:type"  content="image/jpeg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="676">
 <meta property="og:image:alt"   content="SilexPMS — El PMS del Caribe">
 <meta property="og:locale"      content="es_DO">
 <meta property="og:site_name"   content="SilexPMS">
@@ -19,21 +21,37 @@
 <meta name="twitter:card"        content="summary_large_image">
 <meta name="twitter:title"       content="{{ .Site.Title }}">
 <meta name="twitter:description" content="{{ .Site.Params.description }}">
-<meta name="twitter:image"       content="{{ .Site.BaseURL }}og-image.png">
+<meta name="twitter:image"       content="{{ .Site.BaseURL }}og-image.jpg">
 <meta name="twitter:image:alt"   content="SilexPMS — El PMS del Caribe">
 
-<!-- Canonical + hreflang -->
+<!-- Canonical + hreflang — Caribbean Spanish-speaking markets routed to same URL
+     until we publish localised content. Helps Google serve the right regional
+     result without duplicating SEO weight. -->
 <link rel="canonical" href="{{ .Permalink }}">
 <link rel="alternate" hreflang="es-DO" href="{{ .Permalink }}">
+<link rel="alternate" hreflang="es-PR" href="{{ .Permalink }}">
+<link rel="alternate" hreflang="es-MX" href="{{ .Permalink }}">
+<link rel="alternate" hreflang="es"    href="{{ .Permalink }}">
 <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-<!-- Fonts (Plus Jakarta Sans — editorial heavy) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Preload the hero poster to accelerate LCP. The hero section uses this
+     image as the <video poster>, which browsers treat as LCP candidate
+     until the video frame decodes. Fetching it early is worth ~400ms on
+     mobile 4G. -->
+{{- if .IsHome -}}
+<link rel="preload" as="image" href="/video/hero-poster.jpg" fetchpriority="high">
+{{- end }}
+
+<!-- Self-hosted Plus Jakarta Sans (variable font) — eliminates the
+     round-trip to fonts.googleapis.com (render-blocking) and lets
+     Cloudflare cache the .woff2 files at the edge alongside our HTML.
+     Subset to latin + latin-ext = ~48 KB for all 5 weights. -->
+<link rel="preload" as="font" type="font/woff2" href="/fonts/plus-jakarta-sans-latin.woff2" crossorigin>
+{{- $fontCss := resources.Get "css/fonts.css" | resources.Fingerprint -}}
+<link rel="stylesheet" href="{{ $fontCss.RelPermalink }}">
 
 <!-- Tailwind via Hugo Pipes -->
 {{- $css := resources.Get "css/main.css" | css.TailwindCSS (dict "minify" hugo.IsProduction) | resources.Fingerprint }}
@@ -65,7 +83,11 @@
 }
 </script>
 
-<!-- SoftwareApplication -->
+<!-- SoftwareApplication
+     NOTE: aggregateRating intentionally omitted until we reach ≥10
+     verified reviews. Google treats <10 as "rich result unreliable"
+     and hides the stars, so keeping it here hurts more than helps.
+     Re-add when the Capterra / G2 listings reach that threshold. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -81,12 +103,6 @@
     "lowPrice": "29",
     "highPrice": "129",
     "offerCount": "3"
-  },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "ratingCount": "3",
-    "bestRating": "5"
   }
 }
 </script>

@@ -20,6 +20,12 @@ title = "SilexPMS — El PMS del Caribe"
   filename = "sitemap.xml"
   priority = 0.5
 
+# Disable taxonomies — we don't use categories or tags on the landing,
+# and keeping them creates /categories/ and /tags/ listing pages that
+# are both in the sitemap AND Disallow'd in robots.txt — a conflict
+# that Search Console flags as an error.
+disableKinds = ["taxonomy", "term"]
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

@@ -1,8 +1,10 @@
+# SilexPMS — robots.txt
+# https://www.silexpms.com/
+#
+# Taxonomies (categories/tags) are disabled via Hugo config, so their
+# former Disallow lines were removed.
+
 User-agent: *
 Allow: /
-Allow: /plataforma-gestion-hotelera/
-
-Disallow: /categories/
-Disallow: /tags/
 
 Sitemap: https://www.silexpms.com/sitemap.xml
