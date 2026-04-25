@@ -20,8 +20,19 @@
 
 const UPSTREAM = 'https://pms.silexpms.com';
 
+// Paths handled by the Silex PMS app (Next.js on Contabo) instead of Hugo.
+// Add new app routes here as they ship.
+const APP_PATH_PREFIXES = [
+  '/admin',       // SaaS Owner console
+  '/login',       // tenant login (proxied here so silexpms.com/login can show
+                  //   the find-hotel locator from the same Next.js app)
+  '/signup',      // public self-service hotel signup
+  '/find-hotel',  // tenant locator (silexpms.com/find-hotel)
+  '/_next',       // Next.js static assets / RSC payloads
+];
+
 function isAdminPath(pathname) {
-  return pathname.startsWith('/admin') || pathname.startsWith('/_next');
+  return APP_PATH_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + '/'));
 }
 
 export default {

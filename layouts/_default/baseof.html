@@ -27,5 +27,28 @@
   {{- $js := resources.Get "js/main.ts" | js.Build (dict "minify" true "target" "es2020") }}
   <script src="{{ $js.RelPermalink }}" defer></script>
 
+  <!--
+    Silex login shortcut. If the visitor has logged into a tenant before,
+    we cache the subdomain in localStorage and skip the find-hotel step on
+    subsequent "Iniciar sesión" clicks. First-time visitors fall through
+    to the original loginUrl (silexpms.com/find-hotel).
+  -->
+  <script>
+    (function () {
+      try {
+        var raw = localStorage.getItem('silex_last_hotel');
+        if (!raw) return;
+        var data = JSON.parse(raw);
+        if (!data || !data.domain) return;
+        document.addEventListener('click', function (e) {
+          var link = e.target.closest('a[data-silex-login]');
+          if (!link) return;
+          e.preventDefault();
+          window.location.href = 'https://' + data.domain + '/login';
+        }, false);
+      } catch (_) { /* corrupt entry, ignore */ }
+    })();
+  </script>
+
 </body>
 </html>

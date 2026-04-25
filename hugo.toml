@@ -7,9 +7,12 @@ title = "SilexPMS — El PMS del Caribe"
 
 [params]
   description = "La plataforma hotelera de nueva generación para hoteles independientes y boutique del Caribe."
-  appUrl      = "https://app.silexpms.com"
-  registerUrl = "https://app.silexpms.com/auth?register=true"
-  loginUrl    = "https://app.silexpms.com/auth"
+  # Cutover from hotelmate (app.silexpms.com) to Silex.
+  # registerUrl → public signup creates a fresh tenant on silexpms.com
+  # loginUrl    → tenant locator (asks email, redirects to subdomain)
+  appUrl      = "https://silexpms.com"
+  registerUrl = "https://silexpms.com/signup"
+  loginUrl    = "https://silexpms.com/find-hotel"
   heroVideo    = "/video/hero.mp4"
   heroImage    = "/video/hero-poster.jpg"
   demoFormUrl  = "https://api.silexpms.com/api/leads"  # Laravel API + Resend
