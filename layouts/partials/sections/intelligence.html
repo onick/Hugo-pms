@@ -1,176 +1,169 @@
-<section id="inteligencia" class="py-24 relative overflow-hidden" style="background:linear-gradient(135deg, #0c0a1a 0%, #1a1530 50%, #0c0a1a 100%);">
+<!-- ============================================================
+     Iris + automatización — SOLO capacidades que existen hoy:
+     · Iris (silex-iris): agente con 12 herramientas reales — consulta
+       reservas/folios/disponibilidad/KPIs/mayor contable y EJECUTA
+       (crear reserva, check-in/out, cargos, pagos) con audit trail.
+     · Campana de novedades (/api/alerts) derivada del estado vivo.
+     · Auditoría nocturna automática + watchdog 9 AM + outbox contable.
+     La versión anterior describía el motor de insights del app viejo
+     (SENSE/LEARN/PREDICT/ACT, autocalibración, deshacer, 92.3%) que NO
+     existe en Silex — y vestía morado "IA genérica" ajeno a la marca.
+     ============================================================ -->
+<section id="inteligencia" class="py-24 relative overflow-hidden" style="background:linear-gradient(160deg, #141310 0%, #1E1C17 55%, #141310 100%);">
 
-  <!-- Grid overlay -->
-  <div style="position:absolute; inset:0; pointer-events:none; opacity:0.04;
+  <!-- Grid overlay sutil, mismo patrón que la sección e-CF -->
+  <div style="position:absolute; inset:0; pointer-events:none; opacity:0.05;
               background-image:linear-gradient(to right,#fff 1px,transparent 1px),
                                linear-gradient(to bottom,#fff 1px,transparent 1px);
               background-size:64px 64px;"></div>
 
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
     <div class="grid lg:grid-cols-2 gap-16 items-center">
 
-      <!-- Left: Copy -->
+      <!-- Left: copy -->
       <div class="fade-up">
-        <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-indigo-500/30 bg-indigo-500/10">
-          <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/>
-          </svg>
-          <span class="text-sm font-semibold text-indigo-300">Sistema nervioso integrado</span>
+
+        <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-[#E9FF57]/30 bg-[#E9FF57]/10">
+          <span class="w-1.5 h-1.5 rounded-full" style="background:#E9FF57;"></span>
+          <span style="font-size:12px; font-weight:700; color:#E9FF57; letter-spacing:0.06em; text-transform:uppercase;">
+            Iris · asistente + automatización
+          </span>
         </div>
 
-        <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-bold tracking-tight text-white mb-6 leading-[1.1]">
+        <h2 class="text-[clamp(2rem,4vw,3.2rem)] font-extrabold tracking-tight text-white mb-6 leading-[1.1]">
           Tu PMS no solo gestiona.<br>
-          <span style="background:linear-gradient(90deg, #818cf8, #c084fc); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Observa, aprende, sugiere y actúa.</span>
+          <span style="color:#E9FF57;">Responde, avisa y trabaja de noche.</span>
         </h2>
 
-        <p class="text-[#a5a3b5] text-lg leading-relaxed mb-8">
-          Silex es el único PMS con un sistema nervioso de cuatro fases que convierte la operación diaria de tu hotel en decisiones inteligentes — y ejecuta acciones reversibles cuando tú lo apruebas. Sin scripts, sin configuraciones: aprende solo.
+        <p class="text-white/60 text-lg leading-relaxed mb-9">
+          Iris es el asistente de Silex: entiende tu operación y ejecuta lo que
+          le pidas, con rastro de auditoría en cada paso. Y lo que no necesita
+          preguntas, Silex lo automatiza — del cierre nocturno a la contabilidad.
         </p>
 
-        <!-- 4 pillars (SENSE · LEARN · PREDICT · ACT) -->
-        <div class="space-y-5">
+        <div class="space-y-6">
 
-          <!-- 1. OBSERVA (SENSE) -->
           <div class="flex gap-4 items-start">
-            <div class="w-10 h-10 rounded-xl bg-indigo-500/15 flex items-center justify-center shrink-0 mt-0.5">
-              <span class="text-xs font-bold text-indigo-300">01</span>
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0" style="background:#E9FF57;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141310" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
             <div>
-              <h3 class="text-white font-semibold text-sm mb-1 flex items-center gap-2">
-                Observa en tiempo real
-                <span class="text-[10px] font-medium text-indigo-300/70 uppercase tracking-wider">SENSE</span>
-              </h3>
-              <p class="text-[#8a889a] text-sm leading-relaxed">Cada reserva, check-in, pago, incidencia y cambio de estado se registra automáticamente. Tu hotel genera datos — Silex los captura sin que hagas nada.</p>
+              <h3 class="text-white font-semibold text-[15px] mb-1">Pregúntale en español</h3>
+              <p class="text-white/50 text-sm leading-relaxed">«¿Cómo cerró ayer?» «¿Quién debe balance?» «¿Hay una doble libre el viernes?» Iris consulta reservas, folios, disponibilidad, KPIs y hasta el mayor contable — tu operación real, no un chatbot genérico.</p>
             </div>
           </div>
 
-          <!-- 2. APRENDE (LEARN) -->
           <div class="flex gap-4 items-start">
-            <div class="w-10 h-10 rounded-xl bg-violet-500/15 flex items-center justify-center shrink-0 mt-0.5">
-              <span class="text-xs font-bold text-violet-300">02</span>
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0" style="background:#E9FF57;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141310" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
             </div>
             <div>
-              <h3 class="text-white font-semibold text-sm mb-1 flex items-center gap-2">
-                Aprende tu operación — se calibra sola
-                <span class="text-[10px] font-medium text-violet-300/70 uppercase tracking-wider">LEARN</span>
-              </h3>
-              <p class="text-[#8a889a] text-sm leading-relaxed">Silex calcula los umbrales por hotel usando 90 días de tu historia. Si un insight te resulta ruidoso y lo descartas varias veces, la sensibilidad baja sola. No hay dos hoteles iguales — tu sistema tampoco.</p>
+              <h3 class="text-white font-semibold text-[15px] mb-1">Pídele que lo haga</h3>
+              <p class="text-white/50 text-sm leading-relaxed">Crea la reserva, hace el check-in, postea el cargo o registra el pago. Cada herramienta que toca queda en el rastro de auditoría: qué hizo, cuándo y sobre qué reserva.</p>
             </div>
           </div>
 
-          <!-- 3. PREDICE (PREDICT) -->
           <div class="flex gap-4 items-start">
-            <div class="w-10 h-10 rounded-xl bg-purple-500/15 flex items-center justify-center shrink-0 mt-0.5">
-              <span class="text-xs font-bold text-purple-300">03</span>
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0" style="background:#E9FF57;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141310" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
             </div>
             <div>
-              <h3 class="text-white font-semibold text-sm mb-1 flex items-center gap-2">
-                Predice problemas antes de que pasen
-                <span class="text-[10px] font-medium text-purple-300/70 uppercase tracking-wider">PREDICT</span>
-              </h3>
-              <p class="text-[#8a889a] text-sm leading-relaxed">Caída de ocupación, pico de cancelaciones, tarifa por encima del mercado, housekeeping saturado, ingresos concentrados en un solo canal. Once reglas que trabajan silenciosamente todo el día.</p>
+              <h3 class="text-white font-semibold text-[15px] mb-1">Avisos que se apagan solos</h3>
+              <p class="text-white/50 text-sm leading-relaxed">Comprobante fiscal rechazado, turno que quedó abierto, stock bajo, cierre fallido. Cada aviso te lleva al módulo con el filtro puesto — y desaparece cuando el problema se resuelve de origen. Sin marcar leídos.</p>
             </div>
           </div>
 
-          <!-- 4. ACTÚA (ACT) — NEW -->
-          <div class="flex gap-4 items-start relative">
-            <div class="absolute -left-4 top-1 w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/15 flex items-center justify-center shrink-0 mt-0.5 border border-emerald-500/30">
-              <span class="text-xs font-bold text-emerald-300">04</span>
+          <div class="flex gap-4 items-start">
+            <div class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0" style="background:#E9FF57;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#141310" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
             </div>
             <div>
-              <h3 class="text-white font-semibold text-sm mb-1 flex items-center gap-2">
-                Actúa por ti — con audit trail y botón deshacer
-                <span class="text-[10px] font-medium text-emerald-300 uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-emerald-500/15">ACT · Nuevo</span>
-              </h3>
-              <p class="text-[#8a889a] text-sm leading-relaxed">Silex ejecuta acciones reversibles: libera bloqueos vencidos, asigna habitaciones a las llegadas del día, repara inventario automáticamente. Cada acción queda registrada en el historial — con un click la deshaces. Confías porque es transparente.</p>
+              <h3 class="text-white font-semibold text-[15px] mb-1">La noche trabaja por ti</h3>
+              <p class="text-white/50 text-sm leading-relaxed">La auditoría nocturna marca no-shows, postea las noches, concilia pagos y cierra el día contable — y cada cargo genera su asiento solo. Si algo falla, el vigilante te lo escribe a las 9 de la mañana.</p>
             </div>
           </div>
 
         </div>
       </div>
 
-      <!-- Right: Visual mockup — now showing Phase 4 ACT with action + rollback -->
+      <!-- Right: mockup del drawer real de Iris + una novedad de la campana.
+           Colores del PRODUCTO (crema/tinta/dorado) — es una ventana al app,
+           no un concept art. -->
       <div class="fade-up delay-1">
-        <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 space-y-4">
+        <div class="rounded-2xl overflow-hidden border border-white/10" style="box-shadow:0 24px 64px -16px rgba(0,0,0,0.5);">
 
-          <!-- Header -->
-          <div class="flex items-center gap-3 mb-2">
-            <div class="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center">
-              <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
-              </svg>
-            </div>
-            <span class="text-white font-semibold text-sm">Tab Inteligencia</span>
-            <span class="ml-auto inline-flex items-center gap-1.5 text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-medium">
-              <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
-              Vista demo
+          <!-- Header del drawer (gradiente real del launcher de Iris) -->
+          <div class="flex items-center gap-2.5 px-4 py-3" style="background:linear-gradient(135deg, #2A2824 0%, #4A5D7E 100%);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FBFAF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"/></svg>
+            <span class="text-sm font-semibold" style="color:#FBFAF6;">Iris</span>
+            <span class="inline-flex items-center gap-1.5 ml-auto text-[10px]" style="color:rgba(251,250,246,0.7);">
+              <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background:#4ADE80;"></span>
+              en línea
             </span>
           </div>
 
-          <!-- Precision KPI (new) -->
-          <div class="rounded-xl border border-white/5 bg-white/5 p-3 flex items-center justify-between">
-            <div>
-              <p class="text-[9px] uppercase tracking-wider text-[#6b6980]">Precisión del motor · 30 días</p>
-              <p class="text-2xl font-bold text-white mt-0.5">92.3%</p>
-              <p class="text-[10px] text-[#6b6980] mt-0.5">de insights se resolvieron con una acción</p>
+          <!-- Conversación -->
+          <div class="p-4 space-y-3" style="background:#F5F2EC;">
+
+            <div class="flex justify-end">
+              <div class="rounded-2xl rounded-br-md px-3.5 py-2 max-w-[80%]" style="background:#2A2824;">
+                <p class="text-[12.5px]" style="color:#FBFAF6;">¿Cómo cerró la noche?</p>
+              </div>
             </div>
-            <div class="w-10 h-10 rounded-xl bg-indigo-500/15 flex items-center justify-center">
-              <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59"/>
-              </svg>
+
+            <div class="flex justify-start">
+              <div class="rounded-2xl rounded-bl-md px-3.5 py-2.5 max-w-[88%] border" style="background:#FBFAF6; border-color:rgba(42,40,36,0.08);">
+                <p class="text-[12.5px] leading-relaxed" style="color:#2A2824;">
+                  Cierre del 12 de julio completado ✓ — ocupación <strong>62%</strong>
+                  (8 de 13), <strong>RD$ 48,211</strong> cobrados. Para hoy: 2 llegadas
+                  y la hab. 11 sigue pendiente de limpieza.
+                </p>
+                <div class="flex flex-wrap gap-1 mt-2">
+                  <span class="text-[9.5px] px-1.5 py-0.5 rounded" style="background:rgba(42,40,36,0.05); color:#6B655C; font-family:ui-monospace,monospace;">consultó: kpis_de_hoy</span>
+                  <span class="text-[9.5px] px-1.5 py-0.5 rounded" style="background:rgba(42,40,36,0.05); color:#6B655C; font-family:ui-monospace,monospace;">auditoría_nocturna</span>
+                </div>
+              </div>
             </div>
+
+            <div class="flex justify-end">
+              <div class="rounded-2xl rounded-br-md px-3.5 py-2 max-w-[80%]" style="background:#2A2824;">
+                <p class="text-[12.5px]" style="color:#FBFAF6;">Haz el check-in de la habitación 15</p>
+              </div>
+            </div>
+
+            <div class="flex justify-start">
+              <div class="rounded-2xl rounded-bl-md px-3.5 py-2.5 max-w-[88%] border" style="background:#FBFAF6; border-color:rgba(42,40,36,0.08);">
+                <p class="text-[12.5px] leading-relaxed" style="color:#2A2824;">
+                  Listo — <strong>Xiomara Pimentel</strong> quedó en casa, hab. 15.
+                  Abrí su folio con la primera noche posteada.
+                </p>
+                <div class="flex flex-wrap gap-1 mt-2">
+                  <span class="text-[9.5px] px-1.5 py-0.5 rounded" style="background:rgba(26,158,110,0.1); color:#1A7E58; font-family:ui-monospace,monospace;">ejecutó: check_in</span>
+                  <span class="text-[9.5px] px-1.5 py-0.5 rounded" style="background:rgba(42,40,36,0.05); color:#6B655C; font-family:ui-monospace,monospace;">auditado ✓</span>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          <!-- Suggestion with ⚡ Apply button (ACT demo) -->
-          <div class="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 relative overflow-hidden">
-            <div class="absolute left-0 inset-y-0 w-[3px] bg-amber-500 rounded-r-full"></div>
-            <div class="ml-3 flex items-start justify-between gap-3">
+          <!-- Una novedad de la campana, tal cual se ve en el app -->
+          <div class="px-4 py-3 border-t" style="background:#FBFAF6; border-color:rgba(42,40,36,0.08);">
+            <p class="text-[9px] font-bold uppercase tracking-[0.08em] mb-2" style="color:#9E968C;">Novedades (1)</p>
+            <div class="flex items-start gap-2.5">
+              <span class="w-[7px] h-[7px] rounded-full mt-1 shrink-0" style="background:#D4A937;"></span>
               <div class="flex-1">
-                <p class="text-white text-xs font-medium">3 llegadas sin habitación asignada</p>
-                <p class="text-[#8a889a] text-[11px] mt-1 leading-relaxed">IA puede resolverlo automáticamente.</p>
+                <p class="text-[12px] font-semibold leading-snug" style="color:#2A2824;">Hay un turno abierto hace más de 14 horas</p>
+                <p class="text-[11px] mt-0.5" style="color:#6B655C;">Ciérralo para que el arqueo cuadre.</p>
               </div>
-              <button class="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-1 rounded-md bg-indigo-500 text-white hover:bg-indigo-600 transition-colors shrink-0" style="cursor:pointer;">
-                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                Aplicar
-              </button>
+              <svg class="shrink-0 mt-1" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6B655C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
             </div>
           </div>
-
-          <!-- Action log entry (ACT audit trail demo) -->
-          <div class="rounded-xl border border-white/5 bg-white/3 p-4">
-            <div class="flex items-start justify-between gap-3 mb-2">
-              <div class="flex items-center gap-1.5">
-                <span class="inline-flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 font-medium">Ejecutada</span>
-                <span class="text-[9px] text-[#6b6980]">Auto-pilot</span>
-              </div>
-              <button class="inline-flex items-center gap-1 text-[10px] text-[#8a889a] hover:text-white transition-colors" style="cursor:pointer;">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"/>
-                </svg>
-                Deshacer
-              </button>
-            </div>
-            <p class="text-white text-xs font-medium mb-0.5">Liberar habitaciones bloqueadas sin pago</p>
-            <p class="text-[#6b6980] text-[11px] leading-relaxed">Se liberaron 2 reservaciones cuya fecha de llegada había pasado sin pago.</p>
-          </div>
-
-          <!-- Correlation (composite insight demo) -->
-          <div class="rounded-xl border border-rose-500/20 bg-rose-500/5 p-4 relative overflow-hidden">
-            <div class="absolute left-0 inset-y-0 w-[3px] bg-rose-500 rounded-r-full"></div>
-            <div class="ml-3">
-              <div class="flex items-center gap-1.5 mb-1">
-                <p class="text-white text-xs font-medium">Señales de crisis de demanda</p>
-                <span class="text-[9px] px-1.5 py-0.5 rounded-full bg-purple-500/15 text-purple-300 font-medium">Correlación</span>
-              </div>
-              <p class="text-[#8a889a] text-[11px] leading-relaxed">3 métricas cayeron simultáneamente. Revisa eventos locales y tarifas OTA.</p>
-            </div>
-          </div>
-
-          <p class="text-center text-[#4a4860] text-[10px] pt-1">Se calibra por hotel · Cada acción es reversible · Sin configuración</p>
 
         </div>
+
+        <p class="text-center text-white/30 text-[11px] mt-4">
+          Respuestas de tu operación real · Cada acción con rastro de auditoría · Sin configurar nada
+        </p>
       </div>
 
     </div>
