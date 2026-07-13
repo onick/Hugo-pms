@@ -4,3 +4,7 @@ resources/_gen/
 .hugo_build.lock
 .DS_Store
 scripts/.env*
+
+# NUNCA commitear scripts con credenciales
+capture-*.mjs
+*.env
