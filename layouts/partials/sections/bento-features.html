@@ -1,70 +1,162 @@
+<!-- ============================================================
+     Showcase de módulos — visor grande con tabs.
+     Reemplaza el bento de 12 tarjetas con thumbnails ilegibles:
+     ahora una captura REAL y legible por módulo (assets/screenshots/,
+     ver data/showcase.toml para retomarlas) + pills con el resto
+     del sistema. JS vanilla al final del partial.
+     ============================================================ -->
 <section id="plataforma" class="py-24">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Heading -->
-    <div class="text-center mb-14">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full border border-[var(--color-border-dark)] bg-white">
+        <span class="w-1.5 h-1.5 rounded-full" style="background:#1A9E6E;"></span>
+        <span style="font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-secondary);">
+          Capturas reales del producto
+        </span>
+      </div>
       <h2 class="text-[clamp(1.9rem,3.5vw+0.5rem,3rem)] font-extrabold tracking-tight">
-        12 módulos diseñados para
+        Más de 20 módulos diseñados para
         <span class="text-gradient-ocean"> hoteles reales</span>
       </h2>
       <p class="mt-4 text-[var(--text-muted)] text-base max-w-2xl mx-auto">
-        Cada módulo está construido para integrarse con los demás. Sin silos, sin duplicidad de datos.
+        Sin maquetas ni renders: así se ve Silex operando un hotel. Cada módulo
+        se integra con los demás — sin silos, sin digitar dos veces.
       </p>
     </div>
 
-    <!-- Bento grid -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[minmax(160px,auto)]">
-      {{ range .Site.Data.features.features }}
+    <!-- Tabs -->
+    {{ $icons := dict
+      "login"    "M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"
+      "calendar" "M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"
+      "wallet"   "M21 12V7H5a2 2 0 0 1 0-4h14v4M3 5v14a2 2 0 0 0 2 2h16v-5M18 12a2 2 0 0 0 0 4h4v-4z"
+      "sparkles" "M12 3l1.9 5.8a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.8a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3z"
+      "chart"    "M3 3v16a2 2 0 0 0 2 2h16M18 17V9M13 17V5M8 17v-3"
+      "layout"   "M3 3h7v9H3zM14 3h7v5h-7zM14 12h7v9h-7zM3 16h7v5H3z"
+    }}
+    <div role="tablist" aria-label="Módulos de Silex"
+         class="flex gap-2 justify-start lg:justify-center overflow-x-auto pb-2 mb-8 -mx-4 px-4 sm:mx-0 sm:px-0"
+         style="scrollbar-width:none;">
+      {{ range $i, $tab := .Site.Data.showcase.tabs }}
+      <button type="button" role="tab"
+              id="showcase-tab-{{ $tab.id }}"
+              aria-controls="showcase-panel-{{ $tab.id }}"
+              aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}"
+              data-showcase-tab="{{ $tab.id }}"
+              class="showcase-tab shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-colors cursor-pointer
+                     {{ if eq $i 0 }}bg-[var(--color-green-cta)] text-white border-transparent{{ else }}bg-white text-[var(--text-secondary)] border-[var(--color-border-dark)] hover:border-[var(--color-green-cta)]{{ end }}">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="{{ index $icons $tab.icon }}"/>
+        </svg>
+        {{ $tab.label }}
+      </button>
+      {{ end }}
+    </div>
 
-      {{- $span := "" }}
-      {{- if eq .span "hero" }}  {{- $span = "col-span-2 row-span-2" }}
-      {{- else if eq .span "wide" }}  {{- $span = "col-span-2" }}
-      {{- else if eq .span "tall" }}  {{- $span = "row-span-2" }}
-      {{- else }}                {{- $span = "col-span-1" }}
-      {{- end }}
+    <!-- Panels -->
+    {{ range $i, $tab := .Site.Data.showcase.tabs }}
+    <div role="tabpanel"
+         id="showcase-panel-{{ $tab.id }}"
+         aria-labelledby="showcase-tab-{{ $tab.id }}"
+         data-showcase-panel="{{ $tab.id }}"
+         {{ if ne $i 0 }}hidden{{ end }}>
 
-      <div class="bento-card {{ $span }} relative rounded-2xl border border-[var(--color-border)] bg-white p-5 overflow-hidden cursor-default
-                  {{ if eq .span "hero" }}hero-card{{ end }}">
-
-        <!-- Accent top line -->
-        <div class="absolute inset-x-0 top-0 h-0.5" style="background: {{ .color }}"></div>
-
-        <!-- Icon -->
-        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-             style="background: {{ .color }}1a; color: {{ .color }}">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/>
-          </svg>
+      <!-- Browser frame -->
+      <div class="rounded-2xl overflow-hidden border border-[var(--color-border-dark)] bg-white"
+           style="box-shadow:0 24px 64px -16px rgba(13,31,18,0.22);">
+        <div class="flex items-center gap-3 px-4 py-2.5 border-b border-[var(--color-border)]"
+             style="background:#F1F1EB;">
+          <div class="flex gap-1.5" aria-hidden="true">
+            <span class="w-2.5 h-2.5 rounded-full" style="background:#E8837B;"></span>
+            <span class="w-2.5 h-2.5 rounded-full" style="background:#E9C46A;"></span>
+            <span class="w-2.5 h-2.5 rounded-full" style="background:#8AC489;"></span>
+          </div>
+          <div class="flex-1 max-w-xs mx-auto flex items-center justify-center gap-1.5 rounded-md py-1 px-3 bg-white border border-[var(--color-border)]"
+               style="font-size:11px; color:var(--text-muted); font-family:ui-monospace,monospace;">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            tuhotel.silexpms.com
+          </div>
+          <div class="w-10" aria-hidden="true"></div>
         </div>
-
-        <h3 class="font-semibold text-sm {{ if eq .span "hero" }}text-base{{ end }} mb-1.5">{{ .title }}</h3>
-        <p class="text-[var(--text-muted)] text-xs leading-relaxed {{ if eq .span "hero" }}text-sm max-w-xs{{ end }}">{{ .desc }}</p>
-
-        <!-- Screenshot for hero and wide cards -->
-        {{ $screenshotMap := dict
-          "front-desk" "/screenshots/front-desk.png"
-          "reservas" "/screenshots/reservas.png"
-          "housekeeping" "/screenshots/housekeeping.png"
-          "facturacion" "/screenshots/facturacion.png"
-          "crm" "/screenshots/huespedes.png"
-          "channel-manager" "/screenshots/dashboard.png"
-          "revenue" "/screenshots/tarifas.png"
-          "asistente-ia" "/screenshots/dashboard.png"
-          "analytics" "/screenshots/facturacion.png"
-          "staff" "/screenshots/settings.png"
-          "inventario" "/screenshots/habitaciones.png"
-          "tareas" "/screenshots/housekeeping.png"
-        }}
-        {{ $screenshot := index $screenshotMap .id }}
-        {{ if and $screenshot (or (eq .span "hero") (eq .span "wide") (eq .span "tall")) }}
-        <div class="absolute bottom-0 right-0 {{ if eq .span "hero" }}w-[55%] h-[60%]{{ else if eq .span "wide" }}w-[45%] h-[70%]{{ else }}w-[85%] h-[45%] bottom-2{{ end }} overflow-hidden rounded-xl shadow-lg opacity-90">
-          <img src="{{ $screenshot }}" alt="{{ .title }}" class="w-full h-full object-cover object-top-left" loading="lazy" />
-        </div>
-        {{ end }}
+        {{ $img := resources.Get (printf "screenshots/%s" $tab.src) }}
+        {{ $lg := $img.Resize "1600x webp q82" }}
+        {{ $sm := $img.Resize "820x webp q78" }}
+        <img src="{{ $lg.RelPermalink }}"
+             srcset="{{ $sm.RelPermalink }} 820w, {{ $lg.RelPermalink }} 1600w"
+             sizes="(max-width: 768px) 100vw, min(90vw, 1216px)"
+             width="{{ $lg.Width }}" height="{{ $lg.Height }}"
+             alt="Módulo {{ $tab.label }} de Silex PMS — captura real del producto"
+             {{ if ne $i 0 }}loading="lazy"{{ else }}fetchpriority="high"{{ end }}
+             class="w-full h-auto block" />
       </div>
 
-      {{ end }}
+      <!-- Caption -->
+      <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-16 items-start max-w-5xl mx-auto">
+        <div>
+          <h3 class="text-xl font-extrabold tracking-tight mb-2">{{ $tab.headline }}</h3>
+          <p class="text-[var(--text-muted)] text-[15px] leading-relaxed">{{ $tab.benefit }}</p>
+        </div>
+        <ul class="flex flex-col gap-2.5">
+          {{ range $tab.bullets }}
+          <li class="flex items-start gap-2.5 text-[14px] text-[var(--text-secondary)]">
+            <svg class="shrink-0 mt-0.5" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A9E6E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+            {{ . }}
+          </li>
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+    {{ end }}
+
+    <!-- El resto del sistema -->
+    <div class="mt-14 text-center">
+      <div class="text-[11px] font-bold uppercase tracking-[0.08em] text-[var(--text-muted)] mb-4">
+        Y el resto del sistema, incluido en todos los planes
+      </div>
+      <div class="flex flex-wrap justify-center gap-2 max-w-4xl mx-auto">
+        {{ range .Site.Data.showcase.pills }}
+        <span class="px-3.5 py-1.5 rounded-full bg-white border border-[var(--color-border)] text-[13px] font-medium text-[var(--text-secondary)]">
+          {{ . }}
+        </span>
+        {{ end }}
+      </div>
     </div>
 
   </div>
 </section>
+
+<script>
+  // Tabs del showcase — vanilla, accesible (flechas + Home/End).
+  (function () {
+    const tabs = Array.from(document.querySelectorAll('[data-showcase-tab]'));
+    const panels = Array.from(document.querySelectorAll('[data-showcase-panel]'));
+    if (!tabs.length) return;
+
+    const activeCls = ['bg-[var(--color-green-cta)]', 'text-white', 'border-transparent'];
+    const idleCls = ['bg-white', 'text-[var(--text-secondary)]', 'border-[var(--color-border-dark)]', 'hover:border-[var(--color-green-cta)]'];
+
+    function select(id, focus) {
+      tabs.forEach((t) => {
+        const on = t.dataset.showcaseTab === id;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.classList.remove(...activeCls, ...idleCls);
+        t.classList.add(...(on ? activeCls : idleCls));
+        if (on && focus) t.focus();
+      });
+      panels.forEach((p) => { p.hidden = p.dataset.showcasePanel !== id; });
+    }
+
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(t.dataset.showcaseTab, false));
+      t.addEventListener('keydown', (e) => {
+        let j = null;
+        if (e.key === 'ArrowRight') j = (i + 1) % tabs.length;
+        else if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === 'Home') j = 0;
+        else if (e.key === 'End') j = tabs.length - 1;
+        if (j !== null) { e.preventDefault(); select(tabs[j].dataset.showcaseTab, true); }
+      });
+    });
+  })();
+</script>

@@ -1,0 +1,82 @@
+# Showcase de módulos de la home — visor grande con tabs.
+# Las capturas viven en assets/screenshots/ (Hugo las convierte a WebP).
+# Son capturas REALES del producto (tenant demo con datos ficticios):
+# retomarlas cuando la UI cambie — login demo + viewport 1600×1000.
+
+[[tabs]]
+id       = "recepcion"
+label    = "Recepción"
+icon     = "login"
+src      = "recepcion.png"
+headline = "El día completo en una sola pantalla"
+benefit  = "Llegadas, huéspedes en casa y salidas con su balance al frente. Check-in en dos clics y cada pago queda registrado en el turno de caja."
+bullets  = ["Vista 360° del huésped con estado de cuenta en vivo", "Atrasadas y pagos pendientes se destacan solos", "Walk-in express para el huésped que llega sin reserva"]
+
+[[tabs]]
+id       = "calendario"
+label    = "Calendario"
+icon     = "calendar"
+src      = "calendario.png"
+headline = "Planning visual — arrastra y suelta"
+benefit  = "De 3 a 30 días, con colores por estado, urgencia, fuente o balance. Mover una reserva es arrastrarla; cambiar fechas, estirar los bordes."
+bullets  = ["Ocupación, llegadas y salidas del día siempre visibles", "Filtros por estado, canal y tipo de habitación", "Bloqueos por mantenimiento en el mismo tablero"]
+
+[[tabs]]
+id       = "folios"
+label    = "Folios"
+icon     = "wallet"
+src      = "folios.png"
+headline = "La cuenta de cada huésped, siempre cuadrada"
+benefit  = "Cargos, pagos y transferencias en tiempo real. Anticipos, saldo deudor y consumo del día en una sola vista — sin cuadrar a mano al final del turno."
+bullets  = ["Minibar descuenta inventario automáticamente", "Anulaciones con PIN de gerencia y rastro de auditoría", "Cierre del folio emite el e-CF de la DGII"]
+
+[[tabs]]
+id       = "housekeeping"
+label    = "Housekeeping"
+icon     = "sparkles"
+src      = "housekeeping.png"
+headline = "El estado real de cada habitación"
+benefit  = "Tablero kanban de limpieza: sucia → en curso → inspección → lista. Tu equipo lo opera desde el teléfono y recepción lo ve al instante."
+bullets  = ["Tareas se generan solas con cada check-out", "Carga del día repartida por camarera", "Recepción sabe qué habitación está lista sin llamar"]
+
+[[tabs]]
+id       = "reportes"
+label    = "Reportes"
+icon     = "chart"
+src      = "reportes.png"
+headline = "ADR, RevPAR y ocupación sin Excel"
+benefit  = "Los KPIs que un hotelero mira de verdad, calculados sobre tu operación real: revenue del período, ingresos por canal y ocupación diaria."
+bullets  = ["Comparación automática contra el período anterior", "Pickup, pace y producción por canal", "Exporta a CSV con un clic"]
+
+[[tabs]]
+id       = "dashboard"
+label    = "Dashboard"
+icon     = "layout"
+src      = "dashboard.png"
+headline = "Tu mañana arranca informada"
+benefit  = "El briefing del día: cómo cerró la noche, quién llega hoy y si su habitación está lista, ingresos de hoy contra ayer. Todo antes del primer café."
+bullets  = ["Avisos accionables: check-outs vencidos, habitaciones por limpiar", "Ingresos de hoy y del mes al momento", "Estado del cierre nocturno de un vistazo"]
+
+# El resto del sistema — pills bajo el visor.
+pills = [
+  "Facturación e-CF",
+  "Impuestos DGII (606/607)",
+  "Pagos",
+  "Cuentas por cobrar",
+  "Cuentas por pagar",
+  "Contabilidad USALI",
+  "Cuentas bancarias",
+  "Turnos y caja",
+  "Auditoría nocturna",
+  "Revenue Management",
+  "Forecast",
+  "CRM de huéspedes",
+  "Tarifas y temporadas",
+  "Canales (OTAs)",
+  "Inventario",
+  "Mantenimiento",
+  "Mensajería",
+  "Iris · asistente AI",
+  "Usuarios y roles",
+  "Multi-propiedad",
+]
