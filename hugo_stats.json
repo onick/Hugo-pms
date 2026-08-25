@@ -56,7 +56,6 @@
       "backdrop-blur-md",
       "bg-[#E9FF57]/10",
       "bg-[#F5C842]",
-      "bg-[#F5C842]/20",
       "bg-[#f5f4ed]",
       "bg-[#faf9f5]",
       "bg-[var(--color-accent)]",
@@ -248,6 +247,7 @@
       "mt-14",
       "mt-16",
       "mt-2",
+      "mt-3",
       "mt-4",
       "mt-6",
       "mt-8",
@@ -444,6 +444,7 @@
       "plat-accordions",
       "plataforma",
       "precios",
+      "reviews-grid",
       "showcase-panel-calendario",
       "showcase-panel-dashboard",
       "showcase-panel-folios",
@@ -458,7 +459,8 @@
       "showcase-tab-reportes",
       "ss-img-1",
       "ss-img-2",
-      "ss-img-3"
+      "ss-img-3",
+      "testimonios"
     ]
   }
 }

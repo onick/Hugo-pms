@@ -35,9 +35,36 @@ function isAdminPath(pathname) {
   return APP_PATH_PREFIXES.some((p) => pathname === p || pathname.startsWith(p + '/'));
 }
 
+// Reseñas reales para la sección de testimonios: proxy al API central
+// (aprobadas en el Owner Console) con cache de borde de 5 min, así el
+// Laravel no recibe un hit por cada visita a la landing.
+const REVIEWS_UPSTREAM = 'https://api.silexpms.com/api/public/reviews';
+
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    if (url.pathname === '/api/reviews' && request.method === 'GET') {
+      const cache = caches.default;
+      const cacheKey = new Request(url.origin + '/api/reviews');
+      let resp = await cache.match(cacheKey);
+      if (!resp) {
+        try {
+          const upstream = await fetch(REVIEWS_UPSTREAM, {
+            headers: { Accept: 'application/json' },
+            signal: AbortSignal.timeout(8000),
+          });
+          resp = new Response(upstream.body, upstream);
+          resp.headers.set('Cache-Control', 'public, max-age=300');
+          if (upstream.ok) ctx.waitUntil(cache.put(cacheKey, resp.clone()));
+        } catch {
+          resp = new Response(JSON.stringify({ data: [] }), {
+            headers: { 'Content-Type': 'application/json' },
+          });
+        }
+      }
+      return resp;
+    }
 
     if (isAdminPath(url.pathname)) {
       const upstream = new URL(request.url);

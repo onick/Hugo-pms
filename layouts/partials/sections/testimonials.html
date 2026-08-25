@@ -1,55 +1,85 @@
-<section class="py-24 bg-[#f5f4ed]">
+<!-- Testimonios REALES: reseñas escritas por hoteleros desde su cuenta
+     de Silex y aprobadas en el Owner Console. Se cargan de /api/reviews
+     (el worker hace proxy al API central con cache). Si todavía no hay
+     reseñas aprobadas, la sección entera queda oculta — nunca volvemos
+     a enseñar testimonios inventados. El JSON-LD también se inyecta
+     desde datos reales. -->
+<section id="testimonios" class="py-24 bg-[#f5f4ed]" style="display:none">
   <div class="max-w-6xl mx-auto px-6">
 
     <div class="text-center mb-16">
       <p class="text-sm font-semibold uppercase tracking-wider text-[#F5C842] mb-3">Hoteleros que confían en Silex</p>
       <h2 class="text-4xl font-bold text-[#30302E]">Lo que dicen nuestros usuarios</h2>
+      <p class="text-sm text-[#87867f] mt-3">Reseñas escritas por hoteles que operan con Silex, desde su propia cuenta.</p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6">
-
-      <div class="rounded-2xl border border-[#e8e6dc] bg-[#faf9f5] p-8">
-        <div class="flex items-center gap-1 mb-4">
-          {{ range (seq 5) }}<svg class="h-4 w-4 text-[#F5C842]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>{{ end }}
-        </div>
-        <p class="text-[#4d4c48] leading-relaxed mb-6">"Pasamos de Excel a Silex en un día. Ahora mis recepcionistas hacen check-in en 30 segundos. Lo que más me gusta es que todo está en español y el soporte responde rápido."</p>
-        <div class="flex items-center gap-3">
-          <div class="h-10 w-10 rounded-full bg-[#F5C842]/20 flex items-center justify-center text-[#30302E] font-bold text-sm">CG</div>
-          <div>
-            <p class="text-sm font-semibold text-[#30302E]">Carlos García</p>
-            <p class="text-xs text-[#87867f]">Hotel Boutique Pedernales · 12 hab.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="rounded-2xl border border-[#e8e6dc] bg-[#faf9f5] p-8">
-        <div class="flex items-center gap-1 mb-4">
-          {{ range (seq 5) }}<svg class="h-4 w-4 text-[#F5C842]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>{{ end }}
-        </div>
-        <p class="text-[#4d4c48] leading-relaxed mb-6">"Antes pagaba $400/mes por un PMS que ni siquiera estaba en español. Con Silex pago $51 y tiene todo lo que necesito. El pricing dinámico me ha ayudado a subir mi RevPAR un 15%."</p>
-        <div class="flex items-center gap-3">
-          <div class="h-10 w-10 rounded-full bg-[#F5C842]/20 flex items-center justify-center text-[#30302E] font-bold text-sm">MR</div>
-          <div>
-            <p class="text-sm font-semibold text-[#30302E]">María Rodríguez</p>
-            <p class="text-xs text-[#87867f]">Casa Marina Resort · 28 hab.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="rounded-2xl border border-[#e8e6dc] bg-[#faf9f5] p-8">
-        <div class="flex items-center gap-1 mb-4">
-          {{ range (seq 5) }}<svg class="h-4 w-4 text-[#F5C842]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>{{ end }}
-        </div>
-        <p class="text-[#4d4c48] leading-relaxed mb-6">"Lo mejor es el soporte. Cuando tuve un problema a las 10pm un sábado, me respondieron en minutos. Con otros sistemas esperaba días. Silex entiende cómo operamos aquí en el Caribe."</p>
-        <div class="flex items-center gap-3">
-          <div class="h-10 w-10 rounded-full bg-[#F5C842]/20 flex items-center justify-center text-[#30302E] font-bold text-sm">JP</div>
-          <div>
-            <p class="text-sm font-semibold text-[#30302E]">Juan Peña</p>
-            <p class="text-xs text-[#87867f]">Eco Lodge Samaná · 8 hab.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <div id="reviews-grid" class="grid md:grid-cols-3 gap-6"></div>
   </div>
 </section>
+
+<script>
+(function () {
+  var STAR = '<svg class="h-4 w-4 text-[#F5C842]" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
+  var STAR_OFF = STAR.replace('text-[#F5C842]', 'text-[#e8e6dc]');
+
+  function esc(s) {
+    var d = document.createElement('div');
+    d.textContent = s == null ? '' : String(s);
+    return d.innerHTML;
+  }
+
+  function initials(name) {
+    return String(name || '').split(/\s+/).slice(0, 2).map(function (w) { return w.charAt(0); }).join('').toUpperCase() || 'S';
+  }
+
+  fetch('/api/reviews')
+    .then(function (r) { return r.ok ? r.json() : { data: [] }; })
+    .then(function (payload) {
+      var reviews = (payload && payload.data) || [];
+      if (!reviews.length) return; // sección oculta — sin reseñas no hay sección
+
+      var grid = document.getElementById('reviews-grid');
+      grid.innerHTML = reviews.slice(0, 6).map(function (r) {
+        var stars = '';
+        for (var i = 1; i <= 5; i++) stars += (i <= r.rating ? STAR : STAR_OFF);
+        var sub = [r.author_role, r.hotel_name].filter(Boolean).join(' · ');
+        return (
+          '<div class="rounded-2xl border border-[#e8e6dc] bg-[#faf9f5] p-8">' +
+            '<div class="flex items-center gap-1 mb-4">' + stars + '</div>' +
+            '<p class="text-[#4d4c48] leading-relaxed mb-6">"' + esc(r.body) + '"</p>' +
+            '<div class="flex items-center gap-3">' +
+              '<div class="h-10 w-10 rounded-full bg-[#F5C842]/20 flex items-center justify-center text-[#30302E] font-bold text-sm">' + esc(initials(r.author_name)) + '</div>' +
+              '<div>' +
+                '<p class="text-sm font-semibold text-[#30302E]">' + esc(r.author_name) + '</p>' +
+                '<p class="text-xs text-[#87867f]">' + esc(sub) + '</p>' +
+              '</div>' +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+
+      document.getElementById('testimonios').style.display = '';
+
+      // JSON-LD desde datos reales — Googlebot ejecuta JS, así que el
+      // structured data inyectado cuenta. Solo reseñas aprobadas llegan aquí.
+      var ld = {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        'name': 'SilexPMS',
+        'review': reviews.slice(0, 6).map(function (r) {
+          return {
+            '@type': 'Review',
+            'reviewRating': { '@type': 'Rating', 'ratingValue': String(r.rating) },
+            'author': { '@type': 'Person', 'name': r.author_name },
+            'reviewBody': r.body,
+          };
+        }),
+      };
+      var s = document.createElement('script');
+      s.type = 'application/ld+json';
+      s.textContent = JSON.stringify(ld);
+      document.head.appendChild(s);
+    })
+    .catch(function () { /* sin red → sección queda oculta */ });
+})();
+</script>
