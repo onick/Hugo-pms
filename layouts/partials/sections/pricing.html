@@ -3,78 +3,66 @@
 
     <div class="text-center mb-16">
       <p class="text-sm font-semibold uppercase tracking-wider text-[#F5C842] mb-3">Precios transparentes</p>
-      <h2 class="text-4xl md:text-5xl font-bold text-[#30302E] mb-4">El PMS que los grandes tienen,<br>al precio que tu hotel puede pagar</h2>
-      <p class="text-lg text-[#5e5d59] max-w-2xl mx-auto">Sin contratos anuales. Sin costos ocultos. Cancela cuando quieras.</p>
+      <h2 class="text-4xl md:text-5xl font-bold text-[#30302E] mb-4">Todo incluido, siempre.<br>Pagas según el tamaño de tu hotel</h2>
+      <p class="text-lg text-[#5e5d59] max-w-2xl mx-auto">Sin niveles, sin funciones bloqueadas, sin sorpresas al crecer. Un solo plan completo — el precio se ajusta a tus habitaciones.</p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto items-stretch">
 
-      <!-- Starter -->
+      <!-- Escalera de tramos -->
       <div class="rounded-2xl border border-[#e8e6dc] bg-[#faf9f5] p-8 flex flex-col">
-        <h3 class="text-lg font-bold text-[#30302E]">Starter</h3>
-        <p class="text-sm text-[#87867f] mt-1">Para hoteles pequeños y B&Bs</p>
-        <div class="mt-6 mb-6">
-          <span class="text-4xl font-bold text-[#30302E]">$29</span>
-          <span class="text-[#87867f]">/mes</span>
-        </div>
-        <ul class="space-y-3 text-sm text-[#4d4c48] flex-1">
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Hasta 15 habitaciones</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Front Desk completo</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Reservas y calendario</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Facturación con ITBIS y e-CF</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> 1 usuario</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Soporte por email</li>
+        <h3 class="text-lg font-bold text-[#30302E]">Tu tramo</h3>
+        <p class="text-sm text-[#87867f] mt-1 mb-6">Según las habitaciones de tu propiedad</p>
+        <ul class="divide-y divide-[#e8e6dc] flex-1">
+          <li class="flex items-baseline justify-between py-3">
+            <span class="text-sm text-[#4d4c48]">1 a 5 habitaciones</span>
+            <span><span class="text-2xl font-bold text-[#30302E]">$39</span><span class="text-sm text-[#87867f]">/mes</span></span>
+          </li>
+          <li class="flex items-baseline justify-between py-3">
+            <span class="text-sm text-[#4d4c48]">6 a 14 habitaciones</span>
+            <span><span class="text-2xl font-bold text-[#30302E]">$51</span><span class="text-sm text-[#87867f]">/mes</span></span>
+          </li>
+          <li class="flex items-baseline justify-between py-3">
+            <span class="text-sm text-[#4d4c48]">15 a 29 habitaciones</span>
+            <span><span class="text-2xl font-bold text-[#30302E]">$62</span><span class="text-sm text-[#87867f]">/mes</span></span>
+          </li>
+          <li class="flex items-baseline justify-between py-3">
+            <span class="text-sm text-[#4d4c48]">30 a 49 habitaciones</span>
+            <span><span class="text-2xl font-bold text-[#30302E]">$73</span><span class="text-sm text-[#87867f]">/mes</span></span>
+          </li>
+          <li class="flex items-baseline justify-between py-3">
+            <span class="text-sm text-[#4d4c48]">50 a 79 habitaciones</span>
+            <span><span class="text-2xl font-bold text-[#30302E]">$88</span><span class="text-sm text-[#87867f]">/mes</span></span>
+          </li>
+          <li class="flex items-baseline justify-between py-3">
+            <span class="text-sm text-[#4d4c48]">80+ habitaciones</span>
+            <a href="#contacto" class="text-sm font-semibold text-[#30302E] underline decoration-[#F5C842] decoration-2 underline-offset-4 hover:opacity-70 transition-opacity">Precio a medida</a>
+          </li>
         </ul>
-        <a href="{{ .Site.Params.registerUrl }}" class="mt-8 block text-center py-3 px-6 rounded-xl border-2 border-[#30302E] text-[#30302E] font-semibold hover:bg-[#30302E] hover:text-white transition-colors">
-          Comenzar gratis
-        </a>
+        <p class="text-xs text-[#87867f] mt-6">Precios en USD. En República Dominicana se factura el equivalente en RD$.</p>
       </div>
 
-      <!-- Pro (Popular) -->
+      <!-- Todo incluido -->
       <div class="rounded-2xl border-2 border-[#F5C842] bg-[#faf9f5] p-8 flex flex-col relative shadow-lg">
-        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#F5C842] text-[#30302E] text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">Más popular</span>
-        <h3 class="text-lg font-bold text-[#30302E]">Pro</h3>
-        <p class="text-sm text-[#87867f] mt-1">Para hoteles independientes</p>
-        <div class="mt-6 mb-6">
-          <span class="text-4xl font-bold text-[#30302E]">$69</span>
-          <span class="text-[#87867f]">/mes</span>
-        </div>
-        <ul class="space-y-3 text-sm text-[#4d4c48] flex-1">
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Hasta 50 habitaciones</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Todo de Starter</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Housekeeping y tareas</li>
+        <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#F5C842] text-[#30302E] text-xs font-bold px-4 py-1 rounded-full uppercase tracking-wider">En todos los tramos</span>
+        <h3 class="text-lg font-bold text-[#30302E]">Todo el PMS, sin recortes</h3>
+        <p class="text-sm text-[#87867f] mt-1 mb-6">Lo que otros venden por niveles, aquí viene completo</p>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2.5 text-sm text-[#4d4c48] flex-1">
+          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Front Desk completo</li>
+          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Reservas por noche y por horas</li>
+          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Motor de reservas web propio</li>
+          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Folios, caja y turnos</li>
+          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Contabilidad y auditoría nocturna</li>
+          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Facturación e-CF DGII</li>
+          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Housekeeping y mantenimiento</li>
           <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> CRM de huéspedes</li>
           <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Reportes y analytics</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> e-CF DGII automático</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Pricing dinámico</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> 5 usuarios</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Soporte prioritario</li>
+          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Inventario y consumos</li>
+          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Iris, asistente con IA</li>
+          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Usuarios ilimitados</li>
         </ul>
         <a href="{{ .Site.Params.registerUrl }}" class="mt-8 block text-center py-3 px-6 rounded-xl bg-[#F5C842] text-[#30302E] font-bold hover:opacity-90 transition-opacity">
           Comenzar gratis
-        </a>
-      </div>
-
-      <!-- Business -->
-      <div class="rounded-2xl border border-[#e8e6dc] bg-[#faf9f5] p-8 flex flex-col">
-        <h3 class="text-lg font-bold text-[#30302E]">Business</h3>
-        <p class="text-sm text-[#87867f] mt-1">Para cadenas y grupos</p>
-        <div class="mt-6 mb-6">
-          <span class="text-4xl font-bold text-[#30302E]">$129</span>
-          <span class="text-[#87867f]">/mes</span>
-        </div>
-        <ul class="space-y-3 text-sm text-[#4d4c48] flex-1">
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Habitaciones ilimitadas</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Todo de Pro</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Channel Manager (Booking, Airbnb)</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Booking engine propio</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Multi-propiedad</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> API access</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Usuarios ilimitados</li>
-          <li class="flex items-start gap-2"><span class="text-[#F5C842] font-bold">✓</span> Soporte 24/7 + onboarding</li>
-        </ul>
-        <a href="{{ .Site.Params.registerUrl }}" class="mt-8 block text-center py-3 px-6 rounded-xl border-2 border-[#30302E] text-[#30302E] font-semibold hover:bg-[#30302E] hover:text-white transition-colors">
-          Contactar ventas
         </a>
       </div>
 
